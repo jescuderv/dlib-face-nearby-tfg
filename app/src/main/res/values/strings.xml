@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Face Tracker Nearby TFG</string>
+
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+
+    <!--Login-->
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_login">login</string>
+    <string name="login_sign_up">Sign up</string>
+
+</resources>
