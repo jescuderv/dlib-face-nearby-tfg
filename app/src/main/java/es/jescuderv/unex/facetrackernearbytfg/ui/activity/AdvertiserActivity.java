@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -32,9 +31,6 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
 
     @BindView(R.id.advertiser_profile_image)
     ImageView mProfileImage;
-
-    @BindView(R.id.advertiser_progress_bar)
-    ProgressBar mProgressBar;
 
     @Inject
     AdvertiserPresenter mPresenter;
@@ -73,12 +69,6 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         startActivityForResult(Intent.createChooser(gallIntent, "Select Picture"), PICK_IMAGE);
     }
 
-    @OnClick(R.id.advertise_start_advertise_button)
-    public void advertise() {
-        mPresenter.prueba();
-//        Bitmap bitmap = BitmapFactory.decodeFile(Constants.getDLibImageDirectoryPath() + "/faceReceived.jpg");
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -97,12 +87,12 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
 
     @Override
     public void showProgress() {
-        mProgressBar.setVisibility(View.VISIBLE);
+//        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-        mProgressBar.setVisibility(View.GONE);
+//        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override

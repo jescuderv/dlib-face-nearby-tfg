@@ -53,7 +53,18 @@
     <style name="InputBoxText" parent="android:Widget.EditText">
         <item name="android:background">@drawable/edit_text_box</item>
         <item name="android:minWidth">280dp</item>
-        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:textSize">@dimen/text_subtitle1</item>
+    </style>
+
+    <style name="InputBoxTextMultiline" parent="android:Widget.EditText">
+        <item name="android:background">@drawable/edit_text_multiline_box</item>
+        <item name="android:minWidth">280dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:gravity">start</item>
+        <item name="android:paddingTop">16dp</item>
         <item name="android:paddingStart">20dp</item>
         <item name="android:paddingEnd">20dp</item>
         <item name="android:textSize">@dimen/text_subtitle1</item>

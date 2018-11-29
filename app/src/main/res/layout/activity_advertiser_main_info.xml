@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_inverted"
+    tools:context=".ui.activity.AdvertiserMainInfoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/advertiser_main_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_layout_margin"
+            android:text="@string/advertiser_personal_info"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h5"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/advertiser_main_info_name_input"
+            style="@style/InputBoxText"
+            android:layout_width="match_parent"
+            android:layout_below="@id/advertiser_main_info_title"
+            android:layout_marginStart="@dimen/default_layout_margin"
+            android:layout_marginTop="@dimen/separation_margin_1"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:text="Name"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/advertiser_main_info_last_name_input"
+            style="@style/InputBoxText"
+            android:layout_width="match_parent"
+            android:layout_below="@id/advertiser_main_info_name_input"
+            android:layout_marginStart="@dimen/default_layout_margin"
+            android:layout_marginTop="@dimen/separation_margin_2"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:text="Last name"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/advertiser_main_info_birthday_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advertiser_main_info_last_name_input"
+            android:layout_marginStart="@dimen/separation_margin_5"
+            android:layout_marginTop="@dimen/separation_margin_3"
+            android:text="Your birthday:"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h6" />
+
+        <TextView
+            android:id="@+id/advertiser_main_info_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/advertiser_main_info_birthday_text"
+            android:layout_marginStart="@dimen/separation_margin_2"
+            android:layout_marginTop="-6dp"
+            android:layout_toEndOf="@+id/advertiser_main_info_birthday_text"
+            android:background="@drawable/edit_text_box"
+            android:backgroundTint="@color/darker_blue"
+            android:paddingStart="@dimen/separation_margin_3"
+            android:paddingTop="@dimen/separation_margin_1"
+            android:paddingEnd="@dimen/separation_margin_3"
+            android:paddingBottom="@dimen/separation_margin_1"
+            android:text="03/04/1994"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_body1" />
+
+        <EditText
+            android:id="@+id/advertiser_main_info_phone_number"
+            style="@style/InputBoxText"
+            android:layout_width="match_parent"
+            android:layout_below="@id/advertiser_main_info_birthday_text"
+            android:layout_marginStart="@dimen/default_layout_margin"
+            android:layout_marginTop="@dimen/separation_margin_3"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:text="Emergency number"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/advertiser_main_info_address"
+            style="@style/InputBoxText"
+            android:layout_width="match_parent"
+            android:layout_below="@id/advertiser_main_info_phone_number"
+            android:layout_marginStart="@dimen/default_layout_margin"
+            android:layout_marginTop="@dimen/separation_margin_2"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:text="Addres"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/advertiser_main_info_description_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advertiser_main_info_address"
+            android:layout_marginStart="@dimen/separation_margin_4"
+            android:layout_marginTop="@dimen/separation_margin_3"
+            android:text="Tell about yourself"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h6" />
+
+        <EditText
+            android:id="@+id/advertiser_main_info_description_input"
+            style="@style/InputBoxTextMultiline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advertiser_main_info_description_head"
+            android:layout_marginStart="@dimen/default_layout_margin"
+            android:layout_marginTop="@dimen/separation_margin_2"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/advertiser_main_info_save_button"
+            style="@style/TextButton"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/advertiser_main_info_description_input"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/separation_margin_5"
+            android:layout_marginBottom="@dimen/separation_margin_3"
+            android:text="Save it"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</ScrollView>

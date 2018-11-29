@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.AdvertiserMainInfoFragment">
+
+
+    <android.support.design.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/default_layout_margin"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="@dimen/default_elevation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_gradient_round">
+
+            <TextView
+                android:id="@+id/advertiser_main_info_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_layout_margin"
+                android:text="@string/advertiser_personal_info"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_h5"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/advertiser_main_info_title"
+                android:clickable="true"
+                android:contentDescription="@string/advertiser_personal_info"
+                android:focusable="true"
+                android:src="@drawable/icon_add" />
+
+        </RelativeLayout>
+    </android.support.design.card.MaterialCardView>
+
+</RelativeLayout>

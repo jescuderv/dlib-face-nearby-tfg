@@ -2,6 +2,7 @@ package es.jescuderv.unex.facetrackernearbytfg.ui.activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -12,8 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import es.jescuderv.unex.facetrackernearbytfg.R;
-import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.LoginFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,20 +33,26 @@ public class LoginActivity extends AppCompatActivity {
     };
     private static final int REQUEST_CODE_REQUIRED_PERMISSIONS = 1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.login_frame_layout, LoginFragment.newInstance())
-                .commit();
-
         if (!hasPermissions(this, REQUIRED_PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_REQUIRED_PERMISSIONS);
         }
+    }
+
+    @OnClick(R.id.login_discoverer_button)
+    public void onLoginDiscoverClickButton() {
+        startActivity(new Intent(this, DiscovererActivity.class));
+    }
+
+    @OnClick(R.id.login_advertiser_button)
+    public void onLoginDiscoverButtonClick() {
+        startActivity(new Intent(this, AdvertiserActivity.class));
     }
 
 

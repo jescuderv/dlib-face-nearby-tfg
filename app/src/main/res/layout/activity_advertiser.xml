@@ -1,92 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="es.jescuderv.unex.facetrackernearbytfg.ui.activity.AdvertiserActivity">
 
-    <!--<de.hdodenhof.circleimageview.CircleImageView-->
-        <!--android:id="@+id/advertiser_profile_image"-->
-        <!--android:layout_width="300dp"-->
-        <!--android:layout_height="200dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginBottom="350dp"-->
-        <!--android:layout_marginTop="30dp"-->
-        <!--android:src="@drawable/bac"-->
-        <!--android:translationZ="3dp" />-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/advertiser_profile_image"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="350dp"
+        android:src="@drawable/bac"
+        android:translationZ="3dp" />
 
-    <!--<android.support.v4.view.ViewPager-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_margin="@dimen/default_layout_margin"-->
-        <!--android:layout_height="400dp" />-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/advertiser_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/default_layout_margin" />
 
     <!--<android.support.v7.widget.CardView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_margin="@dimen/default_layout_margin"-->
-        <!--android:elevation="@dimen/default_elevation"-->
-        <!--app:cardCornerRadius="@dimen/card_radius"-->
-        <!--app:cardUseCompatPadding="true">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="400dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_margin="@dimen/default_layout_margin"-->
+    <!--android:elevation="@dimen/default_elevation"-->
+    <!--app:cardCornerRadius="@dimen/card_radius"-->
+    <!--app:cardUseCompatPadding="true">-->
 
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@drawable/background_gradient"-->
-            <!--android:elevation="@dimen/default_elevation">-->
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@drawable/background_gradient"-->
+    <!--android:elevation="@dimen/default_elevation">-->
 
-            <!--<ImageView-->
-                <!--android:src="@drawable/icon_add"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent" />-->
-            <!--<ImageView-->
-                <!--android:layout_width="20dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_above="@+id/advertiser_swipe_text"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:src="@drawable/icon_arrow_white_up" />-->
+    <!--<ImageView-->
+    <!--android:src="@drawable/icon_add"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+    <!--<ImageView-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:layout_above="@+id/advertiser_swipe_text"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:src="@drawable/icon_arrow_white_up" />-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/advertiser_swipe_text"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_marginBottom="@dimen/separation_margin_2"-->
-                <!--android:text="SWIPE"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/text_subtitle1"-->
-                <!--android:textStyle="bold" />-->
-        <!--</RelativeLayout>-->
+    <!--<TextView-->
+    <!--android:id="@+id/advertiser_swipe_text"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginBottom="@dimen/separation_margin_2"-->
+    <!--android:text="SWIPE"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="@dimen/text_subtitle1"-->
+    <!--android:textStyle="bold" />-->
+    <!--</RelativeLayout>-->
 
     <!--</android.support.v7.widget.CardView>-->
-
-    <ImageView
-    android:id="@+id/advertiser_profile_image"
-    android:layout_width="wrap_content"
-    android:layout_height="300dp"
-    android:src="@drawable/icon_default_profile_image" />
-
-    <ProgressBar
-    android:id="@+id/advertiser_progress_bar"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="100dp"
-    android:visibility="gone" />
-
-    <Button
-    android:id="@+id/advertise_start_advertise_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginBottom="96dp"
-    android:text="start" />
 
 
 </RelativeLayout>

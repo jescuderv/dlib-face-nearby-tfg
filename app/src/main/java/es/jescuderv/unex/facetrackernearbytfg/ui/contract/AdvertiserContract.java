@@ -21,6 +21,5 @@ public interface AdvertiserContract {
 
         void detectFace(Bitmap faceBitmap);
 
-        void prueba();
     }
 }

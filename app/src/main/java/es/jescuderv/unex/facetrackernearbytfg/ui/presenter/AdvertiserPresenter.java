@@ -1,9 +1,7 @@
 package es.jescuderv.unex.facetrackernearbytfg.ui.presenter;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
-import com.tzutalin.dlib.Constants;
 import com.tzutalin.dlib.VisionDetRet;
 
 import java.io.File;
@@ -58,28 +56,6 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
             }
 
         }, new DetectFace.Params(faceBitmap));
-    }
-
-    @Override
-    public void prueba() {
-        File detectedFile = new File(Constants.getDLibDirectoryPath() + "/faceReceived.jpg");
-        Bitmap bitmap = BitmapFactory.decodeFile(detectedFile.getPath());
-        mRecognize.execute(new DisposableObserver<List<VisionDetRet>>() {
-            @Override
-            public void onNext(List<VisionDetRet> results) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        }, new RecognizeFace.Params(bitmap));
     }
 
     private void saveFaceDetected(Bitmap faceBitmap) {

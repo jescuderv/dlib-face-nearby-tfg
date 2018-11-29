@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <gradient
-                android:angle="270"
-                android:startColor="@color/gradient_light_blue"
+            <corners android:radius="@dimen/card_radius" />
+            <gradient android:angle="270"
                 android:endColor="@color/gradient_dark_blue"
+                android:startColor="@color/gradient_light_blue"
                 android:type="linear" />
         </shape>
     </item>
