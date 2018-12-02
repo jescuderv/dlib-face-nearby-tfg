@@ -10,8 +10,31 @@
     <string name="login_discoverer">Medic</string>
     <string name="login_advertiser">Patient</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="advertiser_personal_info">PERSONAL INFO</string>
+    <!--Advertiser-->
+    <string name="advertiser_personal_info">Personal info</string>
+    <string name="advertiser_medical_info">Medical info</string>
+    <string name="advertiser_medication">Medical treatment</string>
+
+    <!--Personal info-->
+    <string name="personal_info">Personal info</string>
+    <string name="personal_info_name">Name</string>
+    <string name="personal_info_last_name">Last name</string>
+    <string name="personal_info_your_birthday">Your birthday:</string>
+    <string name="personal_info_emergency_number">Emergency number</string>
+    <string name="personal_info_address">Address</string>
+    <string name="personal_info_tell_about_yourself">Tell about yourself</string>
+    <string name="personal_info_save">Save it</string>
+
+    <!--Medication-->
+    <string name="medication_save">Save it</string>
+    <string name="medication">Medical treatment</string>
+    <string name="medical_info">Medical info</string>
+    <string name="medical_info_blood_type">Grupo sanguíneo:</string>
+    <string name="medical_info_add">+</string>
+    <string name="medical_info_intolerance">Intolerancias:</string>
+    <string name="medical_info_surgery">Operaciones:</string>
+    <string name="medical_info_allergy">Alergias:</string>
+    <string name="medical_info_tell_about_yourself">Tell about yourself</string>
+    <string name="medical_info_save">Save it</string>
 
 </resources>

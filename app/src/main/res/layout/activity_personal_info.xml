@@ -4,112 +4,131 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient_inverted"
-    tools:context=".ui.activity.AdvertiserMainInfoActivity">
+    tools:context=".ui.activity.PersonalInfoActivity">
 
     <RelativeLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageButton
+            android:contentDescription="@string/personal_info"
+            android:id="@+id/personal_info_close_button"
+            android:layout_marginTop="@dimen/separation_margin_1"
+            style="@style/ImageButton"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/icon_close" />
+
         <TextView
-            android:id="@+id/advertiser_main_info_title"
-            android:layout_width="wrap_content"
+            android:layout_toStartOf="@id/personal_info_close_button"
+            android:id="@+id/personal_info_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_layout_margin"
-            android:text="@string/advertiser_personal_info"
+            android:text="@string/personal_info"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_h5"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/advertiser_main_info_name_input"
+            android:id="@+id/personal_info_name_input"
             style="@style/InputBoxText"
             android:layout_width="match_parent"
-            android:layout_below="@id/advertiser_main_info_title"
+            android:layout_below="@id/personal_info_title"
             android:layout_marginStart="@dimen/default_layout_margin"
+            android:inputType="text"
             android:layout_marginTop="@dimen/separation_margin_1"
             android:layout_marginEnd="@dimen/default_layout_margin"
-            android:text="Name"
-            android:textColor="@color/white" />
+            android:hint="@string/personal_info_name"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/advertiser_main_info_last_name_input"
+            android:id="@+id/personal_info_last_name_input"
             style="@style/InputBoxText"
             android:layout_width="match_parent"
-            android:layout_below="@id/advertiser_main_info_name_input"
+            android:layout_below="@id/personal_info_name_input"
             android:layout_marginStart="@dimen/default_layout_margin"
             android:layout_marginTop="@dimen/separation_margin_2"
             android:layout_marginEnd="@dimen/default_layout_margin"
-            android:text="Last name"
-            android:textColor="@color/white" />
+            android:inputType="text"
+            android:hint="@string/personal_info_last_name"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <TextView
-            android:id="@+id/advertiser_main_info_birthday_text"
+            android:id="@+id/personal_info_birthday_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/advertiser_main_info_last_name_input"
+            android:layout_below="@id/personal_info_last_name_input"
             android:layout_marginStart="@dimen/separation_margin_5"
             android:layout_marginTop="@dimen/separation_margin_3"
-            android:text="Your birthday:"
+            android:text="@string/personal_info_your_birthday"
             android:textColor="@color/white"
             android:textSize="@dimen/text_h6" />
 
         <TextView
-            android:id="@+id/advertiser_main_info_birthday"
+            android:id="@+id/personal_info_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/advertiser_main_info_birthday_text"
+            android:layout_alignTop="@+id/personal_info_birthday_text"
             android:layout_marginStart="@dimen/separation_margin_2"
             android:layout_marginTop="-6dp"
-            android:layout_toEndOf="@+id/advertiser_main_info_birthday_text"
+            android:layout_toEndOf="@+id/personal_info_birthday_text"
             android:background="@drawable/edit_text_box"
             android:backgroundTint="@color/darker_blue"
             android:paddingStart="@dimen/separation_margin_3"
             android:paddingTop="@dimen/separation_margin_1"
             android:paddingEnd="@dimen/separation_margin_3"
             android:paddingBottom="@dimen/separation_margin_1"
-            android:text="03/04/1994"
             android:textColor="@color/white"
             android:textSize="@dimen/text_body1" />
 
         <EditText
-            android:id="@+id/advertiser_main_info_phone_number"
+            android:id="@+id/personal_info_phone_number"
             style="@style/InputBoxText"
             android:layout_width="match_parent"
-            android:layout_below="@id/advertiser_main_info_birthday_text"
+            android:layout_below="@id/personal_info_birthday_text"
             android:layout_marginStart="@dimen/default_layout_margin"
             android:layout_marginTop="@dimen/separation_margin_3"
+            android:inputType="phone"
             android:layout_marginEnd="@dimen/default_layout_margin"
-            android:text="Emergency number"
-            android:textColor="@color/white" />
+            android:hint="@string/personal_info_emergency_number"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/advertiser_main_info_address"
+            android:id="@+id/personal_info_address"
             style="@style/InputBoxText"
             android:layout_width="match_parent"
-            android:layout_below="@id/advertiser_main_info_phone_number"
+            android:layout_below="@id/personal_info_phone_number"
             android:layout_marginStart="@dimen/default_layout_margin"
             android:layout_marginTop="@dimen/separation_margin_2"
             android:layout_marginEnd="@dimen/default_layout_margin"
-            android:text="Addres"
-            android:textColor="@color/white" />
+            android:inputType="text"
+            android:hint="@string/personal_info_address"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <TextView
-            android:id="@+id/advertiser_main_info_description_head"
+            android:id="@+id/personal_info_description_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/advertiser_main_info_address"
+            android:layout_below="@id/personal_info_address"
             android:layout_marginStart="@dimen/separation_margin_4"
             android:layout_marginTop="@dimen/separation_margin_3"
-            android:text="Tell about yourself"
+            android:text="@string/personal_info_tell_about_yourself"
             android:textColor="@color/white"
             android:textSize="@dimen/text_h6" />
 
         <EditText
-            android:id="@+id/advertiser_main_info_description_input"
+            android:id="@+id/personal_info_description_input"
             style="@style/InputBoxTextMultiline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/advertiser_main_info_description_head"
+            android:layout_below="@id/personal_info_description_head"
             android:layout_marginStart="@dimen/default_layout_margin"
             android:layout_marginTop="@dimen/separation_margin_2"
             android:layout_marginEnd="@dimen/default_layout_margin"
@@ -118,14 +137,14 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/advertiser_main_info_save_button"
+            android:id="@+id/personal_info_save_button"
             style="@style/TextButton"
             android:layout_width="wrap_content"
-            android:layout_below="@id/advertiser_main_info_description_input"
+            android:layout_below="@id/personal_info_description_input"
             android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/separation_margin_5"
             android:layout_marginBottom="@dimen/separation_margin_3"
-            android:text="Save it"
+            android:text="@string/personal_info_save"
             android:textColor="@color/white" />
 
     </RelativeLayout>

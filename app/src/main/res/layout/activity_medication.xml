@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_inverted"
+    tools:context=".ui.activity.MedicationActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/medication_close_button"
+            style="@style/ImageButton"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/separation_margin_1"
+            android:contentDescription="@string/medication"
+            android:src="@drawable/icon_close" />
+
+        <TextView
+            android:id="@+id/medication_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_layout_margin"
+            android:layout_toStartOf="@id/medication_close_button"
+            android:text="@string/medication"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h5"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/medication_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medication_title" />
+
+        <Button
+            android:id="@+id/medication_save_button"
+            style="@style/TextButton"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/medication_list"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/separation_margin_5"
+            android:layout_marginBottom="@dimen/separation_margin_3"
+            android:text="@string/medication_save"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</ScrollView>

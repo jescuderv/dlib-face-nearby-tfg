@@ -22,25 +22,26 @@
             android:background="@drawable/background_gradient_round">
 
             <TextView
-                android:id="@+id/advertiser_main_info_title"
+                android:id="@+id/advertiser_medication_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_layout_margin"
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="@dimen/default_layout_margin"
                 android:layout_marginBottom="@dimen/default_layout_margin"
-                android:text="@string/advertiser_personal_info"
+                android:text="@string/advertiser_medication"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_h5"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/advertiser_main_info_add_button"
+                android:id="@+id/advertiser_medication_add_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/advertiser_main_info_title"
+                android:layout_below="@+id/advertiser_medication_title"
                 android:clickable="true"
-                android:contentDescription="@string/advertiser_personal_info"
+                android:contentDescription="@string/advertiser_medication"
                 android:focusable="true"
                 android:src="@drawable/icon_add" />
 

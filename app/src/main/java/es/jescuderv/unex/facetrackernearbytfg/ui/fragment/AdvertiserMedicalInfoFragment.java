@@ -12,15 +12,15 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.jescuderv.unex.facetrackernearbytfg.R;
-import es.jescuderv.unex.facetrackernearbytfg.ui.activity.PersonalInfoActivity;
+import es.jescuderv.unex.facetrackernearbytfg.ui.activity.MedicalInfoActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AdvertiserMainInfoFragment extends Fragment {
+public class AdvertiserMedicalInfoFragment extends Fragment {
 
 
-    public AdvertiserMainInfoFragment() {
+    public AdvertiserMedicalInfoFragment() {
         // Required empty public constructor
     }
 
@@ -29,14 +29,14 @@ public class AdvertiserMainInfoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_advertiser_main_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_advertiser_medical_info, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
 
-    @OnClick(R.id.advertiser_main_info_add_button)
-    public void onAddMainInfoClick() {
-        getActivity().startActivity(new Intent(getActivity(), PersonalInfoActivity.class));
+    @OnClick(R.id.medical_info_add_button)
+    public void onAddMedicalInfoClick() {
+        getActivity().startActivity(new Intent(getActivity(), MedicalInfoActivity.class));
     }
 
 }

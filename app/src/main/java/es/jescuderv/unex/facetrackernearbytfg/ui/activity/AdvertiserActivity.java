@@ -5,6 +5,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -18,16 +22,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.DaggerAppCompatActivity;
 import es.jescuderv.unex.facetrackernearbytfg.R;
-import es.jescuderv.unex.facetrackernearbytfg.service.AdvertiseService;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserContract;
+import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMainInfoFragment;
+import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicalInfoFragment;
+import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicationFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.presenter.AdvertiserPresenter;
-
-import static com.google.android.gms.signin.internal.SignInClientImpl.ACTION_START_SERVICE;
 
 public class AdvertiserActivity extends DaggerAppCompatActivity implements AdvertiserContract.View {
 
     private final int PICK_IMAGE = 1;
 
+    @BindView(R.id.advertiser_view_pager)
+    ViewPager mViewPager;
 
     @BindView(R.id.advertiser_profile_image)
     ImageView mProfileImage;
@@ -42,12 +48,18 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         setContentView(R.layout.activity_advertiser);
         ButterKnife.bind(this);
 
-        // Start service when start screen. TODO: start service in splash or something like that
-        Intent startIntent = new Intent(getApplicationContext(), AdvertiseService.class);
-        startIntent.setAction(ACTION_START_SERVICE);
-        startService(startIntent);
-    }
+//        // Start service when start screen. TODO: start service in splash or something like that
+//        Intent startIntent = new Intent(getApplicationContext(), AdvertiseService.class);
+//        startIntent.setAction(ACTION_START_SERVICE);
+//        startService(startIntent);
 
+        FragmentStatePagerAdapter pagerAdapter = new ProfileAdapter(getSupportFragmentManager());
+        mViewPager.setPageTransformer(true,new ExpandingViewPagerTransformer());
+        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setClipToPadding(false);
+        mViewPager.setPadding(48, 0 , 48, 0);
+        mViewPager.setPageMargin(-100);
+    }
 
 
     @Override
@@ -107,4 +119,31 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         mProfileImage.setVisibility(View.VISIBLE);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+
+    private class ProfileAdapter extends FragmentStatePagerAdapter {
+
+        public ProfileAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new AdvertiserMainInfoFragment();
+                case 1:
+                    return new AdvertiserMedicalInfoFragment();
+                case 2:
+                    return new AdvertiserMedicationFragment();
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+    }
+
 }
