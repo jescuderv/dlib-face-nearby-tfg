@@ -3,7 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     tools:context="es.jescuderv.unex.facetrackernearbytfg.ui.activity.AdvertiserActivity">
+
+    <ImageButton
+        android:id="@+id/advertiser_settings_button"
+        style="@style/ImageButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/advertiser_settings"
+        android:src="@drawable/icon_settings" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/advertiser_profile_image"

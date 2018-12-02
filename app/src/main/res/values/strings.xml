@@ -36,5 +36,8 @@
     <string name="medical_info_allergy">Alergias:</string>
     <string name="medical_info_tell_about_yourself">Tell about yourself</string>
     <string name="medical_info_save">Save it</string>
+    <string name="advertiser_settings">settings</string>
+    <string name="settings">Settings</string>
+    <string name="settings_visibility">Visibility</string>
 
 </resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_inverted"
+    tools:context=".ui.activity.AdvertiserSettingsActivity">
+
+    <ImageButton
+        android:id="@+id/settings_close_button"
+        style="@style/ImageButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/separation_margin_1"
+        android:contentDescription="@string/settings"
+        android:src="@drawable/icon_close" />
+
+    <TextView
+        android:id="@+id/settings_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_layout_margin"
+        android:layout_toStartOf="@+id/settings_close_button"
+        android:text="@string/settings"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_h5"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/settings_visibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settings_title"
+        android:layout_marginStart="@dimen/default_layout_margin"
+        android:layout_marginTop="@dimen/separation_margin_3"
+        android:text="@string/settings_visibility"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_h6" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/settings_visibility"
+        android:layout_marginStart="@dimen/separation_margin_4"
+        android:layout_toEndOf="@id/settings_visibility" />
+</RelativeLayout>

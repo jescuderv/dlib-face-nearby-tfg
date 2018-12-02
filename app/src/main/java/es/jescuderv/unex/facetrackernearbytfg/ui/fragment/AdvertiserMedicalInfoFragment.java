@@ -34,7 +34,7 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.medical_info_add_button)
+    @OnClick(R.id.advertiser_medical_info_add_button)
     public void onAddMedicalInfoClick() {
         getActivity().startActivity(new Intent(getActivity(), MedicalInfoActivity.class));
     }

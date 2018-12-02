@@ -37,7 +37,6 @@
             android:name="com.google.android.nearby.messages.API_KEY"
             android:value="AIzaSyCRE9eHuf3XqZOgssgNPEoeZPgFFI2QtMc" />
 
-
         <activity
             android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait">
@@ -66,9 +65,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MedicalInfoActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MedicationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AdvertiserSettingsActivity"
             android:screenOrientation="portrait" />
     </application>
 

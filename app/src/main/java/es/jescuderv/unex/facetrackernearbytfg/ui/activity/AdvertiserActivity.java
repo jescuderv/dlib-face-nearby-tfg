@@ -54,10 +54,10 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
 //        startService(startIntent);
 
         FragmentStatePagerAdapter pagerAdapter = new ProfileAdapter(getSupportFragmentManager());
-        mViewPager.setPageTransformer(true,new ExpandingViewPagerTransformer());
+        mViewPager.setPageTransformer(true, new ExpandingViewPagerTransformer());
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setClipToPadding(false);
-        mViewPager.setPadding(48, 0 , 48, 0);
+        mViewPager.setPadding(48, 0, 48, 0);
         mViewPager.setPageMargin(-100);
     }
 
@@ -72,6 +72,11 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     protected void onDestroy() {
         mPresenter.dropView();
         super.onDestroy();
+    }
+
+    @OnClick(R.id.advertiser_settings_button)
+    public void onSettingsClick() {
+        startActivity(new Intent(this, AdvertiserSettingsActivity.class));
     }
 
     @OnClick(R.id.advertiser_profile_image)
