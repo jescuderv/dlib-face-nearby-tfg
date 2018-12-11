@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
     tools:context="es.jescuderv.unex.facetrackernearbytfg.ui.activity.AdvertiserActivity">
 
     <ImageButton
@@ -24,9 +23,10 @@
         android:translationZ="1dp" />
 
     <android.support.v4.view.ViewPager
+        android:layout_marginTop="180dp"
         android:id="@+id/advertiser_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_alignParentBottom="true" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

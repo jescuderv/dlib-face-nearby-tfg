@@ -3,16 +3,16 @@ package es.jescuderv.unex.facetrackernearbytfg.domain.usecase;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import es.jescuderv.unex.facetrackernearbytfg.data.UserDataSource;
-import es.jescuderv.unex.facetrackernearbytfg.data.UserRepository;
+import es.jescuderv.unex.facetrackernearbytfg.data.ConnectionsDataSource;
+import es.jescuderv.unex.facetrackernearbytfg.data.ConnectionsRepository;
 
 @Singleton
 public class AddUserEndpoint {
 
-    private UserDataSource mRepository;
+    private ConnectionsDataSource mRepository;
 
     @Inject
-    AddUserEndpoint(UserRepository userRepository) {
+    AddUserEndpoint(ConnectionsRepository userRepository) {
         mRepository = userRepository;
     }
 

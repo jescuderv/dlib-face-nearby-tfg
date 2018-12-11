@@ -1,4 +1,4 @@
-package es.jescuderv.unex.facetrackernearbytfg.ui.activity;
+package es.jescuderv.unex.facetrackernearbytfg.utils;
 
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;

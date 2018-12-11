@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import es.jescuderv.unex.facetrackernearbytfg.data.UserRepository;
+import es.jescuderv.unex.facetrackernearbytfg.data.ConnectionsRepository;
 import es.jescuderv.unex.facetrackernearbytfg.utils.UseCase;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
@@ -16,11 +16,11 @@ import io.reactivex.Scheduler;
 @Singleton
 public class SaveFace extends UseCase<File, SaveFace.Params> {
 
-    private UserRepository mRepository;
+    private ConnectionsRepository mRepository;
 
     @Inject
     SaveFace(@Named("executor_thread") Scheduler threadExecutor, @Named("main_thread") Scheduler
-            mainThread, UserRepository repository) {
+            mainThread, ConnectionsRepository repository) {
         super(threadExecutor, mainThread);
         this.mRepository = repository;
     }

@@ -23,14 +23,20 @@ import butterknife.OnClick;
 import dagger.android.support.DaggerAppCompatActivity;
 import es.jescuderv.unex.facetrackernearbytfg.R;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserContract;
+import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserMainInfoContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMainInfoFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicalInfoFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicationFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.presenter.AdvertiserPresenter;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserPersonalInfoViewModel;
+import es.jescuderv.unex.facetrackernearbytfg.utils.ExpandingViewPagerTransformer;
 
-public class AdvertiserActivity extends DaggerAppCompatActivity implements AdvertiserContract.View {
+public class AdvertiserActivity extends DaggerAppCompatActivity implements AdvertiserContract.View,
+        AdvertiserMainInfoContract.OnExpandMainInfoListener {
 
-    private final int PICK_IMAGE = 1;
+    private final static int PICK_IMAGE = 1;
+
+    private final static String MAIN_INFO_VIEW_MODEL = "MAIN_INFO_VIEW_MODEL";
 
     @BindView(R.id.advertiser_view_pager)
     ViewPager mViewPager;
@@ -128,7 +134,7 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
 
     private class ProfileAdapter extends FragmentStatePagerAdapter {
 
-        public ProfileAdapter(FragmentManager fm) {
+        ProfileAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -150,5 +156,28 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
             return 3;
         }
     }
+
+
+    //==============================================================================================
+    // Main info callbacks
+    //==============================================================================================
+
+    @Override
+    public void onAddPersonalInfo() {
+        startActivity(new Intent(this, PersonalInfoActivity.class));
+    }
+
+    @Override
+    public void onEditPersonalInfo(UserPersonalInfoViewModel personalInfoViewModel) {
+        Intent intent = new Intent(this, PersonalInfoActivity.class);
+        intent.putExtra(MAIN_INFO_VIEW_MODEL, personalInfoViewModel);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCheckPersonalInfo() {
+
+    }
+
 
 }

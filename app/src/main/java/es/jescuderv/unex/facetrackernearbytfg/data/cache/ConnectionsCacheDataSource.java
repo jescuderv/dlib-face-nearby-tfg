@@ -9,17 +9,17 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import es.jescuderv.unex.facetrackernearbytfg.data.UserDataSource;
+import es.jescuderv.unex.facetrackernearbytfg.data.ConnectionsDataSource;
 import es.jescuderv.unex.facetrackernearbytfg.data.exception.CacheErrorException;
 import io.reactivex.Observable;
 
 @Singleton
-public class UserCacheDataSource implements UserDataSource {
+public class ConnectionsCacheDataSource implements ConnectionsDataSource {
 
     private List<String> mdEndpointUserList;
 
     @Inject
-    UserCacheDataSource() {
+    ConnectionsCacheDataSource() {
         mdEndpointUserList = new ArrayList<>();
     }
 

@@ -70,4 +70,9 @@
         <item name="android:textSize">@dimen/text_subtitle1</item>
     </style>
 
+    <!--Date picker-->
+    <style name="DatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
 </resources>

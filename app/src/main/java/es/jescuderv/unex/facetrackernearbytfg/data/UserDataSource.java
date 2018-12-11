@@ -1,18 +1,13 @@
 package es.jescuderv.unex.facetrackernearbytfg.data;
 
-import android.graphics.Bitmap;
 
-import java.io.File;
-import java.util.List;
-
+import es.jescuderv.unex.facetrackernearbytfg.domain.model.User;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 public interface UserDataSource {
 
-    Observable<File> saveFace(String faceName, Bitmap faceBitmap);
+    Completable setUserData(User user);
 
-    void addUserEndpoint(String endpoint);
-
-    Observable<List<String>> getUserEndpointList();
-
+    Observable<User> getUserData();
 }

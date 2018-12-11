@@ -13,11 +13,7 @@ import javax.inject.Singleton;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
-import es.jescuderv.unex.facetrackernearbytfg.data.UserDataSource;
-import es.jescuderv.unex.facetrackernearbytfg.data.UserRepository;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.LocalDataBase;
-import es.jescuderv.unex.facetrackernearbytfg.data.local.UserLocalDataSource;
-import es.jescuderv.unex.facetrackernearbytfg.data.cache.UserCacheDataSource;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.AddUserEndpoint;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.RecognizeFace;
 import es.jescuderv.unex.facetrackernearbytfg.service.NearbyConnections;
@@ -68,16 +64,5 @@ abstract class AppModule {
                 .build();
     }
 
-    @Binds
-    @Singleton
-    abstract UserDataSource provideUserCacheDataSource(UserCacheDataSource userCacheDataSource);
-
-    @Binds
-    @Singleton
-    abstract UserDataSource provideUserLocalDataSource(UserLocalDataSource userLocalDataSource);
-
-    @Binds
-    @Singleton
-    abstract UserDataSource provideUserRepository(UserRepository userRepository);
 
 }

@@ -23,27 +23,137 @@
 
             <TextView
                 android:id="@+id/advertiser_main_info_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_layout_margin"
                 android:layout_marginTop="70dp"
-                android:layout_marginEnd="@dimen/default_layout_margin"
                 android:layout_marginBottom="@dimen/default_layout_margin"
+                android:layout_toStartOf="@+id/advertiser_main_info_edit_button"
+                android:ellipsize="end"
+                android:lines="1"
                 android:text="@string/advertiser_personal_info"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_h5"
                 android:textStyle="bold" />
 
-            <ImageView
+            <ImageButton
+                android:contentDescription="@string/advertiser_main_info_edit"
+                android:layout_marginBottom="-8dp"
+                android:id="@+id/advertiser_main_info_edit_button"
+                style="@style/ImageButton"
+                android:layout_alignBottom="@+id/advertiser_main_info_title"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:src="@drawable/icon_edit"
+                android:tint="@color/white" />
+
+            <ImageButton
+                android:layout_below="@+id/advertiser_main_info_title"
+                style="@style/ImageButton"
                 android:id="@+id/advertiser_main_info_add_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/advertiser_main_info_title"
                 android:clickable="true"
                 android:contentDescription="@string/advertiser_personal_info"
                 android:focusable="true"
-                android:src="@drawable/icon_add" />
+                android:src="@drawable/icon_add"
+                android:visibility="gone" />
 
+            <RelativeLayout
+                android:id="@+id/advertiser_main_info_data_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/advertiser_main_info_title"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:layout_marginBottom="@dimen/default_layout_margin"
+                android:visibility="gone">
+
+
+                <TextView
+                    android:id="@+id/advertiser_main_info_full_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/advertiser_main_info_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/advertiser_main_info_full_name_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/advertiser_main_info_full_name"
+                    android:layout_marginStart="@dimen/default_layout_margin"
+                    android:layout_marginEnd="@dimen/default_layout_margin"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1" />
+
+                <TextView
+                    android:id="@+id/advertiser_main_info_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/advertiser_main_info_full_name_value"
+                    android:layout_marginTop="@dimen/separation_margin_2"
+                    android:text="@string/advertiser_main_info_birthday"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/advertiser_main_info_birthday_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/advertiser_main_info_birthday"
+                    android:layout_marginStart="@dimen/default_layout_margin"
+                    android:layout_marginEnd="@dimen/default_layout_margin"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1" />
+
+                <TextView
+                    android:id="@+id/advertiser_main_info_phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/advertiser_main_info_birthday_value"
+                    android:layout_marginTop="@dimen/separation_margin_2"
+                    android:text="@string/advertiser_main_info_phone_number"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/advertiser_main_info_phone_number_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/advertiser_main_info_phone_number"
+                    android:layout_marginStart="@dimen/default_layout_margin"
+                    android:layout_marginEnd="@dimen/default_layout_margin"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1" />
+
+                <TextView
+                    android:id="@+id/advertiser_main_info_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/advertiser_main_info_phone_number_value"
+                    android:layout_marginTop="@dimen/separation_margin_2"
+                    android:text="@string/advertiser_main_info_address"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/advertiser_main_info_address_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/advertiser_main_info_address"
+                    android:layout_marginStart="@dimen/default_layout_margin"
+                    android:layout_marginEnd="@dimen/default_layout_margin"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1" />
+
+
+            </RelativeLayout>
         </RelativeLayout>
     </android.support.design.card.MaterialCardView>
 
