@@ -37,10 +37,14 @@
     <string name="medication">Medical treatment</string>
     <string name="medical_info">Medical info</string>
     <string name="medical_info_blood_type">Grupo sanguíneo:</string>
+    <string name="medical_info_add_blood_type">Agrega tu grupo sanguíneo</string>
     <string name="medical_info_add">+</string>
-    <string name="medical_info_intolerance">Intolerancias:</string>
-    <string name="medical_info_surgery">Operaciones:</string>
-    <string name="medical_info_allergy">Alergias:</string>
+    <string name="medical_info_intolerance">Intolerancias</string>
+    <string name="medical_info_surgery">Operaciones</string>
+    <string name="medical_info_allergy">Alergias</string>
+    <string name="medical_info_add_intolerance">Agrega tus intolerancias</string>
+    <string name="medical_info_add_surgery">Agrega tus operaciones</string>
+    <string name="medical_info_add_allergy">Agrega tus alergias</string>
     <string name="medical_info_tell_about_yourself">Tell about yourself</string>
     <string name="medical_info_save">Save it</string>
 

@@ -41,7 +41,8 @@
             android:layout_marginTop="@dimen/separation_margin_1"
             android:text="@string/medical_info_blood_type"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_h6" />
+            android:textSize="@dimen/text_h6"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/medical_info_blood_type"
@@ -61,70 +62,173 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_body1" />
 
-        <TextView
-            android:id="@+id/medical_info_intolerance_text"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/medical_info_intolerance_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/medical_info_blood_type_text"
-            android:layout_marginStart="@dimen/default_layout_margin"
-            android:layout_marginTop="@dimen/separation_margin_4"
-            android:text="@string/medical_info_intolerance"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_h6" />
+            android:layout_marginTop="@dimen/separation_margin_3">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/medical_info_intolerance_list"
+            <TextView
+                android:id="@+id/medical_info_intolerance_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_4"
+                android:text="@string/medical_info_intolerance"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_h6"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/medical_info_intolerance_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medical_info_intolerance_text"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/medical_info_intolerance_empty_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medical_info_intolerance_text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_3"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:layout_marginBottom="@dimen/separation_margin_5"
+                android:text="Aquí aparecerán las intolerancias..."
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_body1" />
+
+            <Button
+                android:id="@+id/medical_info_intolerance_add_button"
+                style="@style/DefaultButton"
+                android:layout_width="40dp"
+                android:layout_alignBaseline="@+id/medical_info_intolerance_text"
+                android:layout_marginStart="@dimen/separation_margin_2"
+                android:layout_toEndOf="@id/medical_info_intolerance_text"
+                android:background="@drawable/background_round"
+                android:text="@string/medical_info_add"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/medical_info_surgery_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/medical_info_intolerance_text"
-            android:layout_marginStart="@dimen/default_layout_margin"
-            android:layout_marginEnd="@dimen/default_layout_margin" />
+            android:layout_below="@id/medical_info_intolerance_layout">
 
-        <TextView
-            android:id="@+id/medical_info_surgery_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/medical_info_intolerance_list"
-            android:layout_marginStart="@dimen/default_layout_margin"
-            android:layout_marginTop="@dimen/separation_margin_4"
-            android:text="@string/medical_info_surgery"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_h6" />
+            <TextView
+                android:id="@+id/medical_info_surgery_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_4"
+                android:text="@string/medical_info_surgery"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_h6"
+                android:textStyle="bold" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/medical_info_surgery_list"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/medical_info_surgery_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medical_info_surgery_text"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/medical_info_surgery_empty_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medical_info_surgery_text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_3"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:layout_marginBottom="@dimen/separation_margin_5"
+                android:text="Aquí aparecerán las operaciones..."
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_body1" />
+
+            <Button
+                android:id="@+id/medical_info_surgery_add_button"
+                style="@style/TextButton"
+                android:layout_width="40dp"
+                android:layout_alignBaseline="@+id/medical_info_surgery_text"
+                android:layout_marginStart="@dimen/separation_margin_2"
+                android:layout_toEndOf="@id/medical_info_surgery_text"
+                android:background="@drawable/background_round"
+                android:text="@string/medical_info_add"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/medical_info_allergy_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/medical_info_surgery_text"
-            android:layout_marginStart="@dimen/default_layout_margin"
-            android:layout_marginEnd="@dimen/default_layout_margin" />
+            android:layout_below="@id/medical_info_surgery_layout">
 
-        <TextView
-            android:id="@+id/medical_info_allergy_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/medical_info_surgery_list"
-            android:layout_marginStart="@dimen/default_layout_margin"
-            android:layout_marginTop="@dimen/separation_margin_4"
-            android:text="@string/medical_info_allergy"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_h6" />
+            <TextView
+                android:id="@+id/medical_info_allergy_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_4"
+                android:text="@string/medical_info_allergy"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_h6"
+                android:textStyle="bold" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/medical_info_allergy_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/medical_info_allergy_text"
-            android:layout_marginStart="@dimen/default_layout_margin"
-            android:layout_marginEnd="@dimen/default_layout_margin" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/medical_info_allergy_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medical_info_allergy_text"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/medical_info_allergy_empty_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/medical_info_allergy_text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_3"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:layout_marginBottom="@dimen/separation_margin_5"
+                android:text="Aquí aparecerán las operaciones..."
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_body1" />
+
+            <Button
+                android:id="@+id/medical_info_allergy_add_button"
+                style="@style/DefaultButton"
+                android:layout_width="40dp"
+                android:layout_alignBaseline="@id/medical_info_allergy_text"
+                android:layout_marginStart="@dimen/separation_margin_2"
+                android:layout_toEndOf="@+id/medical_info_allergy_text"
+                android:background="@drawable/background_round"
+                android:text="@string/medical_info_add"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/medical_info_description_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/medical_info_allergy_list"
+            android:layout_below="@id/medical_info_allergy_layout"
             android:layout_marginStart="@dimen/default_layout_margin"
-            android:layout_marginTop="@dimen/separation_margin_3"
+            android:layout_marginTop="@dimen/separation_margin_2"
             android:text="@string/medical_info_tell_about_yourself"
             android:textColor="@color/white"
             android:textSize="@dimen/text_h6" />

@@ -8,4 +8,5 @@
     <color name="gradient_dark_blue">#6859EA</color>
     <color name="gradient_light_blue">#6ACBE0</color>
     <color name="darker_blue">#303F9F</color>
+    <color name="light_purple">#8d8cfe</color>
 </resources>

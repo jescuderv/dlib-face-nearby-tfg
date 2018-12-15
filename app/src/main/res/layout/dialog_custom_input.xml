@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:elevation="9dp"
+    android:layout_margin="@dimen/separation_margin_2"
+    android:background="@drawable/dialog_rounded_corner"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialog_custom_input_title"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/separation_margin_2"
+        android:layout_marginTop="@dimen/separation_margin_1"
+        android:layout_marginEnd="@dimen/separation_margin_2"
+        android:textAlignment="center"
+        android:textColor="@color/light_purple"
+        android:textSize="@dimen/text_h6"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/dialog_custom_input_email"
+        style="@style/InputBoxText"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/separation_margin_2"
+        android:layout_marginTop="@dimen/separation_margin_3"
+        android:layout_marginEnd="@dimen/separation_margin_2"
+        android:layout_marginBottom="@dimen/separation_margin_1"
+        android:textColor="@color/light_purple"
+        android:hint="Escribe aquí..."
+        android:textCursorDrawable="@null"
+        android:textColorLink="@color/light_purple"
+        android:background="@drawable/button_round_white"
+        android:inputType="textEmailAddress" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_custom_input_cancel_button"
+            style="@style/TextButton"
+            android:layout_width="0dp"
+            android:layout_margin="@dimen/separation_margin_1"
+            android:layout_weight="1"
+            android:text="cancelar"
+            android:textColor="@color/light_purple"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/dialog_custom_input_ok_button"
+            style="@style/TextButton"
+            android:layout_width="0dp"
+            android:layout_margin="@dimen/separation_margin_1"
+            android:layout_weight="1"
+            android:background="@drawable/background_round"
+            android:text="Añadir"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>
