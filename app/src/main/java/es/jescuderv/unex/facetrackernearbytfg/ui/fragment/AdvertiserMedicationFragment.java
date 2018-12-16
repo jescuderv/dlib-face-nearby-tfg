@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.jescuderv.unex.facetrackernearbytfg.R;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.MedicationActivity;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +23,15 @@ public class AdvertiserMedicationFragment extends Fragment {
 
     public AdvertiserMedicationFragment() {
         // Required empty public constructor
+    }
+
+    public static AdvertiserMedicationFragment newInstance(UserViewModel mUserViewModel) {
+
+        Bundle args = new Bundle();
+
+        AdvertiserMedicationFragment fragment = new AdvertiserMedicationFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
 

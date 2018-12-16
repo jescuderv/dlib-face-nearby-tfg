@@ -1,5 +1,8 @@
 package es.jescuderv.unex.facetrackernearbytfg.domain.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private Integer id;
@@ -9,6 +12,12 @@ public class User {
     private Integer phoneNumber;
     private String address;
     private String description;
+
+    private String bloodType;
+    private String medicalDescription;
+    private List<Intolerance> intoleranceList = new ArrayList<>();
+    private List<Surgery> surgeryList = new ArrayList<>();
+    private List<Allergy> allergyList = new ArrayList<>();
 
 
     public User() {
@@ -69,5 +78,46 @@ public class User {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
+    }
+
+    public String getMedicalDescription() {
+        return medicalDescription;
+    }
+
+    public void setMedicalDescription(String medicalDescription) {
+        this.medicalDescription = medicalDescription;
+    }
+
+    public List<Intolerance> getIntoleranceList() {
+        return intoleranceList;
+    }
+
+    public void setIntoleranceList(List<Intolerance> intoleranceList) {
+        this.intoleranceList = intoleranceList;
+    }
+
+    public List<Surgery> getSurgeryList() {
+        return surgeryList;
+    }
+
+    public void setSurgeryList(List<Surgery> surgeryList) {
+        this.surgeryList = surgeryList;
+    }
+
+    public List<Allergy> getAllergyList() {
+        return allergyList;
+    }
+
+    public void setAllergyList(List<Allergy> allergyList) {
+        this.allergyList = allergyList;
     }
 }

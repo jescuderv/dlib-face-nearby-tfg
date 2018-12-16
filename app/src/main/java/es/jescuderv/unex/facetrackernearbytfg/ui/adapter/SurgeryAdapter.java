@@ -12,19 +12,21 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.jescuderv.unex.facetrackernearbytfg.R;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 
-public class StaggeredAdapter extends RecyclerView.Adapter<StaggeredAdapter.ViewHolder> {
+public class SurgeryAdapter extends RecyclerView.Adapter<SurgeryAdapter.ViewHolder> {
 
-    private List<String> mDataSetList;
+    private List<UserViewModel.Surgery> mDataSetList;
 
-    public StaggeredAdapter(List<String> dateSetList) {
+    public SurgeryAdapter(List<UserViewModel.Surgery> dateSetList) {
         mDataSetList = dateSetList;
     }
+
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new StaggeredAdapter.ViewHolder(LayoutInflater.from(viewGroup.getContext())
+        return new SurgeryAdapter.ViewHolder(LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_staggered_list, viewGroup, false));
     }
 
@@ -48,8 +50,8 @@ public class StaggeredAdapter extends RecyclerView.Adapter<StaggeredAdapter.View
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(String text) {
-            mText.setText(text);
+        public void bind(UserViewModel.Surgery surgery) {
+            mText.setText(surgery.getName());
         }
     }
 }

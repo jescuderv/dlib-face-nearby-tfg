@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.AdvertiserMainInfoFragment">
+    tools:context=".ui.fragment.AdvertiserMedicalInfoFragment">
 
 
     <android.support.design.card.MaterialCardView
@@ -22,8 +22,9 @@
             android:background="@drawable/background_gradient_round">
 
             <TextView
+                android:layout_toStartOf="@id/advertiser_medical_info_edit_button"
                 android:id="@+id/advertiser_medical_info_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_layout_margin"
                 android:layout_marginTop="70dp"
@@ -35,15 +36,97 @@
                 android:textSize="@dimen/text_h5"
                 android:textStyle="bold" />
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/advertiser_medical_info_edit_button"
+                style="@style/ImageButton"
+                android:layout_alignBottom="@+id/advertiser_medical_info_title"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:layout_marginBottom="-8dp"
+                android:contentDescription="@string/advertiser_medical_info_edit"
+                android:src="@drawable/icon_edit"
+                android:tint="@color/white" />
+
+            <ImageButton
                 android:id="@+id/advertiser_medical_info_add_button"
+                style="@style/ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/advertiser_medical_info_title"
                 android:clickable="true"
-                android:contentDescription="@string/advertiser_medical_info"
+                android:contentDescription="@string/advertiser_personal_info"
                 android:focusable="true"
-                android:src="@drawable/icon_add" />
+                android:src="@drawable/icon_add"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/advertiser_medical_info_main_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/advertiser_medical_info_title"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:layout_marginBottom="@dimen/default_layout_margin">
+
+                <TextView
+                    android:id="@+id/advertiser_medical_info_blood_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/medical_info_blood_type"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/advertiser_medical_info_blood_type_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/separation_margin_2"
+                    android:layout_toEndOf="@id/advertiser_medical_info_blood_type"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/advertiser_medical_info_surgery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/advertiser_medical_info_blood_type_value"
+                    android:layout_marginTop="@dimen/separation_margin_2"
+                    android:text="@string/medical_info_surgery"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/advertiser_medical_info_surgery_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/advertiser_medical_info_surgery"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/advertiser_medical_info_allergy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/advertiser_medical_info_surgery_recycler_view"
+                    android:layout_marginTop="@dimen/separation_margin_1"
+                    android:text="@string/medical_info_allergy"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/advertiser_medical_info_allergy_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/advertiser_medical_info_allergy"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
     </android.support.design.card.MaterialCardView>

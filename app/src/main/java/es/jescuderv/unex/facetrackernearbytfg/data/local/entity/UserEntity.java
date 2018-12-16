@@ -28,6 +28,11 @@ public final class UserEntity {
     @ColumnInfo(name = "description")
     private String description;
 
+    @ColumnInfo(name = "blood_type")
+    private String bloodType;
+
+    @ColumnInfo(name = "medical_Description")
+    private String medicalDescription;
 
     public UserEntity() {
     }
@@ -87,5 +92,21 @@ public final class UserEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
+    }
+
+    public String getMedicalDescription() {
+        return medicalDescription;
+    }
+
+    public void setMedicalDescription(String medicalDescription) {
+        this.medicalDescription = medicalDescription;
     }
 }

@@ -23,20 +23,19 @@ import butterknife.OnClick;
 import dagger.android.support.DaggerAppCompatActivity;
 import es.jescuderv.unex.facetrackernearbytfg.R;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserContract;
-import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserMainInfoContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMainInfoFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicalInfoFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicationFragment;
-import es.jescuderv.unex.facetrackernearbytfg.ui.presenter.AdvertiserPresenter;
-import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserPersonalInfoViewModel;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 import es.jescuderv.unex.facetrackernearbytfg.utils.ExpandingViewPagerTransformer;
 
 public class AdvertiserActivity extends DaggerAppCompatActivity implements AdvertiserContract.View,
-        AdvertiserMainInfoContract.OnExpandMainInfoListener {
+        AdvertiserMainInfoFragment.OnExpandMainInfoListener, AdvertiserMedicalInfoFragment.OnExpandMedicalInfoListener {
 
     private final static int PICK_IMAGE = 1;
 
-    private final static String MAIN_INFO_VIEW_MODEL = "MAIN_INFO_VIEW_MODEL";
+    private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
+
 
     @BindView(R.id.advertiser_view_pager)
     ViewPager mViewPager;
@@ -45,7 +44,9 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     ImageView mProfileImage;
 
     @Inject
-    AdvertiserPresenter mPresenter;
+    AdvertiserContract.Presenter mPresenter;
+
+    private UserViewModel mUserViewModel;
 
 
     @Override
@@ -59,12 +60,7 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
 //        startIntent.setAction(ACTION_START_SERVICE);
 //        startService(startIntent);
 
-        FragmentStatePagerAdapter pagerAdapter = new ProfileAdapter(getSupportFragmentManager());
-        mViewPager.setPageTransformer(true, new ExpandingViewPagerTransformer());
-        mViewPager.setAdapter(pagerAdapter);
-        mViewPager.setClipToPadding(false);
-        mViewPager.setPadding(48, 0, 48, 0);
-        mViewPager.setPageMargin(-100);
+
     }
 
 
@@ -79,6 +75,7 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         mPresenter.dropView();
         super.onDestroy();
     }
+
 
     @OnClick(R.id.advertiser_settings_button)
     public void onSettingsClick() {
@@ -131,6 +128,28 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onUserData(UserViewModel userViewModel) {
+        mUserViewModel = userViewModel;
+        setUpViewPager();
+    }
+
+    @Override
+    public void onUserDataEmpty() {
+        mUserViewModel = null;
+        setUpViewPager();
+    }
+
+
+    private void setUpViewPager() {
+        FragmentStatePagerAdapter pagerAdapter = new ProfileAdapter(getSupportFragmentManager());
+        mViewPager.setPageTransformer(true, new ExpandingViewPagerTransformer());
+        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setClipToPadding(false);
+        mViewPager.setPadding(48, 0, 48, 0);
+        mViewPager.setPageMargin(-100);
+    }
+
 
     private class ProfileAdapter extends FragmentStatePagerAdapter {
 
@@ -142,11 +161,11 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new AdvertiserMainInfoFragment();
+                    return AdvertiserMainInfoFragment.newInstance(mUserViewModel);
                 case 1:
-                    return new AdvertiserMedicalInfoFragment();
+                    return AdvertiserMedicalInfoFragment.newInstance(mUserViewModel);
                 case 2:
-                    return new AdvertiserMedicationFragment();
+                    return AdvertiserMedicationFragment.newInstance(mUserViewModel);
             }
             return null;
         }
@@ -163,19 +182,31 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     //==============================================================================================
 
     @Override
-    public void onAddPersonalInfo() {
-        startActivity(new Intent(this, PersonalInfoActivity.class));
-    }
-
-    @Override
-    public void onEditPersonalInfo(UserPersonalInfoViewModel personalInfoViewModel) {
+    public void onEditPersonalInfo(UserViewModel personalInfoViewModel) {
         Intent intent = new Intent(this, PersonalInfoActivity.class);
-        intent.putExtra(MAIN_INFO_VIEW_MODEL, personalInfoViewModel);
+        intent.putExtra(USER_VIEW_MODEL, personalInfoViewModel);
         startActivity(intent);
     }
 
     @Override
     public void onCheckPersonalInfo() {
+
+    }
+
+
+    //==============================================================================================
+    // Medical info callbacks
+    //==============================================================================================
+
+    @Override
+    public void onEditMedicalInfo(UserViewModel userMedicalInfoViewModel) {
+        Intent intent = new Intent(this, MedicalInfoActivity.class);
+        intent.putExtra(USER_VIEW_MODEL, userMedicalInfoViewModel);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCheckMedicalInfo() {
 
     }
 

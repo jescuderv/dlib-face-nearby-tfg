@@ -12,20 +12,26 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.support.DaggerFragment;
 import es.jescuderv.unex.facetrackernearbytfg.R;
-import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserMainInfoContract;
-import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserPersonalInfoViewModel;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AdvertiserMainInfoFragment extends DaggerFragment implements AdvertiserMainInfoContract.View {
+public class AdvertiserMainInfoFragment extends Fragment {
+
+    public interface OnExpandMainInfoListener {
+
+        void onEditPersonalInfo(UserViewModel personalInfoViewModel);
+
+        void onCheckPersonalInfo();
+    }
+
+    private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
+
 
     @BindView(R.id.advertiser_main_info_data_layout)
     RelativeLayout mMainInfoLayout;
@@ -50,22 +56,26 @@ public class AdvertiserMainInfoFragment extends DaggerFragment implements Advert
     TextView mAddress;
 
 
-    @Inject
-    AdvertiserMainInfoContract.Presenter mPresenter;
-    private AdvertiserMainInfoContract.OnExpandMainInfoListener mListener;
+    private OnExpandMainInfoListener mListener;
 
-    private UserPersonalInfoViewModel mPersonalInfoViewModel;
+    private UserViewModel mPersonalInfoViewModel;
 
 
-    public AdvertiserMainInfoFragment() {
-        // Required empty public constructor
+    public static AdvertiserMainInfoFragment newInstance(UserViewModel userViewModel) {
+
+        Bundle args = new Bundle();
+        args.putSerializable(USER_VIEW_MODEL, userViewModel);
+
+        AdvertiserMainInfoFragment fragment = new AdvertiserMainInfoFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mListener = (AdvertiserMainInfoContract.OnExpandMainInfoListener) context;
+        mListener = (OnExpandMainInfoListener) context;
     }
 
     @Override
@@ -74,25 +84,32 @@ public class AdvertiserMainInfoFragment extends DaggerFragment implements Advert
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_advertiser_main_info, container, false);
         ButterKnife.bind(this, view);
+
+        checkUserPersonalInfoData();
+
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.attachView(this);
-    }
+    private void checkUserPersonalInfoData() {
+        Bundle args = getArguments();
 
-    @Override
-    public void onDestroy() {
-        mPresenter.dropView();
-        super.onDestroy();
+        try {
+            UserViewModel userViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);
+            mPersonalInfoViewModel = userViewModel;
+            if (!userViewModel.getUserName().isEmpty()) {
+                showUserPersonalData(userViewModel);
+
+            } else showAddPersonalDataButton();
+
+        } catch (NullPointerException e) {
+            showAddPersonalDataButton();
+        }
     }
 
 
     @OnClick(R.id.advertiser_main_info_add_button)
     public void onAddMainInfoClick() {
-        mListener.onAddPersonalInfo();
+        mListener.onEditPersonalInfo(mPersonalInfoViewModel);
     }
 
     @OnClick(R.id.advertiser_main_info_edit_button)
@@ -101,13 +118,10 @@ public class AdvertiserMainInfoFragment extends DaggerFragment implements Advert
     }
 
 
-    @Override
-    public void showUserPersonalData(UserPersonalInfoViewModel user) {
+    private void showUserPersonalData(UserViewModel user) {
         mMainInfoLayout.setVisibility(View.VISIBLE);
         mEditMainInfoButton.setVisibility(View.VISIBLE);
         mAddMainInfoButton.setVisibility(View.GONE);
-
-        mPersonalInfoViewModel = user;
 
         mFullName.setText(String.format("%s %s", user.getUserName(), user.getLastName()));
         mBirthday.setText(user.getBirthday());
@@ -115,8 +129,7 @@ public class AdvertiserMainInfoFragment extends DaggerFragment implements Advert
         mAddress.setText(user.getAddress());
     }
 
-    @Override
-    public void showAddPersonalDataButton() {
+    private void showAddPersonalDataButton() {
         mAddMainInfoButton.setVisibility(View.VISIBLE);
         mEditMainInfoButton.setVisibility(View.GONE);
         mMainInfoLayout.setVisibility(View.GONE);

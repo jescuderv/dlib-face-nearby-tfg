@@ -10,7 +10,6 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -21,11 +20,11 @@ import dagger.android.support.DaggerAppCompatActivity;
 import es.jescuderv.unex.facetrackernearbytfg.R;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.PersonalInfoContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.presenter.PersonalInfoPresenter;
-import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserPersonalInfoViewModel;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 
 public class PersonalInfoActivity extends DaggerAppCompatActivity implements PersonalInfoContract.View {
 
-    private final static String MAIN_INFO_VIEW_MODEL = "MAIN_INFO_VIEW_MODEL";
+    private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
 
 
     @BindView(R.id.personal_info_name_input)
@@ -88,10 +87,21 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
         setContentView(R.layout.activity_personal_info);
         ButterKnife.bind(this);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) showUserPersonalData((UserPersonalInfoViewModel)
-                Objects.requireNonNull(extras.get(MAIN_INFO_VIEW_MODEL)));
+        checkUserPersonalInfoData();
+    }
 
+    private void checkUserPersonalInfoData() {
+        Bundle args = getIntent().getExtras();
+
+        try {
+            UserViewModel userViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);
+            if (!userViewModel.getUserName().isEmpty()){
+                showUserPersonalData(userViewModel);
+            }
+
+        } catch (NullPointerException ignored) {
+
+        }
     }
 
     @Override
@@ -129,12 +139,12 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
 
     @Override
     public void showEmptyFieldsMessage() {
-        Toast.makeText(this, "Hay campos vacíos", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.personal_info_empty_fields), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showSuccessUpdatePersonalInfoMessage() {
-        Toast.makeText(this, "Personal info updated", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.personal_info_updated), Toast.LENGTH_LONG).show();
         onBackPressed();
     }
 
@@ -144,7 +154,7 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
     }
 
 
-    private void showUserPersonalData(UserPersonalInfoViewModel user) {
+    private void showUserPersonalData(UserViewModel user) {
         mUserId = user.getId();
         mName.setText(user.getUserName());
         mLastName.setText(user.getLastName());

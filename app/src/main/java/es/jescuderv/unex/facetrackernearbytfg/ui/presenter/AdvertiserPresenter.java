@@ -9,10 +9,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import es.jescuderv.unex.facetrackernearbytfg.domain.model.User;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.DetectFace;
-import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.RecognizeFace;
+import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.GetUserData;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.SaveFace;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserContract;
+import es.jescuderv.unex.facetrackernearbytfg.ui.mapper.UserMapper;
 import es.jescuderv.unex.facetrackernearbytfg.utils.di.scopes.ActivityScoped;
 import io.reactivex.observers.DisposableObserver;
 
@@ -25,13 +27,14 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
     private DetectFace mDetectFace;
     private SaveFace mSaveFace;
 
-    private RecognizeFace mRecognize;
+    private GetUserData mGetUserData;
+
 
     @Inject
-    AdvertiserPresenter(DetectFace detectFace, SaveFace saveFace, RecognizeFace recognizeFace) {
+    AdvertiserPresenter(DetectFace detectFace, SaveFace saveFace, GetUserData getUserData) {
         mDetectFace = detectFace;
         mSaveFace = saveFace;
-        mRecognize = recognizeFace;
+        mGetUserData = getUserData;
     }
 
 
@@ -79,14 +82,36 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
     }
 
 
+    private void getMedicalData() {
+        mGetUserData.execute(new DisposableObserver<User>() {
+            @Override
+            public void onNext(User user) {
+                mView.onUserData(UserMapper.transform(user));
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.onUserDataEmpty();
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        }, null);
+    }
+
+
     @Override
     public void attachView(AdvertiserContract.View view) {
         mView = view;
+        getMedicalData();
     }
 
     @Override
     public void dropView() {
         mView = null;
+        mGetUserData.dispose();
         mDetectFace.dispose();
         mSaveFace.dispose();
     }

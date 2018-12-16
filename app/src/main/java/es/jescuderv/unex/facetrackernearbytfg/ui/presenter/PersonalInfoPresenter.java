@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.SetUserData;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.PersonalInfoContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.mapper.UserMapper;
-import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserPersonalInfoViewModel;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 import es.jescuderv.unex.facetrackernearbytfg.utils.di.scopes.ActivityScoped;
 import io.reactivex.observers.DisposableCompletableObserver;
 
@@ -33,7 +33,7 @@ public class PersonalInfoPresenter implements PersonalInfoContract.Presenter {
             return;
         }
 
-        UserPersonalInfoViewModel user = setUserInfo(userId, name, lastName, birthDate, phoneNumber,
+        UserViewModel user = setUserInfo(userId, name, lastName, birthDate, phoneNumber,
                 address, description);
 
         mSetUserData.execute(new DisposableCompletableObserver() {
@@ -56,9 +56,9 @@ public class PersonalInfoPresenter implements PersonalInfoContract.Presenter {
                 phoneNumber.trim().isEmpty() && address.trim().isEmpty() && description.trim().isEmpty());
     }
 
-    private UserPersonalInfoViewModel setUserInfo(Integer userId, String name, String lastName, String birthDate,
+    private UserViewModel setUserInfo(Integer userId, String name, String lastName, String birthDate,
                                                   String phoneNumber, String address, String description) {
-        UserPersonalInfoViewModel user = new UserPersonalInfoViewModel();
+        UserViewModel user = new UserViewModel();
         if (userId != null) user.setId(userId);
         user.setUserName(name);
         user.setLastName(lastName);

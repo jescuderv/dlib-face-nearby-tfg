@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,22 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.DaggerAppCompatActivity;
 import es.jescuderv.unex.facetrackernearbytfg.R;
-import es.jescuderv.unex.facetrackernearbytfg.ui.adapter.StaggeredAdapter;
+import es.jescuderv.unex.facetrackernearbytfg.ui.adapter.AllergyAdapter;
+import es.jescuderv.unex.facetrackernearbytfg.ui.adapter.IntoleranceAdapter;
+import es.jescuderv.unex.facetrackernearbytfg.ui.adapter.SurgeryAdapter;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.MedicalInfoContract;
-import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserMedicalInfoViewModel;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 
 public class MedicalInfoActivity extends DaggerAppCompatActivity implements MedicalInfoContract.View {
 
-    private final static String MEDICAL_INFO_VIEW_MODEL = "MEDICAL_INFO_VIEW_MODEL";
+    private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
+
+    private final static int STAGGERED_SPAN_COUNT = 3;
+
+    private final static int INTOLERANCE = 0;
+    private final static int SURGERY = 1;
+    private final static int ALLERGY = 2;
+    private final static int BLOOD_TYPE = 3;
 
 
     @BindView(R.id.medical_info_intolerance_list)
@@ -40,23 +50,33 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
     @BindView(R.id.medical_info_allergy_list)
     RecyclerView mAllergyRecyclerView;
 
+
     @BindView(R.id.medical_info_intolerance_empty_message)
     TextView mIntoleranceEmptyMessage;
+
+    @BindView(R.id.medical_info_allergy_empty_message)
+    TextView mAllergyEmptyMessage;
+
+    @BindView(R.id.medical_info_surgery_empty_message)
+    TextView mSurgeryEmptyMessage;
 
 
     @BindView(R.id.medical_info_blood_type)
     TextView mBloodTypeText;
 
+    @BindView(R.id.medical_info_description_input)
+    EditText mMedicalDescription;
+
 
     @Inject
     MedicalInfoContract.Presenter mPresenter;
 
-    StaggeredAdapter mIntolerancesAdapter;
-    StaggeredAdapter mSurgeriesAdapter;
-    StaggeredAdapter mAllergiesAdapter;
-    List<String> intoleranceList;
-    List<String> surgeryList;
-    List<String> allergyList;
+    private UserViewModel mUserMedicalInfoViewModel = new UserViewModel();
+
+    private List<UserViewModel.Intolerance> mIntoleranceList = new ArrayList<>();
+    private List<UserViewModel.Surgery> mSurgeryList = new ArrayList<>();
+    private List<UserViewModel.Allergy> mAllergyList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,30 +84,42 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
         setContentView(R.layout.activity_medical_info);
         ButterKnife.bind(this);
 
-        Bundle extras = getIntent().getExtras();
-//        if (extras != null) showUserPersonalData((UserMedicalInfoViewModel)
-//                Objects.requireNonNull(extras.get(MEDICAL_INFO_VIEW_MODEL)));
+        setUpAdapters();
 
-        intoleranceList = new ArrayList<>();
-        surgeryList = new ArrayList<>();
-        allergyList = new ArrayList<>();
+        checkMedicalInfoData();
+    }
 
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL);
-        StaggeredGridLayoutManager staggeredGridLayoutManager2 = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL);
-        StaggeredGridLayoutManager staggeredGridLayoutManager3 = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL);
+    private void checkMedicalInfoData() {
+        Bundle args = getIntent().getExtras();
 
+        try {
+            UserViewModel userViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);
 
-        mSurgeriesAdapter = new StaggeredAdapter(surgeryList);
+            if (userViewModel.getBloodType() != null || userViewModel.getAllergyList().size() > 0
+                    || userViewModel.getIntoleranceList().size() > 0 || userViewModel.getSurgeryList().size() > 0)
+                showUserMedicalData(userViewModel);
+
+        } catch (NullPointerException ignored) {
+
+        }
+    }
+
+    private void setUpAdapters() {
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(STAGGERED_SPAN_COUNT, StaggeredGridLayoutManager.HORIZONTAL);
+        StaggeredGridLayoutManager staggeredGridLayoutManager2 = new StaggeredGridLayoutManager(STAGGERED_SPAN_COUNT, StaggeredGridLayoutManager.HORIZONTAL);
+        StaggeredGridLayoutManager staggeredGridLayoutManager3 = new StaggeredGridLayoutManager(STAGGERED_SPAN_COUNT, StaggeredGridLayoutManager.HORIZONTAL);
+
+        SurgeryAdapter surgeriesAdapter = new SurgeryAdapter(mSurgeryList);
         mSurgeryRecyclerView.setLayoutManager(staggeredGridLayoutManager);
-        mSurgeryRecyclerView.setAdapter(mSurgeriesAdapter);
+        mSurgeryRecyclerView.setAdapter(surgeriesAdapter);
 
-        mIntolerancesAdapter = new StaggeredAdapter(intoleranceList);
+        IntoleranceAdapter intoleranceAdapter = new IntoleranceAdapter(mIntoleranceList);
         mIntoleranceRecyclerView.setLayoutManager(staggeredGridLayoutManager2);
-        mIntoleranceRecyclerView.setAdapter(mIntolerancesAdapter);
+        mIntoleranceRecyclerView.setAdapter(intoleranceAdapter);
 
-        mAllergiesAdapter = new StaggeredAdapter(allergyList);
+        AllergyAdapter allergyAdapter = new AllergyAdapter(mAllergyList);
         mAllergyRecyclerView.setLayoutManager(staggeredGridLayoutManager3);
-        mAllergyRecyclerView.setAdapter(mAllergiesAdapter);
+        mAllergyRecyclerView.setAdapter(allergyAdapter);
     }
 
     @Override
@@ -106,31 +138,76 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
     @OnClick(R.id.medical_info_close_button)
     public void onCloseClick() {
         super.onBackPressed();
-
     }
 
     @OnClick(R.id.medical_info_save_button)
     public void onSaveMedicalInfoButtonClick() {
-
+        mUserMedicalInfoViewModel.setBloodType(mBloodTypeText.getText().toString());
+        mUserMedicalInfoViewModel.setSurgeryList(mSurgeryList);
+        mUserMedicalInfoViewModel.setIntoleranceList(mIntoleranceList);
+        mUserMedicalInfoViewModel.setAllergyList(mAllergyList);
+        mUserMedicalInfoViewModel.setMedicalDescription(mMedicalDescription.getText().toString());
+        mPresenter.setUserMedicalData(mUserMedicalInfoViewModel);
     }
 
     @OnClick(R.id.medical_info_intolerance_add_button)
     public void onAdIntoleranceClickButton() {
-        showAddMedicalInfoDialog(0);
+        showAddMedicalInfoDialog(INTOLERANCE);
     }
 
     @OnClick(R.id.medical_info_surgery_add_button)
     public void onAdSurgeryClickButton() {
-        showAddMedicalInfoDialog(1);
+        showAddMedicalInfoDialog(SURGERY);
     }
 
     @OnClick(R.id.medical_info_allergy_add_button)
     public void onAddAllergyClickButton() {
-        showAddMedicalInfoDialog(2);
+        showAddMedicalInfoDialog(ALLERGY);
     }
 
     @OnClick(R.id.medical_info_blood_type)
-    public void onAddBloodTypeButton(){showAddMedicalInfoDialog(3);}
+    public void onAddBloodTypeButton() {
+        showAddMedicalInfoDialog(BLOOD_TYPE);
+    }
+
+
+    @Override
+    public void showUserMedicalData(UserViewModel userMedicalInfoViewModel) {
+        mUserMedicalInfoViewModel = userMedicalInfoViewModel;
+
+        if (userMedicalInfoViewModel.getSurgeryList().size() > 0) {
+            mSurgeryEmptyMessage.setVisibility(View.GONE);
+            mSurgeryRecyclerView.setVisibility(View.VISIBLE);
+        }
+        if (userMedicalInfoViewModel.getIntoleranceList().size() > 0) {
+            mIntoleranceEmptyMessage.setVisibility(View.GONE);
+            mIntoleranceRecyclerView.setVisibility(View.VISIBLE);
+        }
+        if (userMedicalInfoViewModel.getAllergyList().size() > 0) {
+            mAllergyEmptyMessage.setVisibility(View.GONE);
+            mAllergyRecyclerView.setVisibility(View.VISIBLE);
+        }
+
+        mBloodTypeText.setText(userMedicalInfoViewModel.getBloodType());
+        mMedicalDescription.setText(userMedicalInfoViewModel.getMedicalDescription());
+
+        mAllergyList.addAll(userMedicalInfoViewModel.getAllergyList());
+        mSurgeryList.addAll(userMedicalInfoViewModel.getSurgeryList());
+        mIntoleranceList.addAll(userMedicalInfoViewModel.getIntoleranceList());
+
+    }
+
+    @Override
+    public void showSuccessUpdateMedicalInfoMessage() {
+        Toast.makeText(this, getString(R.string.medical_info_updated), Toast.LENGTH_LONG).show();
+        onBackPressed();
+    }
+
+    @Override
+    public void showErrorUpdateMedicalInfoMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
 
     private void showAddMedicalInfoDialog(int medicalInfo) {
         // Create a new custom input dialog
@@ -158,7 +235,6 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
                 dialogTitle.setText(getString(R.string.medical_info_add_blood_type));
         }
 
-
         dialogButtonOk.setOnClickListener(view -> {
             addMedicalInfo(medicalInfo, editText.getText().toString());
             dialog.dismiss();
@@ -170,21 +246,25 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
     private void addMedicalInfo(int medicalInfo, String name) {
         if (!name.trim().isEmpty()) {
             switch (medicalInfo) {
-                case 0:
-                    UserMedicalInfoViewModel.Allergy intolerance = new UserMedicalInfoViewModel.Allergy(1, name);
-                    intoleranceList.add(intolerance.getName());
+                case INTOLERANCE:
+                    UserViewModel.Intolerance intolerance = new UserViewModel.Intolerance(name);
+                    mIntoleranceList.add(intolerance);
                     mIntoleranceEmptyMessage.setVisibility(View.GONE);
                     mIntoleranceRecyclerView.setVisibility(View.VISIBLE);
                     break;
-                case 1:
-                    UserMedicalInfoViewModel.Allergy surgery = new UserMedicalInfoViewModel.Allergy(1, name);
-                    surgeryList.add(surgery.getName());
+                case SURGERY:
+                    UserViewModel.Surgery surgery = new UserViewModel.Surgery(name);
+                    mSurgeryList.add(surgery);
+                    mSurgeryEmptyMessage.setVisibility(View.GONE);
+                    mSurgeryRecyclerView.setVisibility(View.VISIBLE);
                     break;
-                case 2:
-                    UserMedicalInfoViewModel.Allergy allergy = new UserMedicalInfoViewModel.Allergy(2, name);
-                    allergyList.add(allergy.getName());
+                case ALLERGY:
+                    UserViewModel.Allergy allergy = new UserViewModel.Allergy(name);
+                    mAllergyEmptyMessage.setVisibility(View.GONE);
+                    mAllergyRecyclerView.setVisibility(View.VISIBLE);
+                    mAllergyList.add(allergy);
                     break;
-                case 3:
+                case BLOOD_TYPE:
                     mBloodTypeText.setText(name);
                     break;
             }

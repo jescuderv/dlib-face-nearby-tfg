@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/medical_info_intolerance_text"
                 android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_1"
                 android:layout_marginEnd="@dimen/default_layout_margin"
                 android:visibility="gone" />
 
@@ -99,7 +100,7 @@
                 android:layout_marginTop="@dimen/separation_margin_3"
                 android:layout_marginEnd="@dimen/default_layout_margin"
                 android:layout_marginBottom="@dimen/separation_margin_5"
-                android:text="Aquí aparecerán las intolerancias..."
+                android:text="@string/medical_info_empty_intolerance"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_body1" />
 
@@ -139,6 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/medical_info_surgery_text"
                 android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_1"
                 android:layout_marginEnd="@dimen/default_layout_margin"
                 android:visibility="gone" />
 
@@ -152,7 +154,7 @@
                 android:layout_marginTop="@dimen/separation_margin_3"
                 android:layout_marginEnd="@dimen/default_layout_margin"
                 android:layout_marginBottom="@dimen/separation_margin_5"
-                android:text="Aquí aparecerán las operaciones..."
+                android:text="@string/medical_info_empty_surgery"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_body1" />
 
@@ -192,6 +194,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/medical_info_allergy_text"
                 android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_1"
                 android:layout_marginEnd="@dimen/default_layout_margin"
                 android:visibility="gone" />
 
@@ -205,7 +208,7 @@
                 android:layout_marginTop="@dimen/separation_margin_3"
                 android:layout_marginEnd="@dimen/default_layout_margin"
                 android:layout_marginBottom="@dimen/separation_margin_5"
-                android:text="Aquí aparecerán las operaciones..."
+                android:text="@string/medical_info_empty_allergy"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_body1" />
 
