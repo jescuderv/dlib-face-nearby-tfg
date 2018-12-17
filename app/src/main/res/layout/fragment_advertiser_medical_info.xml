@@ -89,10 +89,29 @@
                     android:visibility="gone" />
 
                 <TextView
+                    android:id="@+id/advertiser_medical_info_intolerance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/advertiser_medical_info_blood_type_value"
+                    android:layout_marginTop="@dimen/separation_margin_2"
+                    android:text="@string/medical_info_intolerance"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_body1"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/advertiser_medical_info_intolerance_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/advertiser_medical_info_intolerance"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/advertiser_medical_info_surgery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/advertiser_medical_info_blood_type_value"
+                    android:layout_below="@+id/advertiser_medical_info_intolerance_recycler_view"
                     android:layout_marginTop="@dimen/separation_margin_2"
                     android:text="@string/medical_info_surgery"
                     android:textColor="@color/white"

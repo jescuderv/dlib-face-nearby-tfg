@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.jescuderv.unex.facetrackernearbytfg.R;
 import es.jescuderv.unex.facetrackernearbytfg.ui.adapter.AllergyAdapter;
+import es.jescuderv.unex.facetrackernearbytfg.ui.adapter.IntoleranceAdapter;
 import es.jescuderv.unex.facetrackernearbytfg.ui.adapter.SurgeryAdapter;
 import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 
@@ -55,11 +56,17 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
     TextView mBloodTypeText;
 
 
+    @BindView(R.id.advertiser_medical_info_intolerance_recycler_view)
+    RecyclerView mIntoleranceRecyclerView;
+
     @BindView(R.id.advertiser_medical_info_allergy_recycler_view)
     RecyclerView mAllergyRecyclerView;
 
     @BindView(R.id.advertiser_medical_info_surgery_recycler_view)
     RecyclerView mSurgeryRecyclerView;
+
+    @BindView(R.id.advertiser_medical_info_intolerance)
+    TextView mIntoleranceText;
 
     @BindView(R.id.advertiser_medical_info_allergy)
     TextView mAllergyText;
@@ -133,6 +140,8 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
 
 
     private void showMedicalData(UserViewModel userMedicalInfoViewModel) {
+        int medicalCount = 0;
+
         mAddButton.setVisibility(View.GONE);
         mEditButton.setVisibility(View.VISIBLE);
         mMainLayout.setVisibility(View.VISIBLE);
@@ -143,10 +152,12 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
             mBloodTypeText.setVisibility(View.VISIBLE);
         }
 
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(STAGGERED_SPAN_COUNT, StaggeredGridLayoutManager.HORIZONTAL);
         StaggeredGridLayoutManager staggeredGridLayoutManager2 = new StaggeredGridLayoutManager(STAGGERED_SPAN_COUNT, StaggeredGridLayoutManager.HORIZONTAL);
         StaggeredGridLayoutManager staggeredGridLayoutManager3 = new StaggeredGridLayoutManager(STAGGERED_SPAN_COUNT, StaggeredGridLayoutManager.HORIZONTAL);
 
         if (userMedicalInfoViewModel.getSurgeryList().size() > 0) {
+            medicalCount = medicalCount + 1;
             mSurgeryText.setVisibility(View.VISIBLE);
             mSurgeryRecyclerView.setVisibility(View.VISIBLE);
             SurgeryAdapter surgeryAdapter = new SurgeryAdapter(userMedicalInfoViewModel.getSurgeryList());
@@ -155,11 +166,20 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
         }
 
         if (userMedicalInfoViewModel.getAllergyList().size() > 0) {
+            medicalCount = medicalCount + 1;
             mAllergyText.setVisibility(View.VISIBLE);
             mAllergyRecyclerView.setVisibility(View.VISIBLE);
             AllergyAdapter allergyAdapter = new AllergyAdapter(userMedicalInfoViewModel.getAllergyList());
             mAllergyRecyclerView.setLayoutManager(staggeredGridLayoutManager3);
             mAllergyRecyclerView.setAdapter(allergyAdapter);
+        }
+
+        if (userMedicalInfoViewModel.getIntoleranceList().size() > 0 && medicalCount < 2) {
+            mIntoleranceText.setVisibility(View.VISIBLE);
+            mIntoleranceRecyclerView.setVisibility(View.VISIBLE);
+            IntoleranceAdapter intoleranceAdapter = new IntoleranceAdapter(userMedicalInfoViewModel.getIntoleranceList());
+            mIntoleranceRecyclerView.setLayoutManager(staggeredGridLayoutManager);
+            mIntoleranceRecyclerView.setAdapter(intoleranceAdapter);
         }
 
     }
