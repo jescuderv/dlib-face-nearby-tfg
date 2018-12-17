@@ -34,6 +34,9 @@ public final class UserEntity {
     @ColumnInfo(name = "medical_Description")
     private String medicalDescription;
 
+    @ColumnInfo(name = "face_path")
+    private String facePath;
+
     public UserEntity() {
     }
 
@@ -108,5 +111,13 @@ public final class UserEntity {
 
     public void setMedicalDescription(String medicalDescription) {
         this.medicalDescription = medicalDescription;
+    }
+
+    public String getFacePath() {
+        return facePath;
+    }
+
+    public void setFacePath(String facePath) {
+        this.facePath = facePath;
     }
 }

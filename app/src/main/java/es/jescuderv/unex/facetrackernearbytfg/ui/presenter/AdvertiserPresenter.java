@@ -13,9 +13,12 @@ import es.jescuderv.unex.facetrackernearbytfg.domain.model.User;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.DetectFace;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.GetUserData;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.SaveFace;
+import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.SetUserData;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.mapper.UserMapper;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 import es.jescuderv.unex.facetrackernearbytfg.utils.di.scopes.ActivityScoped;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 
 @ActivityScoped
@@ -28,13 +31,15 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
     private SaveFace mSaveFace;
 
     private GetUserData mGetUserData;
+    private SetUserData mSetUserData;
 
 
     @Inject
-    AdvertiserPresenter(DetectFace detectFace, SaveFace saveFace, GetUserData getUserData) {
+    AdvertiserPresenter(DetectFace detectFace, SaveFace saveFace, GetUserData getUserData, SetUserData setUserData) {
         mDetectFace = detectFace;
         mSaveFace = saveFace;
         mGetUserData = getUserData;
+        mSetUserData = setUserData;
     }
 
 
@@ -61,11 +66,26 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
         }, new DetectFace.Params(faceBitmap));
     }
 
+    @Override
+    public void setUserData(UserViewModel userViewModel) {
+        mSetUserData.execute(new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+               // Nothing to do
+            }
+
+            @Override
+            public void onError(Throwable e) {
+               // Nothing to do
+            }
+        }, new SetUserData.Params(UserMapper.transform(userViewModel)));
+    }
+
     private void saveFaceDetected(Bitmap faceBitmap) {
         mSaveFace.execute(new DisposableObserver<File>() {
             @Override
             public void onNext(File file) {
-                // Nothing to do
+                mView.showFaceDetectSuccessMessage(faceBitmap, file.getAbsolutePath());
             }
 
             @Override
@@ -75,7 +95,6 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
 
             @Override
             public void onComplete() {
-                mView.showFaceDetectSuccessMessage(faceBitmap);
             }
 
         }, new SaveFace.Params(FACE_PERSONAL_NAME, faceBitmap));
@@ -111,6 +130,7 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
     @Override
     public void dropView() {
         mView = null;
+        mSetUserData.dispose();
         mGetUserData.dispose();
         mDetectFace.dispose();
         mSaveFace.dispose();

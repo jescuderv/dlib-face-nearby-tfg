@@ -28,6 +28,7 @@ import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicalInfoF
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicationFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 import es.jescuderv.unex.facetrackernearbytfg.utils.ExpandingViewPagerTransformer;
+import es.jescuderv.unex.facetrackernearbytfg.utils.ImageUtil;
 
 public class AdvertiserActivity extends DaggerAppCompatActivity implements AdvertiserContract.View,
         AdvertiserMainInfoFragment.OnExpandMainInfoListener, AdvertiserMedicalInfoFragment.OnExpandMedicalInfoListener {
@@ -116,10 +117,12 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     }
 
     @Override
-    public void showFaceDetectSuccessMessage(Bitmap faceBitmap) {
+    public void showFaceDetectSuccessMessage(Bitmap faceBitmap, String path) {
         mProfileImage.setVisibility(View.VISIBLE);
         mProfileImage.setImageBitmap(faceBitmap);
-        Toast.makeText(this, "Face detected", Toast.LENGTH_LONG).show();
+        mUserViewModel.setFacePath(path);
+        mPresenter.setUserData(mUserViewModel);
+        Toast.makeText(this, getString(R.string.advertiser_face_detected), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -131,12 +134,18 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     @Override
     public void onUserData(UserViewModel userViewModel) {
         mUserViewModel = userViewModel;
+
+        if (userViewModel.getFacePath() != null) {
+            Bitmap bitmap = ImageUtil.bitmapFromPath(userViewModel.getFacePath());
+            if (bitmap != null) mProfileImage.setImageBitmap(bitmap);
+        }
+
         setUpViewPager();
     }
 
     @Override
     public void onUserDataEmpty() {
-        mUserViewModel = null;
+        mUserViewModel = new UserViewModel();
         setUpViewPager();
     }
 

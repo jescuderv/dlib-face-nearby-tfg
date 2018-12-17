@@ -13,7 +13,7 @@ public interface AdvertiserContract {
 
         void hideProgress();
 
-        void showFaceDetectSuccessMessage(Bitmap faceBitmap);
+        void showFaceDetectSuccessMessage(Bitmap faceBitmap, String path);
 
         void showFaceDetectFailureMessage(String message);
 
@@ -25,6 +25,8 @@ public interface AdvertiserContract {
     interface Presenter extends BasePresenter<View> {
 
         void detectFace(Bitmap faceBitmap);
+
+        void setUserData(UserViewModel userViewModel);
 
     }
 }

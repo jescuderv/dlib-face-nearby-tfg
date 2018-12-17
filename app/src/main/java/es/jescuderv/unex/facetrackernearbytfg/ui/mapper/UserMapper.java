@@ -21,6 +21,7 @@ public class UserMapper {
         userViewModel.setPhoneNumber(user.getPhoneNumber());
         userViewModel.setAddress(user.getAddress());
         userViewModel.setDescription(user.getDescription());
+        userViewModel.setFacePath(user.getFacePath());
 
         userViewModel.setBloodType(user.getBloodType());
         userViewModel.setMedicalDescription(user.getMedicalDescription());
@@ -57,6 +58,7 @@ public class UserMapper {
         user.setPhoneNumber(userViewModel.getPhoneNumber());
         user.setAddress(userViewModel.getAddress());
         user.setDescription(userViewModel.getDescription());
+        user.setFacePath(userViewModel.getFacePath());
 
         user.setBloodType(userViewModel.getBloodType());
         user.setMedicalDescription(userViewModel.getMedicalDescription());

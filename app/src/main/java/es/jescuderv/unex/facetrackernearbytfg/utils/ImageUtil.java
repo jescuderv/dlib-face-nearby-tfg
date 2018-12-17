@@ -24,7 +24,7 @@ public class ImageUtil {
 
     public static File saveImageBitmap(String path, String fileName, Bitmap bitmap) {
         File folder = new File(path);
-        File imgFile = new File(folder.getAbsolutePath() + File.separator +  fileName);
+        File imgFile = new File(folder.getAbsolutePath() + File.separator + fileName);
         if (!folder.exists())
             folder.mkdirs();
 
@@ -39,7 +39,7 @@ public class ImageUtil {
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(imgFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100, fos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
         } catch (IOException e) {
@@ -49,5 +49,12 @@ public class ImageUtil {
         return imgFile;
     }
 
+    public static Bitmap bitmapFromPath(String path) {
+        File imgFile = new File(path);
+        if (imgFile.exists())
+            return BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+        return null;
+    }
 
 }

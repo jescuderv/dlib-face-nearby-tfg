@@ -13,6 +13,7 @@ public class UserViewModel implements Serializable {
     private Integer phoneNumber;
     private String address;
     private String description;
+    private String facePath;
 
     private String bloodType;
     private String medicalDescription;
@@ -79,6 +80,14 @@ public class UserViewModel implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFacePath() {
+        return facePath;
+    }
+
+    public void setFacePath(String facePath) {
+        this.facePath = facePath;
     }
 
     public String getBloodType() {

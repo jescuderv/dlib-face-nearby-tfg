@@ -12,6 +12,7 @@ public class User {
     private Integer phoneNumber;
     private String address;
     private String description;
+    private String facePath;
 
     private String bloodType;
     private String medicalDescription;
@@ -80,6 +81,13 @@ public class User {
         this.description = description;
     }
 
+    public String getFacePath() {
+        return facePath;
+    }
+
+    public void setFacePath(String facePath) {
+        this.facePath = facePath;
+    }
 
     public String getBloodType() {
         return bloodType;
