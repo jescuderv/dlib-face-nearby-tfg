@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.DaggerAppCompatActivity;
 import es.jescuderv.unex.facetrackernearbytfg.R;
+import es.jescuderv.unex.facetrackernearbytfg.service.AdvertiseService;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMainInfoFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicalInfoFragment;
@@ -29,6 +30,8 @@ import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicationFr
 import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 import es.jescuderv.unex.facetrackernearbytfg.utils.ExpandingViewPagerTransformer;
 import es.jescuderv.unex.facetrackernearbytfg.utils.ImageUtil;
+
+import static com.google.android.gms.signin.internal.SignInClientImpl.ACTION_START_SERVICE;
 
 public class AdvertiserActivity extends DaggerAppCompatActivity implements AdvertiserContract.View,
         AdvertiserMainInfoFragment.OnExpandMainInfoListener, AdvertiserMedicalInfoFragment.OnExpandMedicalInfoListener {
@@ -57,9 +60,9 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         ButterKnife.bind(this);
 
 //        // Start service when start screen. TODO: start service in splash or something like that
-//        Intent startIntent = new Intent(getApplicationContext(), AdvertiseService.class);
-//        startIntent.setAction(ACTION_START_SERVICE);
-//        startService(startIntent);
+        Intent startIntent = new Intent(getApplicationContext(), AdvertiseService.class);
+        startIntent.setAction(ACTION_START_SERVICE);
+        startService(startIntent);
 
 
     }

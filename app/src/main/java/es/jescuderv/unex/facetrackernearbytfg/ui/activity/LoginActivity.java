@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.login_discoverer_button)
     public void onLoginDiscoverClickButton() {
-        startActivity(new Intent(this, DiscovererActivity.class));
+        startActivity(new Intent(this, WelcomeDiscovererActivity.class));
     }
 
     @OnClick(R.id.login_advertiser_button)

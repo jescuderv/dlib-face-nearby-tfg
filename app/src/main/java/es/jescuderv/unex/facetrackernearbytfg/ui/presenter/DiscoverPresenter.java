@@ -3,6 +3,7 @@ package es.jescuderv.unex.facetrackernearbytfg.ui.presenter;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.google.android.gms.nearby.connection.Payload;
 import com.google.android.gms.vision.CameraSource;
@@ -14,12 +15,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import es.jescuderv.unex.facetrackernearbytfg.domain.model.User;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.DetectFace;
+import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.GetNearbyData;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.GetUserEndpointList;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.SaveFace;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.SendNearbyPayload;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.TakePicture;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.DiscovererContract;
+import es.jescuderv.unex.facetrackernearbytfg.ui.mapper.UserMapper;
 import es.jescuderv.unex.facetrackernearbytfg.utils.di.scopes.ActivityScoped;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
@@ -37,18 +41,20 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
     private SaveFace mSaveFace;
     private SendNearbyPayload mSendNearbyPayload;
     private GetUserEndpointList mGetUserEndpointList;
+    private GetNearbyData mGetNearbyData;
 
     private boolean isBusy;
 
 
     @Inject
     DiscoverPresenter(DetectFace detectFace, TakePicture takePicture, SaveFace saveFace, SendNearbyPayload
-            sendNearbyPayload, GetUserEndpointList getUserEndpointList) {
+            sendNearbyPayload, GetUserEndpointList getUserEndpointList, GetNearbyData getNearbyData) {
         mDetectFace = detectFace;
         mTakePicture = takePicture;
         mSaveFace = saveFace;
         mSendNearbyPayload = sendNearbyPayload;
         mGetUserEndpointList = getUserEndpointList;
+        mGetNearbyData = getNearbyData;
     }
 
     @Override
@@ -88,19 +94,23 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
         mDetectFace.execute(new DisposableObserver<List<VisionDetRet>>() {
             @Override
             public void onNext(List<VisionDetRet> result) {
-                mView.showFaceDetectSuccessMessage();
+                mView.stopCamera();
+                mView.showStateMessage("Cara detectada");
+//                mView.showFaceDetectSuccessMessage();
             }
 
             @Override
             public void onError(Throwable e) {
+                mView.showStateMessage(e.getMessage());
+//                mView.showDiscovererFailureMessage(e.getMessage());
                 mView.hideProgress();
-                mView.showDiscovererFailureMessage(e.getMessage());
                 isBusy = false;
+                mView.restartCamera();
             }
 
             @Override
             public void onComplete() {
-                mView.hideProgress();
+//                mView.hideProgress();
                 saveFace(faceBitmap);
                 isBusy = false;
             }
@@ -108,6 +118,7 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
     }
 
     private void saveFace(Bitmap faceBitmap) {
+        mView.showStateMessage("Almacenando imagen tomada...");
         mSaveFace.execute(new DisposableObserver<File>() {
             @Override
             public void onNext(File file) {
@@ -116,7 +127,10 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
 
             @Override
             public void onError(Throwable e) {
-                mView.showDiscovererFailureMessage(e.getMessage());
+//                mView.showDiscovererFailureMessage(e.getMessage());
+                mView.showStateMessage(e.getMessage());
+                mView.hideProgress();
+                mView.restartCamera();
             }
 
             @Override
@@ -128,9 +142,17 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
 
     // Saved to get path
     private void sendFaceDetectedNearby(File faceFile) {
+        mView.showStateMessage("Conectando con el usuario adecuado...");
         mGetUserEndpointList.execute(new DisposableObserver<List<String>>() {
             @Override
             public void onNext(List<String> endpointList) {
+                if (endpointList.size() < 1) {
+                    mView.showStateMessage("No se ha encontrando ningún usuario para conectar");
+                    mView.hideProgress();
+                    mView.restartCamera();
+                    return;
+                }
+
                 for (String endpoint : endpointList) {
                     try {
                         Payload payload = Payload.fromFile(faceFile);
@@ -143,29 +165,57 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
 
             @Override
             public void onError(Throwable e) {
-                mView.showDiscovererFailureMessage(e.getMessage());
+                // mView.showDiscovererFailureMessage(e.getMessage());
+                mView.showStateMessage(e.getMessage());
+                mView.hideProgress();
+                mView.restartCamera();
             }
 
             @Override
             public void onComplete() {
-
+                mView.showStateMessage("¡Conexión realizada!");
             }
         }, null);
 
     }
 
     private void sendPayload(String destination, Payload payload) {
+        mView.showStateMessage("Realizando petición de datos...");
         mSendNearbyPayload.execute(new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
-//TODO MOSTRAR OTRA PANTALLA O SIMILAR
+                mView.showStateMessage("Petición completada, esperando respuesta...");
+                receivePayload();
             }
 
             @Override
             public void onError(Throwable e) {
-                mView.showDiscovererFailureMessage(e.getMessage());
+                //mView.showDiscovererFailureMessage(e.getMessage());
+                mView.showStateMessage(e.getMessage());
+                mView.hideProgress();
+                mView.restartCamera();
             }
         }, new SendNearbyPayload.Params(payload, destination));
+    }
+
+    private void receivePayload() {
+        mGetNearbyData.execute(new DisposableObserver<User>() {
+            @Override
+            public void onNext(User user) {
+                mView.showAdvertiserInfo(UserMapper.transform(user));
+                Log.i("a", "todo funciona");
+            }
+//TODO
+            @Override
+            public void onError(Throwable e) {
+                Log.i("a", "erorres hehe");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.i("a", "todo completo");
+            }
+        }, null);
     }
 
 
@@ -183,6 +233,7 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
         mSaveFace.dispose();
         mGetUserEndpointList.dispose();
         mSendNearbyPayload.dispose();
+        mGetNearbyData.dispose();
     }
 
 }

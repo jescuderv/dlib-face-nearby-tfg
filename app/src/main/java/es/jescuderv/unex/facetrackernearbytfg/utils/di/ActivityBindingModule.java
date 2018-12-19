@@ -6,6 +6,7 @@ import es.jescuderv.unex.facetrackernearbytfg.ui.activity.AdvertiserActivity;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.DiscovererActivity;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.MedicalInfoActivity;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.PersonalInfoActivity;
+import es.jescuderv.unex.facetrackernearbytfg.ui.activity.WelcomeDiscovererActivity;
 import es.jescuderv.unex.facetrackernearbytfg.utils.di.scopes.ActivityScoped;
 
 @Module
@@ -26,4 +27,8 @@ abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = MedicalInfoModule.class)
     abstract MedicalInfoActivity medicalInfoActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector
+    abstract WelcomeDiscovererActivity welcomeDiscovererActivity();
 }

@@ -20,6 +20,7 @@ import com.google.android.gms.nearby.connection.PayloadCallback;
 import com.google.android.gms.nearby.connection.PayloadTransferUpdate;
 import com.google.android.gms.nearby.connection.Strategy;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
 import com.tzutalin.dlib.VisionDetRet;
 
 import java.util.List;
@@ -28,7 +29,9 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import es.jescuderv.unex.facetrackernearbytfg.domain.model.User;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.AddUserEndpoint;
+import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.GetUserData;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.RecognizeFace;
 import es.jescuderv.unex.facetrackernearbytfg.utils.RecognitionUtils;
 import io.reactivex.Completable;
@@ -37,6 +40,10 @@ import io.reactivex.observers.DisposableObserver;
 @Singleton
 public class NearbyConnections {
 
+    public interface OnPayloadReceivedListener {
+        void onDataReceived(User user);
+    }
+
 
     private Context mContext;
     private ConnectionsClient mClient;
@@ -44,22 +51,30 @@ public class NearbyConnections {
 
     private RecognizeFace mRecognizeFace;
     private AddUserEndpoint mAddUserEndpoint;
+    private GetUserData mGetUserData;
 
     private String mAdvertiserEndpoint = "";
+    private OnPayloadReceivedListener mListener;
 
     private final static String PACKAGE_NAME = "es.jescuderv.unex.facetrackernearbytfg";
 
 
     @Inject
-    public NearbyConnections(Context context, AddUserEndpoint addUserEndpoint, RecognizeFace recognizeFace) {
+    public NearbyConnections(Context context, AddUserEndpoint addUserEndpoint, RecognizeFace recognizeFace,
+                             GetUserData getUserData) {
         mContext = context;
         mClient = Nearby.getConnectionsClient(context);
         // Code to identify advertisers
         mCodeUser = UUID.randomUUID().toString();
         mRecognizeFace = recognizeFace;
         mAddUserEndpoint = addUserEndpoint;
+        mGetUserData = getUserData;
     }
 
+
+    public void setListener(OnPayloadReceivedListener listener) {
+        mListener = listener;
+    }
 
     public void discover() {
         DiscoveryOptions.Builder discoverOptions = new DiscoveryOptions.Builder();
@@ -105,11 +120,13 @@ public class NearbyConnections {
             recognizeFace(faceBitmap);
 
         } else {
-            // TODO get json
-            String payloadFilenameMessage = RecognitionUtils.decodeReceivedPayloadString(payload);
-            Toast.makeText(mContext, "cara reconocida: siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" + payloadFilenameMessage, Toast.LENGTH_LONG).show();
-        }
+            String payloadString = RecognitionUtils.decodeReceivedPayloadString(payload);
+            Toast.makeText(mContext, "usuario: " + payloadString, Toast.LENGTH_LONG).show();
 
+            Gson gson = new Gson();
+            User user = gson.fromJson(payloadString, User.class);
+            mListener.onDataReceived(user);
+        }
     }
 
     private void recognizeFace(Bitmap faceBitmap) {//TODO POSIBLES CASOS
@@ -117,7 +134,8 @@ public class NearbyConnections {
             @Override
             public void onNext(List<VisionDetRet> results) {
                 Toast.makeText(mContext, "cara reconocida, enviar datos personales", Toast.LENGTH_LONG).show();
-                mClient.sendPayload(mAdvertiserEndpoint, Payload.fromBytes("estos son mis datos personales".getBytes()));
+                getPersonalData();
+
             }
 
             @Override
@@ -132,6 +150,25 @@ public class NearbyConnections {
         }, new RecognizeFace.Params(faceBitmap));
     }
 
+    private void getPersonalData() {
+        mGetUserData.execute(new DisposableObserver<User>() {
+            @Override
+            public void onNext(User user) {
+                String userData = user.getUserJson(); // TODO
+                mClient.sendPayload(mAdvertiserEndpoint, Payload.fromBytes(userData.getBytes()));
+                Toast.makeText(mContext, "Datos personales enviados: " + userData, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        }, null);
+    }
 
 
     //==============================================================================================
@@ -191,8 +228,9 @@ public class NearbyConnections {
                 }
             };
 
+
     // Callbacks for receiving payloads
-    private final PayloadCallback mPayloadCallback =
+    private PayloadCallback mPayloadCallback =
             new PayloadCallback() {
                 @Override
                 public void onPayloadReceived(@NonNull String endpointId, @NonNull Payload payload) {

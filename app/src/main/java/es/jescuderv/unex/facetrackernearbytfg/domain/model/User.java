@@ -1,5 +1,9 @@
 package es.jescuderv.unex.facetrackernearbytfg.domain.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,5 +131,13 @@ public class User {
 
     public void setAllergyList(List<Allergy> allergyList) {
         this.allergyList = allergyList;
+    }
+
+
+    public String getUserJson() {
+        Gson gson = new GsonBuilder().create();
+        JsonObject json = (JsonObject) gson.toJsonTree(this);
+        json.remove("property");
+        return json.toString();
     }
 }

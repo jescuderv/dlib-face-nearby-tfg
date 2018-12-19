@@ -15,6 +15,7 @@ import dagger.Module;
 import dagger.Provides;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.LocalDataBase;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.AddUserEndpoint;
+import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.GetUserData;
 import es.jescuderv.unex.facetrackernearbytfg.domain.usecase.RecognizeFace;
 import es.jescuderv.unex.facetrackernearbytfg.service.NearbyConnections;
 import io.reactivex.Scheduler;
@@ -30,8 +31,9 @@ abstract class AppModule {
 
     @Provides
     @Singleton
-    static NearbyConnections nearbyConnections(Context context, AddUserEndpoint addUserEndpoint, RecognizeFace recognizeFace) {
-        return new NearbyConnections(context, addUserEndpoint, recognizeFace);
+    static NearbyConnections nearbyConnections(Context context, AddUserEndpoint addUserEndpoint,
+                                               RecognizeFace recognizeFace, GetUserData getUserData) {
+        return new NearbyConnections(context, addUserEndpoint, recognizeFace, getUserData);
     }
 
     @Provides

@@ -29,6 +29,8 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -53,6 +55,7 @@ import es.jescuderv.unex.facetrackernearbytfg.ui.camera.graphics.FaceGraphic;
 import es.jescuderv.unex.facetrackernearbytfg.ui.camera.graphics.GraphicOverlay;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.DiscovererContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.presenter.DiscoverPresenter;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 
 import static com.google.android.gms.signin.internal.SignInClientImpl.ACTION_START_SERVICE;
 
@@ -62,6 +65,8 @@ import static com.google.android.gms.signin.internal.SignInClientImpl.ACTION_STA
  * overlay graphics to indicate the position, size, and ID of each face.
  */
 public final class DiscovererActivity extends DaggerAppCompatActivity implements DiscovererContract.View {
+
+    private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
     private static final String TAG = "FaceTracker";
 
     private CameraSource mCameraSource = null;
@@ -76,6 +81,12 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
 
     @BindView(R.id.discoverer_progress_bar)
     ProgressBar mProgressBar;
+
+    @BindView(R.id.discoverer_camera_layout)
+    RelativeLayout mCameraLayout;
+
+    @BindView(R.id.discoverer_state)
+    TextView mStateText;
 
     @Inject
     DiscoverPresenter mPresenter;
@@ -303,18 +314,48 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
     }
 
     @Override
+    public void restartCamera() {
+        mCameraLayout.setVisibility(View.VISIBLE);
+        mStateText.setVisibility(View.GONE);
+        createCameraSource();
+        startCameraSource();
+    }
+
+    @Override
+    public void stopCamera() {
+        mCameraLayout.setVisibility(View.GONE);
+        mStateText.setVisibility(View.VISIBLE);
+        mPreview.stop();
+        if (mCameraSource != null) {
+            mCameraSource.release();
+        }
+    }
+
+    @Override
     public void showAnalyzingMessage() {
         Toast.makeText(this, "Face detected, analyzing...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showFaceDetectSuccessMessage() {
-        Toast.makeText(this, "Face detected", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Face detected", Toast.LENGTH_LONG).show(); //todo delete
     }
 
     @Override
     public void showDiscovererFailureMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showStateMessage(String message) {
+        mStateText.setText(message);
+    }
+
+    @Override
+    public void showAdvertiserInfo(UserViewModel user) {
+        Intent intent = new Intent(this, AdvertiserActivity.class);
+        intent.putExtra(USER_VIEW_MODEL, user);
+        finish();
     }
 
     //==============================================================================================

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_inverted"
+    tools:context=".ui.activity.WelcomeDiscovererActivity">
+
+    <ImageButton
+        android:id="@+id/welcome_discoverer_settings_button"
+        style="@style/ImageButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/default_layout_margin"
+        android:contentDescription="@string/advertiser_settings"
+        android:src="@drawable/icon_settings" />
+
+    <Button
+        android:id="@+id/welcome_discoverer_start"
+        style="@style/DefaultButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/separation_margin_5"
+        android:layout_marginEnd="@dimen/separation_margin_5"
+        android:background="@drawable/background_round"
+        android:text="Start"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_h5" />
+
+</RelativeLayout>

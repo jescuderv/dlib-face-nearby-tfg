@@ -4,10 +4,25 @@
     android:id="@+id/topLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_inverted"
     android:keepScreenOn="true"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_marginStart="@dimen/default_layout_margin"
+        android:layout_marginEnd="@dimen/default_layout_margin"
+        android:textAlignment="center"
+        android:id="@+id/discoverer_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_h4"
+        android:visibility="gone" />
+
+
     <RelativeLayout
+        android:id="@+id/discoverer_camera_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,8 +45,8 @@
         android:id="@+id/discoverer_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="39dp"
+        android:layout_below="@+id/discoverer_state"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/separation_margin_1"
         android:visibility="gone" />
 </RelativeLayout>
