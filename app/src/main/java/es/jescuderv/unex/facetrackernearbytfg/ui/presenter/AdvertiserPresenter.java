@@ -101,7 +101,8 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
     }
 
 
-    private void getMedicalData() {
+    @Override
+    public void getUserData() {
         mGetUserData.execute(new DisposableObserver<User>() {
             @Override
             public void onNext(User user) {
@@ -124,7 +125,6 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
     @Override
     public void attachView(AdvertiserContract.View view) {
         mView = view;
-        getMedicalData();
     }
 
     @Override

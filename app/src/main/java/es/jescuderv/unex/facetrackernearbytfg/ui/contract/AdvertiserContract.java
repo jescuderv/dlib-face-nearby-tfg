@@ -24,6 +24,8 @@ public interface AdvertiserContract {
 
     interface Presenter extends BasePresenter<View> {
 
+        void getUserData();
+
         void detectFace(Bitmap faceBitmap);
 
         void setUserData(UserViewModel userViewModel);

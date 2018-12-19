@@ -36,6 +36,7 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
     }
 
     private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
+    private final static String USER_FROM_DETECTED = "USER_FROM_DETECTED";
 
     private final static int STAGGERED_SPAN_COUNT = 2;
 
@@ -78,13 +79,16 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
     private OnExpandMedicalInfoListener mListener;
 
     private UserViewModel mMedicalInfoViewModel;
+    private boolean mIsFromDetected;
 
 
-    public static AdvertiserMedicalInfoFragment newInstance(UserViewModel userViewModel) {
+    public static AdvertiserMedicalInfoFragment newInstance(UserViewModel userViewModel, boolean isFromDetected) {
 
         Bundle args = new Bundle();
 
         args.putSerializable(USER_VIEW_MODEL, userViewModel);
+        args.putBoolean(USER_FROM_DETECTED, isFromDetected);
+
         AdvertiserMedicalInfoFragment fragment = new AdvertiserMedicalInfoFragment();
         fragment.setArguments(args);
         return fragment;
@@ -111,6 +115,8 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
 
     private void checkUserMedicalInfoData() {
         Bundle args = getArguments();
+
+        mIsFromDetected = args.getBoolean(USER_FROM_DETECTED);
 
         try {
             UserViewModel userViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);

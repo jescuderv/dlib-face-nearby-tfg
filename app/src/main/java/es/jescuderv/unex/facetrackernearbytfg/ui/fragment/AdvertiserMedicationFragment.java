@@ -25,7 +25,7 @@ public class AdvertiserMedicationFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static AdvertiserMedicationFragment newInstance(UserViewModel mUserViewModel) {
+    public static AdvertiserMedicationFragment newInstance(UserViewModel mUserViewModel, boolean mIsFromDetected) {
 
         Bundle args = new Bundle();
 

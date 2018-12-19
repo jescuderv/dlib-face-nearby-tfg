@@ -31,6 +31,7 @@ public class AdvertiserMainInfoFragment extends Fragment {
     }
 
     private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
+    private final static String USER_FROM_DETECTED = "USER_FROM_DETECTED";
 
 
     @BindView(R.id.advertiser_main_info_data_layout)
@@ -59,12 +60,14 @@ public class AdvertiserMainInfoFragment extends Fragment {
     private OnExpandMainInfoListener mListener;
 
     private UserViewModel mPersonalInfoViewModel;
+    private boolean mIsFromDetected;
 
 
-    public static AdvertiserMainInfoFragment newInstance(UserViewModel userViewModel) {
+    public static AdvertiserMainInfoFragment newInstance(UserViewModel userViewModel, boolean isFromDetected) {
 
         Bundle args = new Bundle();
         args.putSerializable(USER_VIEW_MODEL, userViewModel);
+        args.putBoolean(USER_FROM_DETECTED, isFromDetected);
 
         AdvertiserMainInfoFragment fragment = new AdvertiserMainInfoFragment();
         fragment.setArguments(args);
@@ -92,6 +95,8 @@ public class AdvertiserMainInfoFragment extends Fragment {
 
     private void checkUserPersonalInfoData() {
         Bundle args = getArguments();
+
+        mIsFromDetected = args.getBoolean(USER_FROM_DETECTED);
 
         try {
             UserViewModel userViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);

@@ -94,6 +94,7 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
 
         try {
             UserViewModel userViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);
+            mUserMedicalInfoViewModel = userViewModel;
 
             if (userViewModel.getBloodType() != null || userViewModel.getAllergyList().size() > 0
                     || userViewModel.getIntoleranceList().size() > 0 || userViewModel.getSurgeryList().size() > 0)

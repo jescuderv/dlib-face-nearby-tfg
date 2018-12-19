@@ -52,6 +52,8 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
 
     private UserViewModel mUserViewModel;
 
+    private boolean mIsFromDetected = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +61,17 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         setContentView(R.layout.activity_advertiser);
         ButterKnife.bind(this);
 
-//        // Start service when start screen. TODO: start service in splash or something like that
+        // Start service when start screen. TODO: start service in splash or something like that
         Intent startIntent = new Intent(getApplicationContext(), AdvertiseService.class);
         startIntent.setAction(ACTION_START_SERVICE);
         startService(startIntent);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            UserViewModel userViewModel = (UserViewModel) extras.get(USER_VIEW_MODEL);
+            mIsFromDetected = true;
+            onUserData(userViewModel);
+        }
 
     }
 
@@ -71,7 +79,8 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.attachView(AdvertiserActivity.this);
+        mPresenter.attachView(this);
+        if (!mIsFromDetected) mPresenter.getUserData();
     }
 
     @Override
@@ -173,11 +182,11 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return AdvertiserMainInfoFragment.newInstance(mUserViewModel);
+                    return AdvertiserMainInfoFragment.newInstance(mUserViewModel, mIsFromDetected);
                 case 1:
-                    return AdvertiserMedicalInfoFragment.newInstance(mUserViewModel);
+                    return AdvertiserMedicalInfoFragment.newInstance(mUserViewModel, mIsFromDetected);
                 case 2:
-                    return AdvertiserMedicationFragment.newInstance(mUserViewModel);
+                    return AdvertiserMedicationFragment.newInstance(mUserViewModel, mIsFromDetected);
             }
             return null;
         }

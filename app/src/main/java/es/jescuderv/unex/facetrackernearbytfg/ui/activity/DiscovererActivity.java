@@ -220,7 +220,7 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
     protected void onDestroy() {
         mPresenter.dropView();
         super.onDestroy();
-        if (mCameraSource != null) {
+        if (mCameraSource != null && mCameraLayout.getVisibility() == View.VISIBLE) {
             mCameraSource.release();
         }
     }
@@ -355,6 +355,7 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
     public void showAdvertiserInfo(UserViewModel user) {
         Intent intent = new Intent(this, AdvertiserActivity.class);
         intent.putExtra(USER_VIEW_MODEL, user);
+        startActivity(intent);
         finish();
     }
 
