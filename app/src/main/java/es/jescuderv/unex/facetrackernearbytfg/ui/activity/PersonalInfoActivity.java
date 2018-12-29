@@ -2,6 +2,8 @@ package es.jescuderv.unex.facetrackernearbytfg.ui.activity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 public class PersonalInfoActivity extends DaggerAppCompatActivity implements PersonalInfoContract.View {
 
     private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
+    private final static String USER_FROM_DETECTED = "USER_FROM_DETECTED";
 
 
     @BindView(R.id.personal_info_name_input)
@@ -45,11 +48,15 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
     @BindView(R.id.personal_info_description_input)
     EditText mDescription;
 
+    @BindView(R.id.personal_info_save_button)
+    Button mSaveButton;
+
 
     @Inject
     PersonalInfoPresenter mPresenter;
 
     private Integer mUserId;
+    private boolean mIsFromDetected;
 
 
     /* Calendar picker */
@@ -87,7 +94,10 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
         setContentView(R.layout.activity_personal_info);
         ButterKnife.bind(this);
 
+        mIsFromDetected = getIntent().getExtras().getBoolean(USER_FROM_DETECTED);
+
         checkUserPersonalInfoData();
+        checkUserFromDetected();
     }
 
     private void checkUserPersonalInfoData() {
@@ -95,7 +105,7 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
 
         try {
             UserViewModel userViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);
-            if (!userViewModel.getUserName().isEmpty()){
+            if (!userViewModel.getUserName().isEmpty()) {
                 showUserPersonalData(userViewModel);
             }
 
@@ -162,5 +172,17 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
         mPhoneNumber.setText(String.valueOf(user.getPhoneNumber()));
         mAddress.setText(user.getAddress());
         mDescription.setText(user.getDescription());
+    }
+
+    private void checkUserFromDetected() {
+        if (mIsFromDetected) {
+            mName.setEnabled(false);
+            mLastName.setEnabled(false);
+            mBirthday.setEnabled(false);
+            mPhoneNumber.setEnabled(false);
+            mAddress.setEnabled(false);
+            mDescription.setEnabled(false);
+            mSaveButton.setVisibility(View.GONE);
+        }
     }
 }

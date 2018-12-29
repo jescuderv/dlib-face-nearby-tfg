@@ -25,7 +25,7 @@ public class AdvertiserMainInfoFragment extends Fragment {
 
     public interface OnExpandMainInfoListener {
 
-        void onEditPersonalInfo(UserViewModel personalInfoViewModel);
+        void onEditPersonalInfo(UserViewModel personalInfoViewModel, boolean isFromDetected);
 
         void onCheckPersonalInfo();
     }
@@ -114,12 +114,12 @@ public class AdvertiserMainInfoFragment extends Fragment {
 
     @OnClick(R.id.advertiser_main_info_add_button)
     public void onAddMainInfoClick() {
-        mListener.onEditPersonalInfo(mPersonalInfoViewModel);
+        if (!mIsFromDetected) mListener.onEditPersonalInfo(mPersonalInfoViewModel, false);
     }
 
     @OnClick(R.id.advertiser_main_info_edit_button)
     public void onEditMainInfoClick() {
-        mListener.onEditPersonalInfo(mPersonalInfoViewModel);
+        mListener.onEditPersonalInfo(mPersonalInfoViewModel, mIsFromDetected);
     }
 
 
@@ -127,6 +127,9 @@ public class AdvertiserMainInfoFragment extends Fragment {
         mMainInfoLayout.setVisibility(View.VISIBLE);
         mEditMainInfoButton.setVisibility(View.VISIBLE);
         mAddMainInfoButton.setVisibility(View.GONE);
+
+        if (mIsFromDetected)
+            mEditMainInfoButton.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.icon_expand));
 
         mFullName.setText(String.format("%s %s", user.getUserName(), user.getLastName()));
         mBirthday.setText(user.getBirthday());

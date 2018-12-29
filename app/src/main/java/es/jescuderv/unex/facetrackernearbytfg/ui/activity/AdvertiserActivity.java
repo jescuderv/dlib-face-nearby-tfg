@@ -2,6 +2,7 @@ package es.jescuderv.unex.facetrackernearbytfg.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,6 +14,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.tzutalin.dlib.Constants;
+
+import java.io.File;
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -40,8 +44,12 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     private final static int PICK_IMAGE = 1;
 
     private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
+    private final static String USER_FROM_DETECTED = "USER_FROM_DETECTED";
+
     private final static String USER_TYPE = "USER_TYPE";
     private final static String ADVERTISER = "ADVERTISER";
+
+    private final static String FACE_TEMPORAL_NAME = "tempFace";
 
 
     @BindView(R.id.advertiser_view_pager)
@@ -76,6 +84,9 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
             UserViewModel userViewModel = (UserViewModel) extras.get(USER_VIEW_MODEL);
             mIsFromDetected = true;
             onUserData(userViewModel);
+            Bitmap bitmap = BitmapFactory.decodeFile(
+                    Constants.getDLibImageDirectoryPath() + File.separator + FACE_TEMPORAL_NAME + ".jpg");
+            mProfileImage.setImageBitmap(bitmap);
         }
 
     }
@@ -104,9 +115,11 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
 
     @OnClick(R.id.advertiser_profile_image)
     public void setProfileImage() {
-        Intent gallIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        gallIntent.setType("image/*");
-        startActivityForResult(Intent.createChooser(gallIntent, "Select Picture"), PICK_IMAGE);
+        if (!mIsFromDetected) {
+            Intent gallIntent = new Intent(Intent.ACTION_GET_CONTENT);
+            gallIntent.setType("image/*");
+            startActivityForResult(Intent.createChooser(gallIntent, "Select Picture"), PICK_IMAGE);
+        }
     }
 
 
@@ -210,9 +223,10 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     //==============================================================================================
 
     @Override
-    public void onEditPersonalInfo(UserViewModel personalInfoViewModel) {
+    public void onEditPersonalInfo(UserViewModel personalInfoViewModel, boolean isFromDetected) {
         Intent intent = new Intent(this, PersonalInfoActivity.class);
         intent.putExtra(USER_VIEW_MODEL, personalInfoViewModel);
+        intent.putExtra(USER_FROM_DETECTED, isFromDetected);
         startActivity(intent);
     }
 
@@ -227,9 +241,10 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     //==============================================================================================
 
     @Override
-    public void onEditMedicalInfo(UserViewModel userMedicalInfoViewModel) {
+    public void onEditMedicalInfo(UserViewModel userMedicalInfoViewModel, boolean isFromDetected) {
         Intent intent = new Intent(this, MedicalInfoActivity.class);
         intent.putExtra(USER_VIEW_MODEL, userMedicalInfoViewModel);
+        intent.putExtra(USER_FROM_DETECTED, isFromDetected);
         startActivity(intent);
     }
 

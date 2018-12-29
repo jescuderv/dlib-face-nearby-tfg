@@ -137,6 +137,7 @@
                 android:layout_marginStart="@dimen/default_layout_margin"
                 android:layout_marginTop="@dimen/separation_margin_2"
                 android:layout_marginEnd="@dimen/default_layout_margin"
+                android:layout_marginBottom="@dimen/separation_margin_1"
                 android:inputType="textMultiLine"
                 android:lines="5"
                 android:textColor="@color/white" />

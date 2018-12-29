@@ -17,7 +17,7 @@ public class UserMapper {
     public static UserEntity transform(User user) {
         UserEntity userEntity = new UserEntity();
 
-        userEntity.setId(user.getId());
+        userEntity.setId(1);
         userEntity.setUserName(user.getUserName());
         userEntity.setLastName(user.getLastName());
         userEntity.setBirthday(user.getBirthday());
@@ -68,7 +68,7 @@ public class UserMapper {
 
         User user = new User();
 
-        user.setId(entity.getId());
+        user.setId(1);
         user.setUserName(entity.getUserName());
         user.setLastName(entity.getLastName());
         user.setBirthday(entity.getBirthday());

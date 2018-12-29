@@ -32,6 +32,7 @@ import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 public class MedicalInfoActivity extends DaggerAppCompatActivity implements MedicalInfoContract.View {
 
     private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
+    private final static String USER_FROM_DETECTED = "USER_FROM_DETECTED";
 
     private final static int STAGGERED_SPAN_COUNT = 3;
 
@@ -68,6 +69,19 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
     EditText mMedicalDescription;
 
 
+    @BindView(R.id.medical_info_intolerance_add_button)
+    Button mAddIntoleranceButton;
+
+    @BindView(R.id.medical_info_surgery_add_button)
+    Button mAddSurgeryButton;
+
+    @BindView(R.id.medical_info_allergy_add_button)
+    Button mAddAllergyButton;
+
+    @BindView(R.id.medical_info_save_button)
+    Button mSaveButton;
+
+
     @Inject
     MedicalInfoContract.Presenter mPresenter;
 
@@ -77,6 +91,8 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
     private List<UserViewModel.Surgery> mSurgeryList = new ArrayList<>();
     private List<UserViewModel.Allergy> mAllergyList = new ArrayList<>();
 
+    private boolean mIsFromDetected;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +100,11 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
         setContentView(R.layout.activity_medical_info);
         ButterKnife.bind(this);
 
-        setUpAdapters();
+        mIsFromDetected = getIntent().getExtras().getBoolean(USER_FROM_DETECTED);
 
+        setUpAdapters();
         checkMedicalInfoData();
+        checkUserFromDetected();
     }
 
     private void checkMedicalInfoData() {
@@ -273,5 +291,14 @@ public class MedicalInfoActivity extends DaggerAppCompatActivity implements Medi
 
     }
 
+    private void checkUserFromDetected() {
+        if (mIsFromDetected) {
+            mBloodTypeText.setEnabled(false);
+            mAddIntoleranceButton.setVisibility(View.GONE);
+            mAddSurgeryButton.setVisibility(View.GONE);
+            mAddAllergyButton.setVisibility(View.GONE);
+            mSaveButton.setVisibility(View.GONE);
+        }
+    }
 
 }

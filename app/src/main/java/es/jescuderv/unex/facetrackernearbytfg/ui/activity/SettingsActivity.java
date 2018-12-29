@@ -137,7 +137,9 @@ public class SettingsActivity extends DaggerAppCompatActivity implements Setting
 
     @Override
     public void showLoginScreen() {
-        startActivity(new Intent(this, LoginActivity.class));
         finish();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

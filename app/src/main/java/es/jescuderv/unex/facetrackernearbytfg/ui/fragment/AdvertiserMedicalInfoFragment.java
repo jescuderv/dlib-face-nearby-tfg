@@ -30,7 +30,7 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
 
     public interface OnExpandMedicalInfoListener {
 
-        void onEditMedicalInfo(UserViewModel userMedicalInfoViewModel);
+        void onEditMedicalInfo(UserViewModel userMedicalInfoViewModel, boolean isFromDetected);
 
         void onCheckMedicalInfo();
     }
@@ -136,12 +136,12 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
 
     @OnClick(R.id.advertiser_medical_info_add_button)
     public void onAddMedicalInfoClick() {
-        mListener.onEditMedicalInfo(mMedicalInfoViewModel);
+        if (!mIsFromDetected) mListener.onEditMedicalInfo(mMedicalInfoViewModel, false);
     }
 
     @OnClick(R.id.advertiser_medical_info_edit_button)
     public void onEditMedicalInfoClick() {
-        mListener.onEditMedicalInfo(mMedicalInfoViewModel);
+        mListener.onEditMedicalInfo(mMedicalInfoViewModel, mIsFromDetected);
     }
 
 
@@ -151,6 +151,9 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
         mAddButton.setVisibility(View.GONE);
         mEditButton.setVisibility(View.VISIBLE);
         mMainLayout.setVisibility(View.VISIBLE);
+
+        if (mIsFromDetected)
+            mEditButton.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.icon_expand));
 
         if (userMedicalInfoViewModel.getBloodType() != null) {
             mBloodType.setText(userMedicalInfoViewModel.getBloodType());
