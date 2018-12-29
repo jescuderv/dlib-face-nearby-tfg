@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient_inverted"
-    tools:context=".ui.activity.AdvertiserSettingsActivity">
+    tools:context=".ui.activity.SettingsActivity">
 
     <ImageButton
         android:id="@+id/settings_close_button"
@@ -36,12 +36,42 @@
         android:layout_marginTop="@dimen/separation_margin_3"
         android:text="@string/settings_visibility"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_h6" />
+        android:textSize="@dimen/text_h6"
+        android:textStyle="bold" />
 
     <Switch
+        android:id="@+id/settings_visibility_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/settings_visibility"
         android:layout_marginStart="@dimen/separation_margin_4"
         android:layout_toEndOf="@id/settings_visibility" />
+
+    <TextView
+        android:id="@+id/settings_visibility_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settings_visibility"
+        android:layout_marginStart="@dimen/default_layout_margin"
+        android:layout_marginTop="@dimen/separation_margin_2"
+        android:layout_marginEnd="@dimen/default_layout_margin"
+        android:text="@string/settings_visibility_description"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_body1" />
+
+
+    <Button
+        android:id="@+id/settings_change_user"
+        style="@style/TextButton"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/default_layout_margin"
+        android:layout_marginBottom="@dimen/separation_margin_3"
+        android:drawableEnd="@drawable/icon_change"
+        android:drawablePadding="@dimen/separation_margin_5"
+        android:text="@string/settings_change_user"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_h5" />
 </RelativeLayout>

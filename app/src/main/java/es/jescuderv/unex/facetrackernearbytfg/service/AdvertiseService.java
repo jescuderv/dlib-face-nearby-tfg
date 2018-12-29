@@ -31,9 +31,12 @@ public class AdvertiseService extends DaggerService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent != null && intent.getAction().equals(ACTION_START_SERVICE)) {
-            advertise();
+        if (intent != null && intent.getAction() != null) {
+            if (intent.getAction().equals(ACTION_START_SERVICE))
+                advertise();
+
         } else stopMyService();
+
         return START_STICKY;
     }
 
@@ -47,6 +50,7 @@ public class AdvertiseService extends DaggerService {
         stopForeground(true);
         stopSelf();
         isServiceRunning = false;
+        nearbyConnections.stopAdvertise();
     }
 
 

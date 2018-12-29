@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:elevation="9dp"
     android:layout_margin="@dimen/separation_margin_2"
     android:background="@drawable/dialog_rounded_corner"
+    android:elevation="9dp"
     android:orientation="vertical">
 
     <TextView
@@ -21,6 +21,19 @@
         android:textSize="@dimen/text_h6"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/dialog_custom_input_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_layout_margin"
+        android:layout_marginTop="@dimen/separation_margin_1"
+        android:layout_marginEnd="@dimen/default_layout_margin"
+        android:layout_marginBottom="@dimen/separation_margin_1"
+        android:textAlignment="center"
+        android:textColor="@color/darker_blue"
+        android:textSize="@dimen/text_body1"
+        android:visibility="gone" />
+
 
     <EditText
         android:id="@+id/dialog_custom_input_email"
@@ -30,12 +43,12 @@
         android:layout_marginTop="@dimen/separation_margin_3"
         android:layout_marginEnd="@dimen/separation_margin_2"
         android:layout_marginBottom="@dimen/separation_margin_1"
-        android:textColor="@color/light_purple"
-        android:hint="Escribe aquí..."
-        android:textCursorDrawable="@null"
-        android:textColorLink="@color/light_purple"
         android:background="@drawable/button_round_white"
-        android:inputType="textEmailAddress" />
+        android:hint="Escribe aquí..."
+        android:inputType="textEmailAddress"
+        android:textColor="@color/light_purple"
+        android:textColorLink="@color/light_purple"
+        android:textCursorDrawable="@null" />
 
 
     <LinearLayout

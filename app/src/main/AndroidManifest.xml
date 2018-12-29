@@ -39,7 +39,8 @@
 
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,7 +71,7 @@
             android:name=".ui.activity.MedicationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.AdvertiserSettingsActivity"
+            android:name=".ui.activity.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.WelcomeDiscovererActivity"

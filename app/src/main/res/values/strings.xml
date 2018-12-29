@@ -62,6 +62,8 @@
     <string name="advertiser_settings">settings</string>
     <string name="settings">Settings</string>
     <string name="settings_visibility">Visibility</string>
+    <string name="settings_change_user">Cambiar de usuario</string>
+    <string name="settings_visibility_description">Configura la visibilidad para poder buscar y ser buscado por el resto de usuarios de la aplicación</string>
 
 
 </resources>

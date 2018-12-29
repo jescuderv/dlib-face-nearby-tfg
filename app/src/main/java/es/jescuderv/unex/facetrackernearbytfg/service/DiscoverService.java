@@ -32,9 +32,12 @@ public class DiscoverService extends DaggerService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent != null && intent.getAction().equals(ACTION_START_SERVICE)) {
-            discover();
+        if (intent != null && intent.getAction() != null) {
+            if (intent.getAction().equals(ACTION_START_SERVICE))
+                discover();
+
         } else stopMyService();
+
         return START_STICKY;
     }
 
@@ -48,6 +51,7 @@ public class DiscoverService extends DaggerService {
         stopForeground(true);
         stopSelf();
         isServiceRunning = false;
+        nearbyConnections.stopDiscover();
     }
 
 

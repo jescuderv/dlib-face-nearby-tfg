@@ -49,15 +49,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 import es.jescuderv.unex.facetrackernearbytfg.R;
-import es.jescuderv.unex.facetrackernearbytfg.service.DiscoverService;
 import es.jescuderv.unex.facetrackernearbytfg.ui.camera.CameraSourcePreview;
 import es.jescuderv.unex.facetrackernearbytfg.ui.camera.graphics.FaceGraphic;
 import es.jescuderv.unex.facetrackernearbytfg.ui.camera.graphics.GraphicOverlay;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.DiscovererContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.presenter.DiscoverPresenter;
 import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
-
-import static com.google.android.gms.signin.internal.SignInClientImpl.ACTION_START_SERVICE;
 
 
 /**
@@ -104,11 +101,6 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
         super.onCreate(icicle);
         setContentView(R.layout.activity_discoverer);
         ButterKnife.bind(this);
-
-        // Start service when start screen. TODO: start service in splash or something like that
-        Intent startIntent = new Intent(getApplicationContext(), DiscoverService.class);
-        startIntent.setAction(ACTION_START_SERVICE);
-        startService(startIntent);
 
         mPreview = findViewById(R.id.preview);
         mGraphicOverlay = findViewById(R.id.faceOverlay);

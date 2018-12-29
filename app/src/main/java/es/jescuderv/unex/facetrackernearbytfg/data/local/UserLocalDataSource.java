@@ -13,6 +13,7 @@ import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.AllergyEntity;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.IntoleranceEntity;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.SurgeryEntity;
 import es.jescuderv.unex.facetrackernearbytfg.data.mapper.UserMapper;
+import es.jescuderv.unex.facetrackernearbytfg.data.preferences.SessionPreferences;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Allergy;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Intolerance;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Surgery;
@@ -70,6 +71,18 @@ public class UserLocalDataSource implements UserDataSource {
                     intolerances.addAll(mUserDao.getIntolerances(userEntity.getId()));
 
                 }).map(entity -> UserMapper.transform(entity, allergies, surgeries, intolerances));
+    }
+
+    @Override
+    public Completable clearUserData() {
+        return Completable.create(
+                emitter -> {
+                    mDataBase.clearAllTables();
+                    SessionPreferences.setSession(0);
+                    SessionPreferences.setVisibility(0);
+                    emitter.onComplete();
+                }
+        );
     }
 
 }

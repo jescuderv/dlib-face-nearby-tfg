@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.DaggerAppCompatActivity;
 import es.jescuderv.unex.facetrackernearbytfg.R;
+import es.jescuderv.unex.facetrackernearbytfg.data.preferences.SessionPreferences;
 import es.jescuderv.unex.facetrackernearbytfg.service.AdvertiseService;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.AdvertiserContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMainInfoFragment;
@@ -39,6 +40,8 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     private final static int PICK_IMAGE = 1;
 
     private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
+    private final static String USER_TYPE = "USER_TYPE";
+    private final static String ADVERTISER = "ADVERTISER";
 
 
     @BindView(R.id.advertiser_view_pager)
@@ -61,10 +64,12 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         setContentView(R.layout.activity_advertiser);
         ButterKnife.bind(this);
 
-        // Start service when start screen. TODO: start service in splash or something like that
-        Intent startIntent = new Intent(getApplicationContext(), AdvertiseService.class);
-        startIntent.setAction(ACTION_START_SERVICE);
-        startService(startIntent);
+        // Start service when start screen
+        if (SessionPreferences.getVisibility() == 1) {
+            Intent startIntent = new Intent(getApplicationContext(), AdvertiseService.class);
+            startIntent.setAction(ACTION_START_SERVICE);
+            startService(startIntent);
+        }
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -92,7 +97,9 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
 
     @OnClick(R.id.advertiser_settings_button)
     public void onSettingsClick() {
-        startActivity(new Intent(this, AdvertiserSettingsActivity.class));
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.putExtra(USER_TYPE, ADVERTISER);
+        startActivity(intent);
     }
 
     @OnClick(R.id.advertiser_profile_image)

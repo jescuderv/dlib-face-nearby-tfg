@@ -104,6 +104,14 @@ public class NearbyConnections {
                 });
     }
 
+    public void stopAdvertise() {
+        mClient.stopAdvertising();
+    }
+
+    public void stopDiscover() {
+        mClient.stopDiscovery();
+    }
+
 
     public Completable sendNearbyPayload(String destination, Payload payload) {
         return Completable.create(emitter -> {

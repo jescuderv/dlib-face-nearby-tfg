@@ -15,6 +15,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.jescuderv.unex.facetrackernearbytfg.R;
+import es.jescuderv.unex.facetrackernearbytfg.data.preferences.SessionPreferences;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,7 +37,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+
+        checkSession();
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
@@ -45,14 +49,23 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void checkSession() {
+        if (SessionPreferences.getSession() == 1) onLoginAdvertiserButtonClick();
+        else if (SessionPreferences.getSession() == 2) onLoginDiscoverButtonClick();
+    }
+
     @OnClick(R.id.login_discoverer_button)
-    public void onLoginDiscoverClickButton() {
+    public void onLoginDiscoverButtonClick() {
         startActivity(new Intent(this, WelcomeDiscovererActivity.class));
+        finish();
+        SessionPreferences.setSession(2);
     }
 
     @OnClick(R.id.login_advertiser_button)
-    public void onLoginDiscoverButtonClick() {
+    public void onLoginAdvertiserButtonClick() {
         startActivity(new Intent(this, AdvertiserActivity.class));
+        finish();
+        SessionPreferences.setSession(1);
     }
 
 

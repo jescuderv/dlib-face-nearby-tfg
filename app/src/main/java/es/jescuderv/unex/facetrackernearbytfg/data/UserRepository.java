@@ -29,4 +29,9 @@ public class UserRepository implements UserDataSource {
     public Observable<User> getUserData() {
         return mUserLocalDataSource.getUserData();
     }
+
+    @Override
+    public Completable clearUserData() {
+        return mUserLocalDataSource.clearUserData();
+    }
 }

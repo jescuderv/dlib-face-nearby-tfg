@@ -10,4 +10,6 @@ public interface UserDataSource {
     Completable setUserData(User user);
 
     Observable<User> getUserData();
+
+    Completable clearUserData();
 }
