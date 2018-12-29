@@ -44,6 +44,7 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
     private GetNearbyData mGetNearbyData;
 
     private boolean isBusy;
+    private boolean hasFoundUsers = false;
 
 
     @Inject
@@ -180,6 +181,7 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
     }
 
     private void sendPayload(String destination, Payload payload) {
+        startCountdownReset();
         mView.showStateMessage("Realizando petición de datos...");
         mSendNearbyPayload.execute(new DisposableCompletableObserver() {
             @Override
@@ -202,10 +204,12 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
         mGetNearbyData.execute(new DisposableObserver<User>() {
             @Override
             public void onNext(User user) {
+                hasFoundUsers = true;
                 mView.showAdvertiserInfo(UserMapper.transform(user));
                 Log.i("a", "todo funciona");
             }
-//TODO
+
+            //TODO
             @Override
             public void onError(Throwable e) {
                 Log.i("a", "erorres hehe");
@@ -216,6 +220,16 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
                 Log.i("a", "todo completo");
             }
         }, null);
+    }
+
+    private void startCountdownReset() {
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            if (!hasFoundUsers) {
+                mView.hideProgress();
+                mView.restartCamera();
+            }
+        }, 90000);
     }
 
 
