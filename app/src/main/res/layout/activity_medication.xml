@@ -6,7 +6,6 @@
     android:background="@drawable/background_gradient_inverted"
     tools:context=".ui.activity.MedicationActivity">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -31,22 +30,67 @@
             android:textSize="@dimen/text_h5"
             android:textStyle="bold" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/medication_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/medication_title" />
-
-        <Button
-            android:id="@+id/medication_save_button"
-            style="@style/TextButton"
+        <TextView
+            android:id="@+id/medication_diabetes_text"
             android:layout_width="wrap_content"
-            android:layout_below="@id/medication_list"
-            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medication_title"
+            android:layout_marginStart="@dimen/default_layout_margin"
+            android:layout_marginTop="@dimen/separation_margin_4"
+            android:text="Diabetes"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h6"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/medication_diabetes_treatment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medication_diabetes_text"
+            android:layout_marginStart="@dimen/separation_margin_5"
+            android:layout_marginTop="@dimen/separation_margin_2"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:layout_marginBottom="@dimen/separation_margin_5"
+            android:text="- Inyección insulina Humalog 10:00 (5mg)  \n- Inyección insulina Humalog 16:00 (5mg)\n- Inyección insulina Humalog 22:00 (5mg)"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_body1" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/medication_diabetes_chart"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_below="@id/medication_diabetes_treatment" />
+
+        <TextView
+            android:id="@+id/medication_heartbeat_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medication_diabetes_chart"
+            android:layout_marginStart="@dimen/default_layout_margin"
             android:layout_marginTop="@dimen/separation_margin_5"
-            android:layout_marginBottom="@dimen/separation_margin_3"
-            android:text="@string/medication_save"
-            android:textColor="@color/white" />
+            android:text="Pulso cardíaco"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h6"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/medication_heartbeat_treatment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medication_heartbeat_text"
+            android:layout_marginStart="@dimen/separation_margin_5"
+            android:layout_marginTop="@dimen/separation_margin_2"
+            android:text="- Pastilla Bisoprol 11:00 (5mg) \n- Pastilla Bisoprol 18:00 (5mg)"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_body1" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/medication_heartbeat_chart"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_below="@id/medication_heartbeat_treatment"
+            android:layout_marginBottom="@dimen/separation_margin_3" />
+
 
     </RelativeLayout>
 

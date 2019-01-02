@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.jescuderv.unex.facetrackernearbytfg.ui.camera;
+package es.jescuderv.unex.facetrackernearbytfg.ui.views.camera;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -29,7 +29,7 @@ import com.google.android.gms.vision.CameraSource;
 
 import java.io.IOException;
 
-import es.jescuderv.unex.facetrackernearbytfg.ui.camera.graphics.GraphicOverlay;
+import es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.graphics.GraphicOverlay;
 
 public class CameraSourcePreview extends ViewGroup {
     private static final String TAG = "CameraSourcePreview";

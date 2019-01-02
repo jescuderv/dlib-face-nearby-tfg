@@ -26,8 +26,6 @@ public class AdvertiserMainInfoFragment extends Fragment {
     public interface OnExpandMainInfoListener {
 
         void onEditPersonalInfo(UserViewModel personalInfoViewModel, boolean isFromDetected);
-
-        void onCheckPersonalInfo();
     }
 
     private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";

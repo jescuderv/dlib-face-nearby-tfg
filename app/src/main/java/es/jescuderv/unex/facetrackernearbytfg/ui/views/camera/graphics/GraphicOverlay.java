@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.jescuderv.unex.facetrackernearbytfg.ui.camera.graphics;
+package es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.graphics;
 
 import android.content.Context;
 import android.graphics.Canvas;

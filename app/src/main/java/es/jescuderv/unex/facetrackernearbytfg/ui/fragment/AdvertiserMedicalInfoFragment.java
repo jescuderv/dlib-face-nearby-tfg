@@ -31,8 +31,6 @@ public class AdvertiserMedicalInfoFragment extends Fragment {
     public interface OnExpandMedicalInfoListener {
 
         void onEditMedicalInfo(UserViewModel userMedicalInfoViewModel, boolean isFromDetected);
-
-        void onCheckMedicalInfo();
     }
 
     private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";

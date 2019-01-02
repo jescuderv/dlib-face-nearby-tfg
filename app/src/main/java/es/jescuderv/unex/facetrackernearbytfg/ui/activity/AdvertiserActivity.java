@@ -33,13 +33,14 @@ import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMainInfoFrag
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicalInfoFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.fragment.AdvertiserMedicationFragment;
 import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
-import es.jescuderv.unex.facetrackernearbytfg.utils.ExpandingViewPagerTransformer;
+import es.jescuderv.unex.facetrackernearbytfg.ui.views.ExpandingViewPagerTransformer;
 import es.jescuderv.unex.facetrackernearbytfg.utils.ImageUtil;
 
 import static com.google.android.gms.signin.internal.SignInClientImpl.ACTION_START_SERVICE;
 
 public class AdvertiserActivity extends DaggerAppCompatActivity implements AdvertiserContract.View,
-        AdvertiserMainInfoFragment.OnExpandMainInfoListener, AdvertiserMedicalInfoFragment.OnExpandMedicalInfoListener {
+        AdvertiserMainInfoFragment.OnExpandMainInfoListener, AdvertiserMedicalInfoFragment.OnExpandMedicalInfoListener,
+        AdvertiserMedicationFragment.OnExpandMedicationListener {
 
     private final static int PICK_IMAGE = 1;
 
@@ -206,7 +207,7 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
                 case 1:
                     return AdvertiserMedicalInfoFragment.newInstance(mUserViewModel, mIsFromDetected);
                 case 2:
-                    return AdvertiserMedicationFragment.newInstance(mUserViewModel, mIsFromDetected);
+                    return AdvertiserMedicationFragment.newInstance();
             }
             return null;
         }
@@ -219,7 +220,7 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
 
 
     //==============================================================================================
-    // Main info callbacks
+    // Fragments callbacks
     //==============================================================================================
 
     @Override
@@ -230,15 +231,6 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
         startActivity(intent);
     }
 
-    @Override
-    public void onCheckPersonalInfo() {
-
-    }
-
-
-    //==============================================================================================
-    // Medical info callbacks
-    //==============================================================================================
 
     @Override
     public void onEditMedicalInfo(UserViewModel userMedicalInfoViewModel, boolean isFromDetected) {
@@ -249,8 +241,8 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     }
 
     @Override
-    public void onCheckMedicalInfo() {
-
+    public void onCheckMedicationInfo() {
+        startActivity(new Intent(this, MedicationActivity.class));
     }
 
 

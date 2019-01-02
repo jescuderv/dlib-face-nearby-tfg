@@ -23,28 +23,77 @@
 
             <TextView
                 android:id="@+id/advertiser_medication_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_layout_margin"
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="@dimen/default_layout_margin"
                 android:layout_marginBottom="@dimen/default_layout_margin"
+                android:layout_toStartOf="@id/advertiser_medication_edit_button"
                 android:text="@string/advertiser_medication"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_h5"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/advertiser_medication_add_button"
+            <ImageButton
+                android:id="@+id/advertiser_medication_edit_button"
+                style="@style/ImageButton"
+                android:layout_alignBottom="@+id/advertiser_medication_title"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:layout_marginBottom="-8dp"
+                android:contentDescription="@string/advertiser_medical_info_edit"
+                android:src="@drawable/icon_expand"
+                android:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/advertiser_medication_diabetes_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/advertiser_medication_title"
-                android:clickable="true"
-                android:contentDescription="@string/advertiser_medication"
-                android:focusable="true"
-                android:src="@drawable/icon_add" />
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_4"
+                android:text="Diabetes"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_h6"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/advertiser_medication_diabetes_treatment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/advertiser_medication_diabetes_text"
+                android:layout_marginStart="@dimen/separation_margin_5"
+                android:layout_marginTop="@dimen/separation_margin_2"
+                android:layout_marginEnd="@dimen/default_layout_margin"
+                android:layout_marginBottom="@dimen/separation_margin_5"
+                android:text="- Inyección insulina Humalog 10:00 (5mg)  \n- Inyección insulina Humalog 16:00 (5mg)\n- Inyección insulina Humalog 22:00 (5mg)"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_body1" />
+
+            <TextView
+                android:id="@+id/advertiser_medication_heartbeat_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/advertiser_medication_diabetes_treatment"
+                android:layout_marginStart="@dimen/default_layout_margin"
+                android:layout_marginTop="@dimen/separation_margin_3"
+                android:text="Pulso cardíaco"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_h6"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/advertiser_medication_heartbeat_treatment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/advertiser_medication_heartbeat_text"
+                android:layout_marginStart="@dimen/separation_margin_5"
+                android:layout_marginTop="@dimen/separation_margin_2"
+                android:text="- Pastilla Bisoprol 11:00 (5mg) \n- Pastilla Bisoprol 18:00 (5mg)"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_body1" />
         </RelativeLayout>
     </android.support.design.card.MaterialCardView>
 

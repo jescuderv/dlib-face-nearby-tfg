@@ -1,7 +1,7 @@
 package es.jescuderv.unex.facetrackernearbytfg.ui.fragment;
 
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,28 +12,34 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.jescuderv.unex.facetrackernearbytfg.R;
-import es.jescuderv.unex.facetrackernearbytfg.ui.activity.MedicationActivity;
-import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AdvertiserMedicationFragment extends Fragment {
 
+    public interface OnExpandMedicationListener {
+
+        void onCheckMedicationInfo();
+    }
+
+    private OnExpandMedicationListener mListener;
+
 
     public AdvertiserMedicationFragment() {
         // Required empty public constructor
     }
 
-    public static AdvertiserMedicationFragment newInstance(UserViewModel mUserViewModel, boolean mIsFromDetected) {
-
-        Bundle args = new Bundle();
-
-        AdvertiserMedicationFragment fragment = new AdvertiserMedicationFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public static AdvertiserMedicationFragment newInstance() {
+        return new AdvertiserMedicationFragment();
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mListener = (AdvertiserMedicationFragment.OnExpandMedicationListener) context;
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -44,9 +50,9 @@ public class AdvertiserMedicationFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.advertiser_medication_add_button)
+    @OnClick(R.id.advertiser_medication_edit_button)
     public void onAddMedicationClick() {
-        getActivity().startActivity(new Intent(getActivity(), MedicationActivity.class));
+        mListener.onCheckMedicationInfo();
     }
 
 }

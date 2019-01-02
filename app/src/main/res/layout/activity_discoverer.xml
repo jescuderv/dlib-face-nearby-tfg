@@ -27,17 +27,17 @@
         android:layout_height="match_parent">
 
 
-        <es.jescuderv.unex.facetrackernearbytfg.ui.camera.CameraSourcePreview
+        <es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.CameraSourcePreview
             android:id="@+id/preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <es.jescuderv.unex.facetrackernearbytfg.ui.camera.graphics.GraphicOverlay
+            <es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.graphics.GraphicOverlay
                 android:id="@+id/faceOverlay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </es.jescuderv.unex.facetrackernearbytfg.ui.camera.CameraSourcePreview>
+        </es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.CameraSourcePreview>
 
     </RelativeLayout>
 
