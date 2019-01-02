@@ -55,8 +55,8 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
     @Inject
     PersonalInfoPresenter mPresenter;
 
-    private Integer mUserId;
     private boolean mIsFromDetected;
+    private UserViewModel mUserViewModel;
 
 
     /* Calendar picker */
@@ -104,9 +104,9 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
         Bundle args = getIntent().getExtras();
 
         try {
-            UserViewModel userViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);
-            if (!userViewModel.getUserName().isEmpty()) {
-                showUserPersonalData(userViewModel);
+            mUserViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);
+            if (!mUserViewModel.getUserName().isEmpty()) {
+                showUserPersonalData(mUserViewModel);
             }
 
         } catch (NullPointerException ignored) {
@@ -141,7 +141,7 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
 
     @OnClick(R.id.personal_info_save_button)
     public void savePersonalData() {
-        mPresenter.setUserPersonalData(mUserId, mName.getText().toString(), mLastName.getText().toString(),
+        mPresenter.setUserPersonalData(mUserViewModel, mName.getText().toString(), mLastName.getText().toString(),
                 mBirthday.getText().toString(), mPhoneNumber.getText().toString(), mAddress.getText().toString(),
                 mDescription.getText().toString());
     }
@@ -165,7 +165,6 @@ public class PersonalInfoActivity extends DaggerAppCompatActivity implements Per
 
 
     private void showUserPersonalData(UserViewModel user) {
-        mUserId = user.getId();
         mName.setText(user.getUserName());
         mLastName.setText(user.getLastName());
         mBirthday.setText(user.getBirthday());

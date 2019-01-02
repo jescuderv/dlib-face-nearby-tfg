@@ -57,7 +57,7 @@ public class AdvertiserMainInfoFragment extends Fragment {
 
     private OnExpandMainInfoListener mListener;
 
-    private UserViewModel mPersonalInfoViewModel;
+    private UserViewModel mPersonalInfoViewModel = new UserViewModel();
     private boolean mIsFromDetected;
 
 

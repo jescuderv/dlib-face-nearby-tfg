@@ -1,6 +1,7 @@
 package es.jescuderv.unex.facetrackernearbytfg.ui.contract;
 
 import es.jescuderv.unex.facetrackernearbytfg.ui.BasePresenter;
+import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
 
 public interface PersonalInfoContract {
 
@@ -15,7 +16,7 @@ public interface PersonalInfoContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void setUserPersonalData(Integer userId, String name, String lastName, String birthDate, String phoneNumber,
+        void setUserPersonalData(UserViewModel userViewModel, String name, String lastName, String birthDate, String phoneNumber,
                                  String address, String description);
     }
 }

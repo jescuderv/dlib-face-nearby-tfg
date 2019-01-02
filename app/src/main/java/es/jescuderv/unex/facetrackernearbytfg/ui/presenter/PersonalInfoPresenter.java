@@ -25,7 +25,7 @@ public class PersonalInfoPresenter implements PersonalInfoContract.Presenter {
 
 
     @Override
-    public void setUserPersonalData(Integer userId, String name, String lastName, String birthDate, String phoneNumber,
+    public void setUserPersonalData(UserViewModel userViewModel, String name, String lastName, String birthDate, String phoneNumber,
                                     String address, String description) {
 
         if (checkEmptyFields(name, lastName, birthDate, phoneNumber, address, description)) {
@@ -33,8 +33,7 @@ public class PersonalInfoPresenter implements PersonalInfoContract.Presenter {
             return;
         }
 
-        UserViewModel user = setUserInfo(userId, name, lastName, birthDate, phoneNumber,
-                address, description);
+        setUserInfo(userViewModel, name, lastName, birthDate, phoneNumber, address, description);
 
         mSetUserData.execute(new DisposableCompletableObserver() {
             @Override
@@ -46,7 +45,7 @@ public class PersonalInfoPresenter implements PersonalInfoContract.Presenter {
             public void onError(Throwable e) {
                 mView.showErrorUpdatePersonalInfoMessage(e.getMessage());
             }
-        }, new SetUserData.Params(UserMapper.transform(user)));
+        }, new SetUserData.Params(UserMapper.transform(userViewModel)));
     }
 
 
@@ -56,17 +55,14 @@ public class PersonalInfoPresenter implements PersonalInfoContract.Presenter {
                 phoneNumber.trim().isEmpty() && address.trim().isEmpty() && description.trim().isEmpty());
     }
 
-    private UserViewModel setUserInfo(Integer userId, String name, String lastName, String birthDate,
-                                                  String phoneNumber, String address, String description) {
-        UserViewModel user = new UserViewModel();
-        if (userId != null) user.setId(userId);
-        user.setUserName(name);
-        user.setLastName(lastName);
-        user.setBirthday(birthDate);
-        user.setPhoneNumber(Integer.valueOf(phoneNumber));
-        user.setAddress(address);
-        user.setDescription(description);
-        return user;
+    private void setUserInfo(UserViewModel userViewModel, String name, String lastName, String birthDate,
+                             String phoneNumber, String address, String description) {
+        userViewModel.setUserName(name);
+        userViewModel.setLastName(lastName);
+        userViewModel.setBirthday(birthDate);
+        userViewModel.setPhoneNumber(Integer.valueOf(phoneNumber));
+        userViewModel.setAddress(address);
+        userViewModel.setDescription(description);
     }
 
 
