@@ -8,7 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.jescuderv.unex.facetrackernearbytfg.R;
@@ -27,15 +30,21 @@ public class AdvertiserMedicationFragment extends Fragment {
         void onCheckMedicationInfo(UserViewModel personalInfoViewModel, boolean isFromDetected);
     }
 
+    @BindView(R.id.advertiser_medication_diabetes_treatment)
+    TextView mDiabetesTreatment;
+
+    @BindView(R.id.advertiser_medication_heartbeat_treatment)
+    TextView mHeartBeatTreatment;
+
+    @BindView(R.id.advertiser_medication_edit_button)
+    ImageButton mEditButton;
+
+
     private UserViewModel mPersonalInfoViewModel = new UserViewModel();
     private boolean mIsFromDetected;
 
     private OnExpandMedicationListener mListener;
 
-
-    public AdvertiserMedicationFragment() {
-        // Required empty public constructor
-    }
 
     public static AdvertiserMedicationFragment newInstance(UserViewModel userViewModel, boolean isFromDetected) {
 
@@ -69,20 +78,23 @@ public class AdvertiserMedicationFragment extends Fragment {
 
     private void checkUserPersonalInfoData() {
         Bundle args = getArguments();
-
         mIsFromDetected = args.getBoolean(USER_FROM_DETECTED);
 
         try {
             UserViewModel userViewModel = (UserViewModel) args.get(USER_VIEW_MODEL);
+
             mPersonalInfoViewModel = userViewModel;
-            if (!userViewModel.getDiabetesMedication().isEmpty() || !userViewModel.getHearthBeatMedication().isEmpty()) {
-//                showUserPersonalData(userViewModel);
+            if (!userViewModel.getDiabetesMedication().isEmpty())
+                mDiabetesTreatment.setText(userViewModel.getDiabetesMedication());
 
-            }
+            if (!userViewModel.getHearthBeatMedication().isEmpty())
+                mHeartBeatTreatment.setText(userViewModel.getHearthBeatMedication());
 
-        } catch (NullPointerException e) {
-//            showAddPersonalDataButton();
-        }
+            if (mIsFromDetected)
+                mEditButton.setImageDrawable(getResources().getDrawable(R.drawable.icon_expand));
+
+        } catch (NullPointerException ignored) {}
+
     }
 
     @OnClick(R.id.advertiser_medication_edit_button)

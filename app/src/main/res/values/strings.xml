@@ -13,7 +13,7 @@
     <!--Advertiser-->
     <string name="advertiser_personal_info">Personal info</string>
     <string name="advertiser_medical_info">Medical info</string>
-    <string name="advertiser_medication">Medical treatment</string>
+    <string name="advertiser_medication">Tratamientos</string>
     <string name="advertiser_face_detected">Face detected</string>
 
     <!--Advertiser main info-->
