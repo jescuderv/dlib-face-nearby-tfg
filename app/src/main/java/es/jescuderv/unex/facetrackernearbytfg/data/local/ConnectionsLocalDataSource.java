@@ -12,22 +12,15 @@ import javax.inject.Singleton;
 
 import es.jescuderv.unex.facetrackernearbytfg.data.ConnectionsDataSource;
 import es.jescuderv.unex.facetrackernearbytfg.data.exception.DatabaseErrorException;
-import es.jescuderv.unex.facetrackernearbytfg.data.local.dao.UserDao;
-import es.jescuderv.unex.facetrackernearbytfg.utils.AppExecutors;
 import es.jescuderv.unex.facetrackernearbytfg.utils.ImageUtil;
 import io.reactivex.Observable;
 
 @Singleton
 public class ConnectionsLocalDataSource implements ConnectionsDataSource {
 
-    private UserDao mUserDao;
-    private AppExecutors mAppExecutors;
-
-
     @Inject
-    ConnectionsLocalDataSource(LocalDataBase localDataBase) {
-        this.mUserDao = localDataBase.userDao();
-        this.mAppExecutors = new AppExecutors();
+    ConnectionsLocalDataSource() {
+        // Requires empty constructor
     }
 
     @Override
@@ -40,7 +33,7 @@ public class ConnectionsLocalDataSource implements ConnectionsDataSource {
                 emitter.onNext(file);
                 emitter.onComplete();
 
-            } else emitter.onError(new DatabaseErrorException("Can't save face"));
+            } else emitter.onError(new DatabaseErrorException("Error al almacenar cara"));
         });
     }
 

@@ -35,7 +35,7 @@ public class AdvertiserPresenter implements AdvertiserContract.Presenter {
 
 
     @Inject
-    AdvertiserPresenter(DetectFace detectFace, SaveFace saveFace, GetUserData getUserData, SetUserData setUserData) {
+    public AdvertiserPresenter(DetectFace detectFace, SaveFace saveFace, GetUserData getUserData, SetUserData setUserData) {
         mDetectFace = detectFace;
         mSaveFace = saveFace;
         mGetUserData = getUserData;

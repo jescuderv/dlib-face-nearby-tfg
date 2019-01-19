@@ -49,32 +49,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 import es.jescuderv.unex.facetrackernearbytfg.R;
-import es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.CameraSourcePreview;
-import es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.graphics.FaceGraphic;
-import es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.graphics.GraphicOverlay;
 import es.jescuderv.unex.facetrackernearbytfg.ui.contract.DiscovererContract;
 import es.jescuderv.unex.facetrackernearbytfg.ui.presenter.DiscoverPresenter;
 import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
+import es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.CameraSourcePreview;
+import es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.graphics.FaceGraphic;
+import es.jescuderv.unex.facetrackernearbytfg.ui.views.camera.graphics.GraphicOverlay;
 
 
-/**
- * Activity for the face tracker app.  This app detects faces with the rear facing camera, and draws
- * overlay graphics to indicate the position, size, and ID of each face.
- */
-public final class DiscovererActivity extends DaggerAppCompatActivity implements DiscovererContract.View {
+public class DiscovererActivity extends DaggerAppCompatActivity implements DiscovererContract.View {
 
     private final static String USER_VIEW_MODEL = "USER_VIEW_MODEL";
     private static final String TAG = "FaceTracker";
+    private static final int RC_HANDLE_GMS = 9001;
+    // permission request codes need to be < 256
+    private static final int RC_HANDLE_CAMERA_PERM = 2;
 
     private CameraSource mCameraSource = null;
 
     private CameraSourcePreview mPreview;
     private GraphicOverlay mGraphicOverlay;
-
-    private static final int RC_HANDLE_GMS = 9001;
-    // permission request codes need to be < 256
-    private static final int RC_HANDLE_CAMERA_PERM = 2;
-
 
     @BindView(R.id.discoverer_progress_bar)
     ProgressBar mProgressBar;
@@ -150,12 +144,9 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
     }
 
     /**
-     * Creates and starts the camera.  Note that this uses a higher resolution in comparison
-     * to other detection examples to enable the barcode detector to detect small barcodes
-     * at long distances.
+     * Creates and starts the camera.
      */
     private void createCameraSource() {
-
         Context context = getApplicationContext();
         FaceDetector detector = new FaceDetector.Builder(context)
                 .setTrackingEnabled(true)
@@ -165,24 +156,11 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
                 new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory())
                         .build());
 
-        if (!detector.isOperational()) {
-            // Note: The first time that an app using face API is installed on a device, GMS will
-            // download a native library to the device in order to do detection.  Usually this
-            // completes before the app is run for the first time.  But if that download has not yet
-            // completed, then the above call will not detect any faces.
-            //
-            // isOperational() can be used to check if the required native library is currently
-            // available.  The detector will automatically become operational once the library
-            // download completes on device.
-            Log.w(TAG, "FaceDTO detector dependencies are not yet available.");
-        }
-
         mCameraSource = new CameraSource.Builder(context, detector)
                 .setRequestedPreviewSize(640, 480)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedFps(60.0f)
                 .build();
-
     }
 
     /**
@@ -258,7 +236,7 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("FaceDTO Tracker sample")
+        builder.setTitle("Face Tracker sample")
                 .setMessage(R.string.no_camera_permission)
                 .setPositiveButton(R.string.ok, listener)
                 .show();
@@ -274,7 +252,6 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
      * again when the camera source is created.
      */
     private void startCameraSource() {
-
         // check that the device has play services available.
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
                 getApplicationContext());
@@ -325,12 +302,7 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
 
     @Override
     public void showAnalyzingMessage() {
-        Toast.makeText(this, "Face detected, analyzing...", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showFaceDetectSuccessMessage() {
-        Toast.makeText(this, "Face detected", Toast.LENGTH_LONG).show(); //todo delete
+        Toast.makeText(this, getString(R.string.discoverer_face_detected), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -341,6 +313,7 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
     @Override
     public void showStateMessage(String message) {
         mStateText.setText(message);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -352,7 +325,7 @@ public final class DiscovererActivity extends DaggerAppCompatActivity implements
     }
 
     //==============================================================================================
-    // Graphic FaceDTO Tracker
+    // Graphic Face Tracker
     //==============================================================================================
 
     /**

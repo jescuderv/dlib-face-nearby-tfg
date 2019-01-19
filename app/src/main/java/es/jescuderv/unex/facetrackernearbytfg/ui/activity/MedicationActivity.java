@@ -172,7 +172,7 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
             mDiabetesMedication.add(medication);
         }
 
-        mDiabetesLineChartView.setDataSet(mDiabetesEntries, "Nivel de glucosa (mg/dL)");
+        mDiabetesLineChartView.setDataSet(mDiabetesEntries, getString(R.string.medication_glucosa_level));
     }
 
     private void setUpHeartbeatChart() {
@@ -195,7 +195,7 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
             mHearthBeatMedication.add(medication);
         }
 
-        mHeartBeatLineChartView.setDataSet(mHearthBeatEntries, "Pulso cardíaco (p/m)");
+        mHeartBeatLineChartView.setDataSet(mHearthBeatEntries, getString(R.string.medication_hearth_beat_level));
     }
 
     private void checkUserFromDetected() {
@@ -210,7 +210,7 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
 
     @Override
     public void showSuccessUpdateMedicationMessage() {
-        Toast.makeText(this, "Medicación actualizada", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.medication_updated), Toast.LENGTH_LONG).show();
         onBackPressed();
     }
 
@@ -235,7 +235,7 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
                     case DIABETES:
                         if (mDiabetesMedication.size() > 0) {
                             if (mDiabetesMedication.get(mDiabetesMedication.size() - 1).getDate() > time) {
-                                Toast.makeText(this, "La hora debe ser posterior a la última introducida", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, getString(R.string.medication_error_time), Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
@@ -244,7 +244,7 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
                     case HEARTH_BEAT:
                         if (mHearthBeatMedication.size() > 0) {
                             if (mHearthBeatMedication.get(mHearthBeatMedication.size() - 1).getDate() > time) {
-                                Toast.makeText(this, "La hora debe ser posterior a la última introducida", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, getString(R.string.medication_error_time), Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
@@ -253,10 +253,8 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
                 }
             }
         };
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.DatePickerDialogTheme,
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.TimePickerDialogTheme,
                 myTimeListener, hour, minute, true);
-        timePickerDialog.setTitle("Escoger hora de medición:");
-        timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         timePickerDialog.show();
     }
 
@@ -276,10 +274,10 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
 
         switch (medication) {
             case DIABETES:
-                dialogTitle.setText("Agregar medición para diabetes:");
+                dialogTitle.setText(getString(R.string.medication_add_diabetes));
                 break;
             case HEARTH_BEAT:
-                dialogTitle.setText("Agregar medición para pulso cardíaco");
+                dialogTitle.setText(getString(R.string.medication_add_hearth_beat));
                 break;
         }
 
@@ -296,13 +294,13 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
             case DIABETES:
                 mDiabetesEntries.add(new Entry(time, Float.parseFloat(value)));
                 mDiabetesMedication.add(new UserViewModel.Medication(Float.parseFloat(value), time));
-                mDiabetesLineChartView.setDataSet(mDiabetesEntries, "Nivel de glucosa (mg/dL)");
+                mDiabetesLineChartView.setDataSet(mDiabetesEntries, getString(R.string.medication_glucosa_level));
                 mDiabetesChart.invalidate();
                 break;
             case HEARTH_BEAT:
                 mHearthBeatEntries.add(new Entry(time, Float.parseFloat(value)));
                 mHearthBeatMedication.add(new UserViewModel.Medication(Float.parseFloat(value), time));
-                mHeartBeatLineChartView.setDataSet(mHearthBeatEntries, "Pulso cardíaco (p/m)");
+                mHeartBeatLineChartView.setDataSet(mHearthBeatEntries, getString(R.string.medication_hearth_beat_level));
                 mHeartbeatChart.invalidate();
                 break;
         }
@@ -322,10 +320,10 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
 
         switch (medication) {
             case DIABETES:
-                dialogTitle.setText("Agrega medicación para diabetes");
+                dialogTitle.setText(getString(R.string.medication_add_diabetes));
                 break;
             case HEARTH_BEAT:
-                dialogTitle.setText("Agrega medicación para pulso cardíaco");
+                dialogTitle.setText(getString(R.string.medication_add_hearth_beat));
                 break;
         }
 

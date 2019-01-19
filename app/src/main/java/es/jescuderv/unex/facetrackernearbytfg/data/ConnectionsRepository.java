@@ -19,7 +19,7 @@ public class ConnectionsRepository implements ConnectionsDataSource {
     private ConnectionsDataSource mLocalDataSource;
 
     @Inject
-    public ConnectionsRepository(ConnectionsCacheDataSource userCacheDataSource, ConnectionsLocalDataSource userLocalDataSource) {
+    ConnectionsRepository(ConnectionsCacheDataSource userCacheDataSource, ConnectionsLocalDataSource userLocalDataSource) {
         mCacheDataSource = userCacheDataSource;
         mLocalDataSource = userLocalDataSource;
     }

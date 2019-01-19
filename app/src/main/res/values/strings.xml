@@ -7,43 +7,59 @@
     <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
 
     <!--Login-->
-    <string name="login_discoverer">Medic</string>
-    <string name="login_advertiser">Patient</string>
+    <string name="login_discoverer">Médico</string>
+    <string name="login_advertiser">Paciente</string>
+    <string name="login_not_permissions">No se han garantizado todos los permisos</string>
+
+    <!--Discoverer-->
+    <string name="discoverer_start">Comenzar</string>
+    <string name="discoverer_face_detected">Cara detectada, analizando…</string>
 
     <!--Advertiser-->
-    <string name="advertiser_personal_info">Personal info</string>
-    <string name="advertiser_medical_info">Medical info</string>
+    <string name="advertiser_personal_info">Info personal</string>
+    <string name="advertiser_medical_info">Info médica</string>
     <string name="advertiser_medication">Tratamientos</string>
     <string name="advertiser_face_detected">Face detected</string>
 
     <!--Advertiser main info-->
-    <string name="advertiser_main_info_edit">edit</string>
+    <string name="advertiser_main_info_edit">Editar</string>
     <string name="advertiser_main_info_name">Nombre</string>
     <string name="advertiser_main_info_birthday">Fecha de nacimiento</string>
     <string name="advertiser_main_info_phone_number">Teléfono</string>
     <string name="advertiser_main_info_address">Dirección</string>
 
     <!--Advertiser medical info-->
-    <string name="advertiser_medical_info_edit">Edit</string>
+    <string name="advertiser_medical_info_edit">Editar</string>
 
     <!--Personal info-->
-    <string name="personal_info">Personal info</string>
-    <string name="personal_info_name">Name</string>
-    <string name="personal_info_last_name">Last name</string>
-    <string name="personal_info_your_birthday">Your birthday:</string>
-    <string name="personal_info_emergency_number">Emergency number</string>
-    <string name="personal_info_address">Address</string>
-    <string name="personal_info_tell_about_yourself">Tell about yourself</string>
+    <string name="personal_info">Info personal</string>
+    <string name="personal_info_name">Nombre</string>
+    <string name="personal_info_last_name">Apellidos</string>
+    <string name="personal_info_your_birthday">Fecha de nacimiento:</string>
+    <string name="personal_info_emergency_number">Número de emergencia</string>
+    <string name="personal_info_address">Dirección</string>
+    <string name="personal_info_tell_about_yourself">Algo más sobre ti:</string>
     <string name="personal_info_empty_fields">Hay campos vacíos</string>
-    <string name="personal_info_updated">Personal info updated</string>
-    <string name="personal_info_save">Save it</string>
+    <string name="personal_info_updated">Información actualizada</string>
+    <string name="personal_info_save">Guardar</string>
 
     <!--Medication-->
-    <string name="medication_save">Save it</string>
-    <string name="medication">Medical treatment</string>
-    <string name="medical_info">Medical info</string>
+    <string name="medication_save">Guardar</string>
+    <string name="medication">Tratamiento</string>
+    <string name="medication_diabetes">Diabetes</string>
+    <string name="medication_not_treatment">No existe tratamiento para esta enfermedad</string>
+    <string name="medication_hearth_beat">Pulso cardíaco</string>
+    <string name="medication_glucosa_level">Nivel de glucosa (mg/dL)</string>
+    <string name="medication_hearth_beat_level">Pulso cardíaco (p/m)</string>
+    <string name="medication_updated">Medicación actualizada</string>
+    <string name="medication_error_time">La hora debe ser posterior a la última introducida</string>
+    <string name="medication_add_diabetes">Agregar medición para diabetes:</string>
+    <string name="medication_add_hearth_beat">Agregar medición para pulso cardíaco</string>
+
+    <!--Medical info-->
+    <string name="medical_info">Info médica</string>
     <string name="medical_info_blood_type">Grupo sanguíneo:</string>
-    <string name="medical_info_updated">Medical info updated</string>
+    <string name="medical_info_updated">Información actualizada</string>
     <string name="medical_info_add_blood_type">Agrega tu grupo sanguíneo</string>
     <string name="medical_info_add">+</string>
     <string name="medical_info_intolerance">Intolerancias</string>
@@ -52,18 +68,25 @@
     <string name="medical_info_add_intolerance">Agrega tus intolerancias</string>
     <string name="medical_info_add_surgery">Agrega tus operaciones</string>
     <string name="medical_info_add_allergy">Agrega tus alergias</string>
-    <string name="medical_info_tell_about_yourself">Tell about yourself</string>
+    <string name="medical_info_tell_about_yourself">Más detalles:</string>
     <string name="medical_info_empty_intolerance">Aquí aparecerán las intolerancias…</string>
     <string name="medical_info_empty_surgery">Aquí aparecerán las operaciones…</string>
     <string name="medical_info_empty_allergy">Aquí aparecerán las alergias…</string>
-    <string name="medical_info_save">Save it</string>
+    <string name="medical_info_save">Guardar</string>
 
     <!--Settings-->
-    <string name="advertiser_settings">settings</string>
-    <string name="settings">Settings</string>
-    <string name="settings_visibility">Visibility</string>
+    <string name="advertiser_settings">Configuración</string>
+    <string name="settings">Configuración</string>
+    <string name="settings_visibility">Visibilidad</string>
     <string name="settings_change_user">Cambiar de usuario</string>
     <string name="settings_visibility_description">Configura la visibilidad para poder buscar y ser buscado por el resto de usuarios de la aplicación</string>
+    <string name="settings_logout">Cerrar sesión</string>
+    <string name="settings_warning">Se borrarán todos los datos almacenados, ¿estás de acuerdo?</string>
+    <string name="settings_ok">Aceptar</string>
 
+    <!--Dialog-->
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="dialog_add">Añadir</string>
+    <string name="dialog_write_here">Escribe aquí…</string>
 
 </resources>

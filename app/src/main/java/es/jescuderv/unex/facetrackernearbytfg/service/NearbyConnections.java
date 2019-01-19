@@ -76,7 +76,7 @@ public class NearbyConnections {
         mListener = listener;
     }
 
-    public void discover() {
+    void discover() {
         DiscoveryOptions.Builder discoverOptions = new DiscoveryOptions.Builder();
         discoverOptions.setStrategy(Strategy.P2P_CLUSTER);
         mClient.startDiscovery(PACKAGE_NAME, mEndpointDiscoveryCallback, discoverOptions.build())
@@ -90,7 +90,7 @@ public class NearbyConnections {
                 });
     }
 
-    public void advertise() {
+    void advertise() {
         AdvertisingOptions.Builder advertisingOptions = new AdvertisingOptions.Builder();
         advertisingOptions.setStrategy(Strategy.P2P_CLUSTER);
         mClient.startAdvertising(mCodeUser, PACKAGE_NAME, mConnectionLifecycleCallback, advertisingOptions.build())
@@ -104,11 +104,11 @@ public class NearbyConnections {
                 });
     }
 
-    public void stopAdvertise() {
+    void stopAdvertise() {
         mClient.stopAdvertising();
     }
 
-    public void stopDiscover() {
+    void stopDiscover() {
         mClient.stopDiscovery();
     }
 
@@ -118,7 +118,7 @@ public class NearbyConnections {
             Task<Void> voidTask = mClient.sendPayload(destination, payload);
 
             if (voidTask != null) emitter.onComplete();
-            else emitter.onError(new Exception("error")); //TODO
+            else emitter.onError(new Exception("Error enviando payload"));
         });
     }
 
@@ -137,13 +137,12 @@ public class NearbyConnections {
         }
     }
 
-    private void recognizeFace(Bitmap faceBitmap) {//TODO POSIBLES CASOS
+    private void recognizeFace(Bitmap faceBitmap) {
         mRecognizeFace.execute(new DisposableObserver<List<VisionDetRet>>() {
             @Override
             public void onNext(List<VisionDetRet> results) {
                 Toast.makeText(mContext, "cara reconocida, enviar datos personales", Toast.LENGTH_LONG).show();
                 getPersonalData();
-
             }
 
             @Override
@@ -162,7 +161,7 @@ public class NearbyConnections {
         mGetUserData.execute(new DisposableObserver<User>() {
             @Override
             public void onNext(User user) {
-                String userData = user.getUserJson(); // TODO
+                String userData = user.getUserJson();
                 mClient.sendPayload(mAdvertiserEndpoint, Payload.fromBytes(userData.getBytes()));
                 Toast.makeText(mContext, "Datos personales enviados: " + userData, Toast.LENGTH_LONG).show();
             }
@@ -221,18 +220,18 @@ public class NearbyConnections {
 
                 @Override
                 public void onConnectionResult(@NonNull String endpointId, ConnectionResolution result) {
-                    Toast.makeText(mContext, "Advertise: on connection result", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "On connection result", Toast.LENGTH_LONG).show();
                     if (result.getStatus().getStatusCode() == ConnectionsStatusCodes.STATUS_OK) {
                         // We're connected! Can now start sending and receiving data.
                         mAddUserEndpoint.execute(endpointId);
-                        Toast.makeText(mContext, "Advertise: on connection disconnected: " + endpointId, Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "On connection initiated: " + endpointId, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onDisconnected(@NonNull String endpointId) {
                     // We've been disconnected from this endpoint. No more data can be sent or received.
-                    Toast.makeText(mContext, "Advertise: on connection disconnected", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "On connection disconnected", Toast.LENGTH_LONG).show();
                 }
             };
 

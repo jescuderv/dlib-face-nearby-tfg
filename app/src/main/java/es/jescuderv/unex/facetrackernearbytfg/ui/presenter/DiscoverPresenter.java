@@ -3,7 +3,6 @@ package es.jescuderv.unex.facetrackernearbytfg.ui.presenter;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.google.android.gms.nearby.connection.Payload;
 import com.google.android.gms.vision.CameraSource;
@@ -48,7 +47,7 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
 
 
     @Inject
-    DiscoverPresenter(DetectFace detectFace, TakePicture takePicture, SaveFace saveFace, SendNearbyPayload
+    public DiscoverPresenter(DetectFace detectFace, TakePicture takePicture, SaveFace saveFace, SendNearbyPayload
             sendNearbyPayload, GetUserEndpointList getUserEndpointList, GetNearbyData getNearbyData) {
         mDetectFace = detectFace;
         mTakePicture = takePicture;
@@ -97,13 +96,12 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
             public void onNext(List<VisionDetRet> result) {
                 mView.stopCamera();
                 mView.showStateMessage("Cara detectada");
-//                mView.showFaceDetectSuccessMessage();
             }
 
             @Override
             public void onError(Throwable e) {
                 mView.showStateMessage(e.getMessage());
-//                mView.showDiscovererFailureMessage(e.getMessage());
+                mView.showDiscovererFailureMessage(e.getMessage());
                 mView.hideProgress();
                 isBusy = false;
                 mView.restartCamera();
@@ -111,7 +109,6 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
 
             @Override
             public void onComplete() {
-//                mView.hideProgress();
                 saveFace(faceBitmap);
                 isBusy = false;
             }
@@ -128,7 +125,6 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
 
             @Override
             public void onError(Throwable e) {
-//                mView.showDiscovererFailureMessage(e.getMessage());
                 mView.showStateMessage(e.getMessage());
                 mView.hideProgress();
                 mView.restartCamera();
@@ -166,7 +162,6 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
 
             @Override
             public void onError(Throwable e) {
-                // mView.showDiscovererFailureMessage(e.getMessage());
                 mView.showStateMessage(e.getMessage());
                 mView.hideProgress();
                 mView.restartCamera();
@@ -206,18 +201,15 @@ public class DiscoverPresenter implements DiscovererContract.Presenter {
             public void onNext(User user) {
                 hasFoundUsers = true;
                 mView.showAdvertiserInfo(UserMapper.transform(user));
-                Log.i("a", "todo funciona");
             }
 
-            //TODO
             @Override
             public void onError(Throwable e) {
-                Log.i("a", "erorres hehe");
+
             }
 
             @Override
             public void onComplete() {
-                Log.i("a", "todo completo");
             }
         }, null);
     }

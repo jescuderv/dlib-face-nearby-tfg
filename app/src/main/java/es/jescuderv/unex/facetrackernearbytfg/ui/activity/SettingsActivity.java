@@ -87,11 +87,11 @@ public class SettingsActivity extends DaggerAppCompatActivity implements Setting
         Button dialogButtonOk = dialog.findViewById(R.id.dialog_custom_input_ok_button);
         Button dialogButtonCancel = dialog.findViewById(R.id.dialog_custom_input_cancel_button);
 
-        dialogTitle.setText("Cerrar sesión");
+        dialogTitle.setText(getString(R.string.settings_logout));
         dialogInput.setVisibility(View.GONE);
         dialogDescription.setVisibility(View.VISIBLE);
-        dialogDescription.setText("Se borrarán todos los datos almacenados, ¿estás de acuerdo?");
-        dialogButtonOk.setText("Aceptar");
+        dialogDescription.setText(getString(R.string.settings_warning));
+        dialogButtonOk.setText(getString(R.string.settings_ok));
 
 
         dialogButtonOk.setOnClickListener(view -> {

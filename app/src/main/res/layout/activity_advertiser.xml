@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_provisional"
+    android:background="@drawable/background_main"
     tools:context="es.jescuderv.unex.facetrackernearbytfg.ui.activity.AdvertiserActivity">
 
     <ImageButton
@@ -20,7 +20,7 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:src="@drawable/bac"
+        android:src="@drawable/background_profile"
         android:translationZ="1dp" />
 
     <android.support.v4.view.ViewPager

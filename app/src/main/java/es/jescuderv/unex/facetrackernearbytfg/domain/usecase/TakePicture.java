@@ -34,7 +34,7 @@ public class TakePicture extends UseCase<Bitmap, TakePicture.Params> {
                                         Bitmap compressed = ImageUtil.compressImageBitmap(bitmap);
                                         emitter.onNext(compressed);
 
-                                    } else emitter.onError(new Throwable("Error taking picture"));
+                                    } else emitter.onError(new Throwable("Error tomando foto"));
 
                                 }));
     }

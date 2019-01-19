@@ -33,7 +33,7 @@ public class RecognizeFace extends UseCase<List<VisionDetRet>, RecognizeFace.Par
                     List<VisionDetRet> results = mFaceRec.recognize(params.getFaceBitmap());
 
                     if (results == null) {
-                        emitter.onError(new FaceRecognitionException("Error recognizing faces"));
+                        emitter.onError(new FaceRecognitionException("Error reconociendo caras"));
                         return;
                     }
 
@@ -41,7 +41,7 @@ public class RecognizeFace extends UseCase<List<VisionDetRet>, RecognizeFace.Par
                         emitter.onNext(results);
                         emitter.onComplete();
                     } else {
-                        emitter.onError(new FaceRecognitionException("Face does not match with any stored face"));
+                        emitter.onError(new FaceRecognitionException("La cara no correponde con ninguna almacenada"));
                     }
                 }
         );

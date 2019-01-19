@@ -54,7 +54,7 @@
                 android:layout_below="@+id/advertiser_medication_title"
                 android:layout_marginStart="@dimen/default_layout_margin"
                 android:layout_marginTop="@dimen/separation_margin_2"
-                android:text="Diabetes"
+                android:text="@string/medication_diabetes"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_h6"
                 android:textStyle="bold" />
@@ -67,7 +67,7 @@
                 android:layout_marginStart="@dimen/separation_margin_5"
                 android:layout_marginTop="@dimen/separation_margin_1"
                 android:layout_marginEnd="@dimen/default_layout_margin"
-                android:text="No existe tratamiento para esta enfermedad"
+                android:text="@string/medication_not_treatment"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_body1" />
 
@@ -78,7 +78,7 @@
                 android:layout_below="@id/advertiser_medication_diabetes_treatment"
                 android:layout_marginStart="@dimen/default_layout_margin"
                 android:layout_marginTop="@dimen/separation_margin_2"
-                android:text="Pulso cardíaco"
+                android:text="@string/medication_hearth_beat"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_h6"
                 android:textStyle="bold" />
@@ -89,8 +89,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/advertiser_medication_heartbeat_text"
                 android:layout_marginStart="@dimen/separation_margin_5"
+                android:layout_marginEnd="@dimen/default_layout_margin"
                 android:layout_marginTop="@dimen/separation_margin_1"
-                android:text="No existe tratamiento para esta enfermedad"
+                android:text="@string/medication_not_treatment"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_body1" />
         </RelativeLayout>

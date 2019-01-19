@@ -31,15 +31,15 @@ public class DetectFace extends UseCase<List<VisionDetRet>, DetectFace.Params> {
         return Observable.create(emitter -> {
             List<VisionDetRet> results = mFaceRec.detect(params.getFaceBitmap());
             if (results == null) {
-                emitter.onError(new FaceRecognitionException("Error detecting faces"));
+                emitter.onError(new FaceRecognitionException("Error detectando caras"));
                 return;
             }
 
             if (results.size() == 0) {
-                emitter.onError(new FaceRecognitionException("ERROR: No face was detected or face was too small."));
+                emitter.onError(new FaceRecognitionException("ERROR: No se ha detectado ninguna cara o es demasiado pequeña"));
 
             } else if (results.size() > 1) {
-                emitter.onError(new FaceRecognitionException("ERROR: More than one face was detected."));
+                emitter.onError(new FaceRecognitionException("ERROR: Más de una cara detectada"));
 
             } else {
                 emitter.onNext(results);

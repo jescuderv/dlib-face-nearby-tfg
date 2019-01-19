@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_REQUIRED_PERMISSIONS) {
             for (int grantResult : grantResults) {
                 if (grantResult == PackageManager.PERMISSION_DENIED) {
-                    Toast.makeText(this, "No se han garantizado todos los permisos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.login_not_permissions), Toast.LENGTH_LONG).show();
                     finish();
                     return;
                 }

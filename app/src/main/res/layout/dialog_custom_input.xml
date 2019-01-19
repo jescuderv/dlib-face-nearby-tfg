@@ -44,7 +44,7 @@
         android:layout_marginEnd="@dimen/separation_margin_2"
         android:layout_marginBottom="@dimen/separation_margin_1"
         android:background="@drawable/button_round_white"
-        android:hint="Escribe aquí..."
+        android:hint="@string/dialog_write_here"
         android:inputType="textEmailAddress"
         android:textColor="@color/light_purple"
         android:textColorLink="@color/light_purple"
@@ -62,7 +62,7 @@
             android:layout_width="0dp"
             android:layout_margin="@dimen/separation_margin_1"
             android:layout_weight="1"
-            android:text="cancelar"
+            android:text="@string/dialog_cancel"
             android:textColor="@color/light_purple"
             android:textStyle="normal" />
 
@@ -73,7 +73,7 @@
             android:layout_margin="@dimen/separation_margin_1"
             android:layout_weight="1"
             android:background="@drawable/background_round"
-            android:text="Añadir"
+            android:text="@string/dialog_add"
             android:textColor="@color/white" />
 
     </LinearLayout>

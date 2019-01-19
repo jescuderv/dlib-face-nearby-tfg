@@ -19,8 +19,6 @@ public interface DiscovererContract {
 
         void showAnalyzingMessage();
 
-        void showFaceDetectSuccessMessage();
-
         void showDiscovererFailureMessage(String message);
 
         void showStateMessage(String message);

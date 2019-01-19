@@ -26,7 +26,7 @@
         android:layout_marginStart="@dimen/separation_margin_5"
         android:layout_marginEnd="@dimen/separation_margin_5"
         android:background="@drawable/background_round"
-        android:text="Start"
+        android:text="@string/discoverer_start"
         android:textColor="@color/white"
         android:textSize="@dimen/text_h5" />
 

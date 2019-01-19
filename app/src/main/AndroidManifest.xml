@@ -37,6 +37,13 @@
             android:name="com.google.android.nearby.messages.API_KEY"
             android:value="AIzaSyCRE9eHuf3XqZOgssgNPEoeZPgFFI2QtMc" />
 
+        <service
+            android:name=".service.AdvertiseService"
+            android:exported="false" />
+        <service
+            android:name=".service.DiscoverService"
+            android:exported="false" />
+
         <activity
             android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
@@ -54,12 +61,6 @@
             android:name=".ui.activity.DiscovererActivity"
             android:screenOrientation="portrait" />
 
-        <service
-            android:name=".service.AdvertiseService"
-            android:exported="false" />
-        <service
-            android:name=".service.DiscoverService"
-            android:exported="false" />
 
         <activity
             android:name=".ui.activity.PersonalInfoActivity"

@@ -51,8 +51,8 @@ public class PersonalInfoPresenter implements PersonalInfoContract.Presenter {
 
     private boolean checkEmptyFields(String name, String lastName, String birthDate, String phoneNumber,
                                      String address, String description) {
-        return (name.trim().isEmpty() && lastName.trim().isEmpty() && birthDate.trim().isEmpty() &&
-                phoneNumber.trim().isEmpty() && address.trim().isEmpty() && description.trim().isEmpty());
+        return (name.trim().isEmpty() || lastName.trim().isEmpty() || birthDate.trim().isEmpty() ||
+                phoneNumber.trim().isEmpty() || address.trim().isEmpty() || description.trim().isEmpty());
     }
 
     private void setUserInfo(UserViewModel userViewModel, String name, String lastName, String birthDate,
