@@ -35,15 +35,14 @@ public class DiscoverService extends DaggerService {
         if (intent != null && intent.getAction() != null) {
             if (intent.getAction().equals(ACTION_START_SERVICE))
                 discover();
-
-        } else stopMyService();
+        }
 
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        isServiceRunning = false;
+        stopMyService();
         super.onDestroy();
     }
 

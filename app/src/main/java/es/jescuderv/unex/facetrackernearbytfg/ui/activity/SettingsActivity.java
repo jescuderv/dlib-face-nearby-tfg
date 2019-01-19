@@ -110,11 +110,11 @@ public class SettingsActivity extends DaggerAppCompatActivity implements Setting
             SessionPreferences.setVisibility(0);
 
             if (mTypeUser.equals(ADVERTISER)) {
-                Intent startIntent = new Intent(getApplicationContext(), AdvertiseService.class);
-                startService(startIntent);
+                Intent stopIntent = new Intent(getApplicationContext(), AdvertiseService.class);
+                stopService(stopIntent);
             } else if (mTypeUser.equals(DISCOVERER)) {
-                Intent startIntent = new Intent(getApplicationContext(), DiscoverService.class);
-                startService(startIntent);
+                Intent stopIntent = new Intent(getApplicationContext(), DiscoverService.class);
+                stopService(stopIntent);
             }
 
 
