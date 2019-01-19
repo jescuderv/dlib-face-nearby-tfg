@@ -24,6 +24,11 @@ public class User {
     private List<Surgery> surgeryList = new ArrayList<>();
     private List<Allergy> allergyList = new ArrayList<>();
 
+    private String diabetesMedication;
+    private List<Medication> diabetesList = new ArrayList<>();
+    private String hearthBeatMedication;
+    private List<Medication> hearthBeatList = new ArrayList<>();
+
 
     public User() {
     }
@@ -133,6 +138,38 @@ public class User {
         this.allergyList = allergyList;
     }
 
+
+    public String getDiabetesMedication() {
+        return diabetesMedication;
+    }
+
+    public void setDiabetesMedication(String diabetesMedication) {
+        this.diabetesMedication = diabetesMedication;
+    }
+
+    public List<Medication> getDiabetesList() {
+        return diabetesList;
+    }
+
+    public void setDiabetesList(List<Medication> diabetesList) {
+        this.diabetesList = diabetesList;
+    }
+
+    public String getHearthBeatMedication() {
+        return hearthBeatMedication;
+    }
+
+    public void setHearthBeatMedication(String hearthBeatMedication) {
+        this.hearthBeatMedication = hearthBeatMedication;
+    }
+
+    public List<Medication> getHearthBeatList() {
+        return hearthBeatList;
+    }
+
+    public void setHearthBeatList(List<Medication> hearthBeatList) {
+        this.hearthBeatList = hearthBeatList;
+    }
 
     public String getUserJson() {
         Gson gson = new GsonBuilder().create();

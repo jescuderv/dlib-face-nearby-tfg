@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.AllergyEntity;
+import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.HearthBeatMedicationEntity;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.IntoleranceEntity;
+import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.DiabetesMedicationEntity;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.SurgeryEntity;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.UserEntity;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Allergy;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Intolerance;
+import es.jescuderv.unex.facetrackernearbytfg.domain.model.Medication;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Surgery;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.User;
 
@@ -28,6 +31,9 @@ public class UserMapper {
 
         userEntity.setBloodType(user.getBloodType());
         userEntity.setMedicalDescription(user.getMedicalDescription());
+
+        userEntity.setDiabetesTreatment(user.getDiabetesMedication());
+        userEntity.setHearthBeatTreatment(user.getHearthBeatMedication());
 
         return userEntity;
     }
@@ -62,9 +68,32 @@ public class UserMapper {
         return intoleranceEntity;
     }
 
+    public static DiabetesMedicationEntity transform(Medication medication, Long userId) {
+        DiabetesMedicationEntity diabetesMedicationEntity = new DiabetesMedicationEntity();
+
+        diabetesMedicationEntity.setId(medication.getId());
+        diabetesMedicationEntity.setValue(medication.getValue());
+        diabetesMedicationEntity.setDate(medication.getDate());
+        diabetesMedicationEntity.setUserId(userId);
+
+        return diabetesMedicationEntity;
+    }
+
+    public static HearthBeatMedicationEntity transform_(Medication medication, Long userId) {
+        HearthBeatMedicationEntity hearthBeatMedicationEntity = new HearthBeatMedicationEntity();
+
+        hearthBeatMedicationEntity.setId(medication.getId());
+        hearthBeatMedicationEntity.setValue(medication.getValue());
+        hearthBeatMedicationEntity.setDate(medication.getDate());
+        hearthBeatMedicationEntity.setUserId(userId);
+
+        return hearthBeatMedicationEntity;
+    }
+
 
     public static User transform(UserEntity entity, List<AllergyEntity> allergyEntityList, List<SurgeryEntity>
-            surgeryEntityList, List<IntoleranceEntity> intoleranceEntityList) {
+            surgeryEntityList, List<IntoleranceEntity> intoleranceEntityList, List<DiabetesMedicationEntity> diabetes,
+                                 List<HearthBeatMedicationEntity> heartBeat) {
 
         User user = new User();
 
@@ -80,6 +109,10 @@ public class UserMapper {
 
         user.setBloodType(entity.getBloodType());
         user.setMedicalDescription(entity.getMedicalDescription());
+
+
+        user.setDiabetesMedication(entity.getDiabetesTreatment());
+        user.setHearthBeatMedication(entity.getHearthBeatTreatment());
 
         List<Allergy> allergies = new ArrayList<>();
         for (AllergyEntity allergyEntity : allergyEntityList) {
@@ -99,6 +132,18 @@ public class UserMapper {
         }
         user.setIntoleranceList(intolerances);
 
+        List<Medication> diabetesMedication = new ArrayList<>();
+        for (DiabetesMedicationEntity diabetesMedicationEntity : diabetes) {
+            diabetesMedication.add(transform(diabetesMedicationEntity));
+        }
+        user.setDiabetesList(diabetesMedication);
+
+        List<Medication> hearthBeatMedication = new ArrayList<>();
+        for (HearthBeatMedicationEntity hearthBeatMedicationEntity : heartBeat) {
+            hearthBeatMedication.add(transform(hearthBeatMedicationEntity));
+        }
+        user.setHearthBeatList(hearthBeatMedication);
+
         return user;
     }
 
@@ -112,6 +157,14 @@ public class UserMapper {
 
     private static Intolerance transform(IntoleranceEntity entity) {
         return new Intolerance(entity.getId(), entity.getName());
+    }
+
+    private static Medication transform(DiabetesMedicationEntity entity) {
+        return new Medication(entity.getId(), entity.getValue(), entity.getDate());
+    }
+
+    private static Medication transform(HearthBeatMedicationEntity entity) {
+        return new Medication(entity.getId(), entity.getValue(), entity.getDate());
     }
 
 }

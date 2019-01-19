@@ -5,6 +5,7 @@ import dagger.android.ContributesAndroidInjector;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.AdvertiserActivity;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.DiscovererActivity;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.MedicalInfoActivity;
+import es.jescuderv.unex.facetrackernearbytfg.ui.activity.MedicationActivity;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.PersonalInfoActivity;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.SettingsActivity;
 import es.jescuderv.unex.facetrackernearbytfg.ui.activity.WelcomeDiscovererActivity;
@@ -36,4 +37,8 @@ abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = SettingsModule.class)
     abstract SettingsActivity settingsActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = MedicationModule.class)
+    abstract MedicationActivity medicationActivity();
 }

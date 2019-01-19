@@ -37,6 +37,12 @@ public final class UserEntity {
     @ColumnInfo(name = "face_path")
     private String facePath;
 
+    @ColumnInfo(name = "diabetes_treatment")
+    private String diabetesTreatment;
+
+    @ColumnInfo(name = "hearth_beat_treatment")
+    private String hearthBeatTreatment;
+
     public UserEntity() {
     }
 
@@ -119,5 +125,21 @@ public final class UserEntity {
 
     public void setFacePath(String facePath) {
         this.facePath = facePath;
+    }
+
+    public String getDiabetesTreatment() {
+        return diabetesTreatment;
+    }
+
+    public void setDiabetesTreatment(String diabetesTreatment) {
+        this.diabetesTreatment = diabetesTreatment;
+    }
+
+    public String getHearthBeatTreatment() {
+        return hearthBeatTreatment;
+    }
+
+    public void setHearthBeatTreatment(String hearthBeatTreatment) {
+        this.hearthBeatTreatment = hearthBeatTreatment;
     }
 }

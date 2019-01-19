@@ -21,6 +21,11 @@ public class UserViewModel implements Serializable {
     private List<UserViewModel.Surgery> surgeryList = new ArrayList<>();
     private List<UserViewModel.Allergy> allergyList = new ArrayList<>();
 
+    private String diabetesMedication;
+    private List<Medication> diabetesList = new ArrayList<>();
+    private String hearthBeatMedication;
+    private List<Medication> hearthBeatList = new ArrayList<>();
+
 
     public UserViewModel() {
     }
@@ -131,6 +136,38 @@ public class UserViewModel implements Serializable {
     }
 
 
+    public String getDiabetesMedication() {
+        return diabetesMedication;
+    }
+
+    public void setDiabetesMedication(String diabetesMedication) {
+        this.diabetesMedication = diabetesMedication;
+    }
+
+    public List<Medication> getDiabetesList() {
+        return diabetesList;
+    }
+
+    public void setDiabetesList(List<Medication> diabetesList) {
+        this.diabetesList = diabetesList;
+    }
+
+    public String getHearthBeatMedication() {
+        return hearthBeatMedication;
+    }
+
+    public void setHearthBeatMedication(String hearthBeatMedication) {
+        this.hearthBeatMedication = hearthBeatMedication;
+    }
+
+    public List<Medication> getHearthBeatList() {
+        return hearthBeatList;
+    }
+
+    public void setHearthBeatList(List<Medication> hearthBeatList) {
+        this.hearthBeatList = hearthBeatList;
+    }
+
     public static class Intolerance implements Serializable {
         private Integer id;
         private String name;
@@ -220,6 +257,47 @@ public class UserViewModel implements Serializable {
 
         public void setName(String name) {
             this.name = name;
+        }
+    }
+
+    public static class Medication implements Serializable {
+        private Integer id;
+        private float value;
+        private float date;
+
+        public Medication(float value, float date) {
+            this.value = value;
+            this.date = date;
+        }
+
+        public Medication(Integer id, float value, float date) {
+            this.id = id;
+            this.value = value;
+            this.date = date;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public float getValue() {
+            return value;
+        }
+
+        public void setValue(float value) {
+            this.value = value;
+        }
+
+        public float getDate() {
+            return date;
+        }
+
+        public void setDate(float date) {
+            this.date = date;
         }
     }
 }

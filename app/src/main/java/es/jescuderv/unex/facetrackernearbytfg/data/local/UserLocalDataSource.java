@@ -10,12 +10,15 @@ import es.jescuderv.unex.facetrackernearbytfg.data.UserDataSource;
 import es.jescuderv.unex.facetrackernearbytfg.data.exception.DatabaseErrorException;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.dao.UserDao;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.AllergyEntity;
+import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.DiabetesMedicationEntity;
+import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.HearthBeatMedicationEntity;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.IntoleranceEntity;
 import es.jescuderv.unex.facetrackernearbytfg.data.local.entity.SurgeryEntity;
 import es.jescuderv.unex.facetrackernearbytfg.data.mapper.UserMapper;
 import es.jescuderv.unex.facetrackernearbytfg.data.preferences.SessionPreferences;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Allergy;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Intolerance;
+import es.jescuderv.unex.facetrackernearbytfg.domain.model.Medication;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Surgery;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.User;
 import io.reactivex.Completable;
@@ -52,6 +55,14 @@ public class UserLocalDataSource implements UserDataSource {
                 mUserDao.addIntolerance(UserMapper.transform(intolerance, userId));
             }
 
+            for (Medication diabetes : user.getDiabetesList()){
+                mUserDao.addDiabetesMedication(UserMapper.transform(diabetes, userId));
+            }
+
+            for (Medication hearthBeat : user.getHearthBeatList()){
+                mUserDao.addHearthBeatMedication(UserMapper.transform_(hearthBeat, userId));
+            }
+
             return Completable.complete();
         }
 
@@ -63,14 +74,18 @@ public class UserLocalDataSource implements UserDataSource {
         List<AllergyEntity> allergies = new ArrayList<>();
         List<SurgeryEntity> surgeries = new ArrayList<>();
         List<IntoleranceEntity> intolerances = new ArrayList<>();
+        List<DiabetesMedicationEntity> diabetes = new ArrayList<>();
+        List<HearthBeatMedicationEntity> heartBeat = new ArrayList<>();
         return mUserDao.getUser()
                 .toObservable()
                 .doOnNext(userEntity -> {
                     allergies.addAll(mUserDao.getAllergies(userEntity.getId()));
                     surgeries.addAll(mUserDao.getSurgeries(userEntity.getId()));
                     intolerances.addAll(mUserDao.getIntolerances(userEntity.getId()));
+                    diabetes.addAll(mUserDao.getDiabetesMedication(userEntity.getId()));
+                    heartBeat.addAll(mUserDao.getHearthBeatMedication(userEntity.getId()));
 
-                }).map(entity -> UserMapper.transform(entity, allergies, surgeries, intolerances));
+                }).map(entity -> UserMapper.transform(entity, allergies, surgeries, intolerances, diabetes, heartBeat));
     }
 
     @Override

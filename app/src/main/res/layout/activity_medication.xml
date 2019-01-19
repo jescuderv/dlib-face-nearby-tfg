@@ -42,6 +42,18 @@
             android:textSize="@dimen/text_h6"
             android:textStyle="bold" />
 
+
+        <Button
+            android:id="@+id/medication_diabetes_add_button"
+            style="@style/TextButton"
+            android:layout_width="40dp"
+            android:layout_alignBaseline="@+id/medication_diabetes_text"
+            android:layout_marginStart="@dimen/separation_margin_2"
+            android:layout_toEndOf="@id/medication_diabetes_text"
+            android:background="@drawable/background_round"
+            android:text="@string/medical_info_add"
+            android:textColor="@color/white" />
+
         <TextView
             android:id="@+id/medication_diabetes_treatment"
             android:layout_width="wrap_content"
@@ -51,7 +63,6 @@
             android:layout_marginTop="@dimen/separation_margin_2"
             android:layout_marginEnd="@dimen/default_layout_margin"
             android:layout_marginBottom="@dimen/separation_margin_5"
-            android:text="- Inyección insulina Humalog 10:00 (5mg)  \n- Inyección insulina Humalog 16:00 (5mg)\n- Inyección insulina Humalog 22:00 (5mg)"
             android:textColor="@color/white"
             android:textSize="@dimen/text_body1" />
 
@@ -60,6 +71,19 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_below="@id/medication_diabetes_treatment" />
+
+        <Button
+            android:id="@+id/medication_diabetes_add_chart_button"
+            style="@style/TextButton"
+            android:layout_width="40dp"
+            android:layout_below="@+id/medication_diabetes_chart"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-25dp"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:background="@drawable/edit_text_box"
+            android:backgroundTint="@color/darker_blue"
+            android:text="@string/medical_info_add"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/medication_heartbeat_text"
@@ -73,6 +97,17 @@
             android:textSize="@dimen/text_h6"
             android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/medication_heartbeat_add_button"
+            style="@style/TextButton"
+            android:layout_width="40dp"
+            android:layout_alignBaseline="@+id/medication_heartbeat_text"
+            android:layout_marginStart="@dimen/separation_margin_2"
+            android:layout_toEndOf="@id/medication_heartbeat_text"
+            android:background="@drawable/background_round"
+            android:text="@string/medical_info_add"
+            android:textColor="@color/white" />
+
         <TextView
             android:id="@+id/medication_heartbeat_treatment"
             android:layout_width="wrap_content"
@@ -80,7 +115,6 @@
             android:layout_below="@id/medication_heartbeat_text"
             android:layout_marginStart="@dimen/separation_margin_5"
             android:layout_marginTop="@dimen/separation_margin_2"
-            android:text="- Pastilla Bisoprol 11:00 (5mg) \n- Pastilla Bisoprol 18:00 (5mg)"
             android:textColor="@color/white"
             android:textSize="@dimen/text_body1" />
 
@@ -91,6 +125,29 @@
             android:layout_below="@id/medication_heartbeat_treatment"
             android:layout_marginBottom="@dimen/separation_margin_3" />
 
+        <Button
+            android:id="@+id/medication_heartbeat_add_chart_button"
+            style="@style/TextButton"
+            android:layout_width="40dp"
+            android:layout_below="@+id/medication_heartbeat_chart"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-25dp"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:background="@drawable/edit_text_box"
+            android:backgroundTint="@color/darker_blue"
+            android:text="@string/medical_info_add"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/medication_save_button"
+            style="@style/TextButton"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/medication_heartbeat_chart"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/separation_margin_5"
+            android:layout_marginBottom="@dimen/separation_margin_3"
+            android:text="@string/medical_info_save"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 

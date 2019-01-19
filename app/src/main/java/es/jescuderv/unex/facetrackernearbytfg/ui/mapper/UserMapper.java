@@ -5,6 +5,7 @@ import java.util.List;
 
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Allergy;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Intolerance;
+import es.jescuderv.unex.facetrackernearbytfg.domain.model.Medication;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.Surgery;
 import es.jescuderv.unex.facetrackernearbytfg.domain.model.User;
 import es.jescuderv.unex.facetrackernearbytfg.ui.viewmodel.UserViewModel;
@@ -45,6 +46,21 @@ public class UserMapper {
         }
         userViewModel.setSurgeryList(surgeries);
 
+        userViewModel.setDiabetesMedication(user.getDiabetesMedication());
+        userViewModel.setHearthBeatMedication(user.getHearthBeatMedication());
+
+        List<UserViewModel.Medication> diabetesMedication = new ArrayList<>();
+        for (Medication diabetes : user.getDiabetesList()) {
+            diabetesMedication.add(new UserViewModel.Medication(diabetes.getId(), diabetes.getValue(), diabetes.getDate()));
+        }
+        userViewModel.setDiabetesList(diabetesMedication);
+
+        List<UserViewModel.Medication> hearthBeatMedication = new ArrayList<>();
+        for (Medication hearthBeat : user.getHearthBeatList()) {
+            hearthBeatMedication.add(new UserViewModel.Medication(hearthBeat.getId(), hearthBeat.getValue(), hearthBeat.getDate()));
+        }
+        userViewModel.setHearthBeatList(hearthBeatMedication);
+
         return userViewModel;
     }
 
@@ -80,6 +96,21 @@ public class UserMapper {
             surgeries.add(new Surgery(surgery.getId(), surgery.getName()));
         }
         user.setSurgeryList(surgeries);
+
+        user.setDiabetesMedication(userViewModel.getDiabetesMedication());
+        user.setHearthBeatMedication(userViewModel.getHearthBeatMedication());
+
+        List<Medication> diabetesMedication = new ArrayList<>();
+        for (UserViewModel.Medication diabetes : userViewModel.getDiabetesList()) {
+            diabetesMedication.add(new Medication(diabetes.getId(), diabetes.getValue(), diabetes.getDate()));
+        }
+        user.setDiabetesList(diabetesMedication);
+
+        List<Medication> hearthBeatMedication = new ArrayList<>();
+        for (UserViewModel.Medication hearthBeat : userViewModel.getHearthBeatList()) {
+            hearthBeatMedication.add(new Medication(hearthBeat.getId(), hearthBeat.getValue(), hearthBeat.getDate()));
+        }
+        user.setHearthBeatList(hearthBeatMedication);
 
         return user;
     }

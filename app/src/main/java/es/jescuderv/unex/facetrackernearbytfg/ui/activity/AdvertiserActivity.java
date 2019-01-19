@@ -207,7 +207,7 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
                 case 1:
                     return AdvertiserMedicalInfoFragment.newInstance(mUserViewModel, mIsFromDetected);
                 case 2:
-                    return AdvertiserMedicationFragment.newInstance();
+                    return AdvertiserMedicationFragment.newInstance(mUserViewModel, mIsFromDetected);
             }
             return null;
         }
@@ -241,8 +241,11 @@ public class AdvertiserActivity extends DaggerAppCompatActivity implements Adver
     }
 
     @Override
-    public void onCheckMedicationInfo() {
-        startActivity(new Intent(this, MedicationActivity.class));
+    public void onCheckMedicationInfo(UserViewModel userMedicalInfoViewModel, boolean isFromDetected) {
+        Intent intent = new Intent(this, MedicationActivity.class);
+        intent.putExtra(USER_VIEW_MODEL, userMedicalInfoViewModel);
+        intent.putExtra(USER_FROM_DETECTED, isFromDetected);
+        startActivity(intent);
     }
 
 
