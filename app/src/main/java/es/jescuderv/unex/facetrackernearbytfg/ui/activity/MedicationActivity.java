@@ -1,5 +1,6 @@
 package es.jescuderv.unex.facetrackernearbytfg.ui.activity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -221,41 +223,60 @@ public class MedicationActivity extends DaggerAppCompatActivity implements Medic
 
     private void showTimePickerDialog(int medication) {
         final Calendar myCalender = Calendar.getInstance();
-        int hour = myCalender.get(Calendar.HOUR_OF_DAY);
-        int minute = myCalender.get(Calendar.MINUTE);
 
+        DatePickerDialog.OnDateSetListener mDatePickerListener = new DatePickerDialog.OnDateSetListener() {
 
-        TimePickerDialog.OnTimeSetListener myTimeListener = (view, hourOfDay, minute1) -> {
-            if (view.isShown()) {
-                myCalender.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                myCalender.set(Calendar.MINUTE, minute1);
-                Long time = TimeUnit.MILLISECONDS.toHours(myCalender.getTimeInMillis());
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalender.set(Calendar.YEAR, year);
+                myCalender.set(Calendar.MONTH, monthOfYear);
+                myCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                switch (medication) {
-                    case DIABETES:
-                        if (mDiabetesMedication.size() > 0) {
-                            if (mDiabetesMedication.get(mDiabetesMedication.size() - 1).getDate() > time) {
-                                Toast.makeText(this, getString(R.string.medication_error_time), Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }
-                        showMedicationChartDialog(medication, time);
-                        break;
-                    case HEARTH_BEAT:
-                        if (mHearthBeatMedication.size() > 0) {
-                            if (mHearthBeatMedication.get(mHearthBeatMedication.size() - 1).getDate() > time) {
-                                Toast.makeText(this, getString(R.string.medication_error_time), Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }
-                        showMedicationChartDialog(medication, time);
-                        break;
-                }
+                int hour = myCalender.get(Calendar.HOUR_OF_DAY);
+                int minute = myCalender.get(Calendar.MINUTE);
+
+                new TimePickerDialog(MedicationActivity.this, R.style.TimePickerDialogTheme,
+                        myTimeListener, hour, minute, true).show();
             }
+
+            TimePickerDialog.OnTimeSetListener myTimeListener = (view, hourOfDay, minute1) -> {
+                if (view.isShown()) {
+                    myCalender.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    myCalender.set(Calendar.MINUTE, minute1);
+                    Long time = TimeUnit.MILLISECONDS.toHours(myCalender.getTimeInMillis());
+
+                    switch (medication) {
+                        case DIABETES:
+                            if (mDiabetesMedication.size() > 0) {
+                                if (mDiabetesMedication.get(mDiabetesMedication.size() - 1).getDate() >= time) {
+                                    Toast.makeText(MedicationActivity.this, getString(R.string.medication_error_time), Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
+                            showMedicationChartDialog(medication, time);
+                            break;
+                        case HEARTH_BEAT:
+                            if (mHearthBeatMedication.size() > 0) {
+                                if (mHearthBeatMedication.get(mHearthBeatMedication.size() - 1).getDate() >= time) {
+                                    Toast.makeText(MedicationActivity.this, getString(R.string.medication_error_time), Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
+                            showMedicationChartDialog(medication, time);
+                            break;
+                    }
+                }
+            };
+
         };
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.TimePickerDialogTheme,
-                myTimeListener, hour, minute, true);
-        timePickerDialog.show();
+
+
+        new DatePickerDialog(this, R.style.DatePickerDialogTheme, mDatePickerListener, myCalender
+                .get(Calendar.YEAR), myCalender.get(Calendar.MONTH),
+                myCalender.get(Calendar.DAY_OF_MONTH)).show();
+
+
     }
 
     private void showMedicationChartDialog(int medication, long time) {
