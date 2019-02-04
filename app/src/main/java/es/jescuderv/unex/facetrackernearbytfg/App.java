@@ -8,7 +8,6 @@ import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasServiceInjector;
-import es.jescuderv.unex.facetrackernearbytfg.utils.RecognitionUtils;
 import es.jescuderv.unex.facetrackernearbytfg.utils.di.DaggerAppComponent;
 
 public class App extends DaggerApplication implements HasServiceInjector{
@@ -20,7 +19,6 @@ public class App extends DaggerApplication implements HasServiceInjector{
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        RecognitionUtils.createRecognitionResources(this);
     }
 
     @Override

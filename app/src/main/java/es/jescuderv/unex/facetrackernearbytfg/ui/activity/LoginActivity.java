@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.jescuderv.unex.facetrackernearbytfg.R;
 import es.jescuderv.unex.facetrackernearbytfg.data.preferences.SessionPreferences;
+import es.jescuderv.unex.facetrackernearbytfg.utils.RecognitionUtils;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -98,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
             }
+            RecognitionUtils.createRecognitionResources(this);
             recreate();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
